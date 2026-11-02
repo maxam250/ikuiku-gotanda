@@ -24,7 +24,7 @@ class HistoryController extends Controller
         // 現在時点の調整日付を取得
         $adjustedDate = adjustTimeWithShift(); //custom helper関数
 
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable($request->input('item_id'))->orderBy('item_name', 'asc')->get();
         $options = Option::orderBy('sort', 'asc')->get();
         $option_pays = OptionPay::orderBy('sort', 'asc')->get();
         $courses = Course::orderBy('sort', 'asc')->get();
@@ -114,7 +114,7 @@ class HistoryController extends Controller
     public function create()
     {
         //
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable()->orderBy('item_name', 'asc')->get();
         $options = Option::orderBy('sort', 'asc')->get();
         $option_pays = OptionPay::orderBy('sort', 'asc')->get();
         $courses = Course::orderBy('sort', 'asc')->get();
@@ -212,7 +212,7 @@ class HistoryController extends Controller
         $reservations->option = json_decode($reservations->option, true);
         $reservations->option_pay = json_decode($reservations->option_pay, true);
 
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable($reservations->item_id)->orderBy('item_name', 'asc')->get();
         $options = Option::orderBy('sort', 'asc')->get();
         $option_pays = OptionPay::orderBy('sort', 'asc')->get();
         $courses = Course::orderBy('sort', 'asc')->get();

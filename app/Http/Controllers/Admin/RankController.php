@@ -95,7 +95,7 @@ class RankController extends Controller
         $rank = Rank::findOrFail($id);
         $rankCates = RankCate::orderBy('sort', 'asc')->get();
         $itemRanks = ItemRank::where('rank_id', '=', $id)->orderBy('no', 'asc')->get();
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable($itemRanks->pluck('item_id'))->orderBy('item_name', 'asc')->get();
 
         return view('admin.ranks.edit', compact('rank', 'rankCates', 'itemRanks', 'items'));
     }

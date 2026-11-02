@@ -1163,7 +1163,7 @@ body.app-body .top-layout-wrap #ListArea .cast-grid {
 }
 
 /* =============================================================================
-   下層ページのキャスト一覧（女の子一覧など）：PC 4列 / タブレット 3列 / スマホ 2列
+   下層ページのキャスト一覧（女の子一覧など）：PC 4列 / タブレット 3列 / スマホ 3列
    画像は 2:3 の枠に収め、縦に長い画像は枠でトリミングする
    ============================================================================= */
 body.app-body .content-panel .cast-grid {
@@ -1195,8 +1195,8 @@ body.app-body .content-panel .cast-flip-back img {
 }
 @media (max-width: 640px) {
     body.app-body .content-panel .cast-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.5rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.4rem;
     }
 }
 

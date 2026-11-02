@@ -35,6 +35,7 @@ class FanclubContentController extends Controller
     public function create()
     {
         $casts = Item::query()
+            ->selectable()
             ->whereHas('fanclub')
             ->orderBy('item_name')
             ->get(['id', 'item_name']);

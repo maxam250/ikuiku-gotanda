@@ -224,20 +224,44 @@ section.editSection{
     border-color: #6b7280;
 }
 
-/* ── ドラッグ並び替え ───────────────────────────── */
+/* ── ドラッグ並び替え（SortableJS: public/js/admin/sortable-grid.js） ── */
 .sortable-list .box {
     cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
-.sortable-list .box.ui-sortable-helper {
+.sortable-list .box img {
+    pointer-events: none; /* 画像のドラッグ（ブラウザ標準）を抑止 */
+}
+/* 挿入位置：カードと同じ大きさの空き枠（大きさが変わらないので周りが揺れない）＋左端に青いライン */
+.sortable-list .box.sortable-ghost {
+    position: relative;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.sortable-list .box.sortable-ghost > * {
+    visibility: hidden;
+}
+.sortable-list .box.sortable-ghost::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -0.25rem;              /* カード間の余白の中央 */
+    width: 4px;
+    border-radius: 2px;
+    background: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+/* つかんでいるカード：浮かせず（影・傾き無し）そのまま追従 */
+.sortable-drag,
+.sortable-list .box.sortable-drag {
     cursor: grabbing;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-}
-.sortable-list .sortable-placeholder {
-    visibility: visible !important;
-    background: #eff6ff;
-    border: 2px dashed #93c5fd;
-    border-radius: 6px;
-    min-height: 120px;
+    opacity: 0.85 !important;
+    box-shadow: none !important;
+    /* ※ transform は SortableJS が追従に使うので指定しない */
 }
 
 /* ── サムネイル正方形 ────────────────────────────── */

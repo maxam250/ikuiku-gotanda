@@ -105,47 +105,21 @@
 
 <!-- jQueryとSortable用のスクリプト -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{ asset('js/Sortable.min.js') }}"></script>
+<script src="{{ asset('js/admin/sortable-grid.js') }}?v={{ filemtime(public_path('js/admin/sortable-grid.js')) }}"></script>
 
 <script>
 
 // 並び替え
 
-$(function() {
-    // 並び替え可能にする
-    $(".sortable-list").sortable({
-        delay: 0,
-        distance: 1,
-        scrollSpeed: 25,
-        scrollSensitivity: 50,
-        update: function(event, ui) {
-            let pickupOrder = [];
-            $(this).find('li').each(function(index) {
-                let pickupId = $(this).data('pickup-id');
-                pickupOrder.push({
-                    id: pickupId,
-                    sort: index + 1 // 並び順を1からスタートさせる
-                });
-            });
-
-            // Ajaxで並び順をサーバーに送信
-            $.ajax({
-                url: "{{ route('admin.pickups.sort') }}",
-                method: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    pickupOrder: pickupOrder
-                },
-                success: function(response) {
-                    if (!response || !response.success) {
-                        alert('並び替えに失敗しました');
-                    }
-                },
-                error: function() {
-                    alert('エラーが発生しました');
-                }
-            });
-        }
+// ドラッグ並び替え（SortableJS：カードが滑らかに入れ替わる）
+document.addEventListener('DOMContentLoaded', function () {
+    initSortableGrid({
+        selector: '.sortable-list',
+        idAttr: 'pickup-id',
+        paramName: 'pickupOrder',
+        url: "{{ route('admin.pickups.sort') }}",
+        token: "{{ csrf_token() }}",
     });
 });
 

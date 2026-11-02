@@ -226,45 +226,21 @@
 
 <!-- jQueryとSortable用のスクリプト -->
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{ asset('js/Sortable.min.js') }}"></script>
+<script src="{{ asset('js/admin/sortable-grid.js') }}?v={{ filemtime(public_path('js/admin/sortable-grid.js')) }}"></script>
 
 <script>
 
 // 並び替え
 
-$(function() {
-    // 並び替え可能にする
-    $(".sortable-list").sortable({
-        update: function(event, ui) {
-            let scheduleOrder = [];
-            $(this).find('li').each(function(index) {
-                let scheduleId = $(this).data('schedule-id');
-                scheduleOrder.push({
-                    id: scheduleId,
-                    sort: index + 1 // 並び順を1からスタートさせる
-                });
-            });
-
-            // Ajaxで並び順をサーバーに送信
-            $.ajax({
-                url: "{{ route('admin.schedules.sort') }}",
-                method: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    scheduleOrder: scheduleOrder
-                },
-                success: function(response) {
-                    if(response.success) {
-                        // alert('並び替えが完了しました');
-                    } else {
-                        alert('並び替えに失敗しました');
-                    }
-                },
-                error: function() {
-                    alert('エラーが発生しました');
-                }
-            });
-        }
+// ドラッグ並び替え（SortableJS：カードが滑らかに入れ替わる）
+document.addEventListener('DOMContentLoaded', function () {
+    initSortableGrid({
+        selector: '.sortable-list',
+        idAttr: 'schedule-id',
+        paramName: 'scheduleOrder',
+        url: "{{ route('admin.schedules.sort') }}",
+        token: "{{ csrf_token() }}",
     });
 });
 

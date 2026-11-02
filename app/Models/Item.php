@@ -41,6 +41,23 @@ class Item extends  Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * 管理画面のキャスト選択肢：公開中（item_active=1）のキャストのみ。
+     * 編集画面などで既に選択済みのキャストは、非公開でも選択肢に残す（値が勝手に変わらないように）。
+     * 非公開キャストは「キャスト一覧 ?tab=passive」で確認する。
+     */
+    public function scopeSelectable($query, $keepIds = [])
+    {
+        $keepIds = collect(is_iterable($keepIds) ? $keepIds : [$keepIds])->filter()->values()->all();
+
+        return $query->where(function ($q) use ($keepIds) {
+            $q->where('item_active', 1);
+            if ($keepIds) {
+                $q->orWhereIn('id', $keepIds);
+            }
+        });
+    }
+
     // サムネイル
     public function thumbnail ()
     {

@@ -1,0 +1,293 @@
+/*
+ * public/css/frontend/age_verification_gotanda.css
+ * 入口ページ（年齢確認）。旧 _gotanda/css/index.css・sp-css/index.css 準拠。
+ * 紺地(#022d7b) → ロゴ → YES / NO の丸ボタン → 18禁の注意書き → 求人バナー → グループ店 → 各種媒体 → フッター
+ */
+
+body.age-verify-page.av-gtd {
+    display: block;
+    min-height: 100vh;
+    margin: 0;
+    background: #022d7b;
+    background-image: none;
+    color: #fff;
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    overflow-x: hidden; /* はみ出た部分はトリミング */
+}
+.av-gtd a {
+    color: #fff;
+}
+
+/* ロゴ（旧 #mainArea） */
+.av-gtd-main {
+    width: min(1000px, 100%);
+    margin: 0 auto 1.5rem;
+    padding: 2rem 1rem 0;
+    box-sizing: border-box;
+}
+.av-gtd-main h1 {
+    margin: 0;
+    line-height: 0;
+}
+.av-gtd-main img {
+    display: block;
+    width: min(800px, 100%);
+    height: auto;
+    margin: 0 auto;
+}
+
+.av-gtd-contents {
+    width: min(1140px, 100%);
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* YES / NO（旧 #btnArea: 150px の丸ボタン、間に「あなたは18歳以上ですか？」） */
+.av-gtd-btns {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: min(550px, 100%);
+    margin: 0 auto 3rem;
+}
+.av-gtd-btn-item form {
+    margin: 0;
+}
+.av-gtd-btn {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: #396699;
+    color: #fff !important;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 150px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 0 3px rgba(106, 194, 244, 0.6);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+.av-gtd-btn:hover {
+    background-color: #6ac2f4;
+    box-shadow: 0 0 0 3px #fff;
+}
+.av-gtd-question {
+    margin: 0 0.5rem;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* 注意書き（旧 #caution: 18禁アイコン＋半透明の黒い枠） */
+.av-gtd-caution {
+    width: min(480px, 100%);
+    margin: 0 auto 40px;
+    padding: 20px 20px 20px 100px;
+    box-sizing: border-box;
+    border: 1px solid #caba78;
+    border-radius: 8px;
+    background: url('../../images/index/18kin.png') no-repeat 14px center / 70px auto, rgba(25, 25, 25, 0.8);
+    color: #afafaf;
+    font-size: 0.75rem;
+    line-height: 1.7;
+    text-align: left;
+}
+.av-gtd-caution strong {
+    color: #fff;
+}
+
+/* お問い合わせ（スマホのみ） */
+.av-gtd-contact {
+    display: none;
+}
+
+/* 求人バナー（旧 #bannerArea） */
+.av-gtd-banners {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 0 0 25px;
+}
+.av-gtd-banners a {
+    display: block;
+    max-width: min(560px, 100%);
+    line-height: 0;
+    transition: opacity 0.2s;
+}
+.av-gtd-banners a:hover {
+    opacity: 0.85;
+}
+.av-gtd-banners img {
+    width: 100%;
+    height: auto;
+}
+
+/* グループ店（旧 #group_link） */
+.av-gtd-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 15px 19px;
+    width: min(900px, 100%);
+    margin: 0 auto 25px;
+}
+.av-gtd-groups a {
+    display: block;
+    line-height: 0;
+}
+.av-gtd-groups img {
+    width: 100%;
+    height: auto;
+}
+.av-gtd-group-name {
+    display: block;
+    padding: 0.8rem;
+    border: 1px solid #6ac2f4;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* 各種媒体（旧 #linkArea） */
+.av-gtd-links {
+    width: min(980px, 100%);
+    margin: 0 auto 30px;
+}
+.av-gtd-links > h2 {
+    margin: 0 0 1rem;
+    padding: 0.5rem;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-align: center;
+}
+.av-gtd-links .links-grouped-list {
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+.av-gtd-links .links-grouped-title {
+    display: none;
+}
+
+/* フッター（旧 #footer #contactArea） */
+.av-gtd-footer {
+    padding: 20px 1rem;
+    border-top: 1px solid rgba(106, 194, 244, 0.5);
+    color: #fff;
+    text-align: center;
+}
+.av-gtd-footer h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+}
+.av-gtd-footer p {
+    margin: 0 0 0.4rem;
+}
+.av-gtd-footer-tel a {
+    font-size: 2.3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-decoration: none;
+}
+.av-gtd-footer-open span {
+    font-weight: 700;
+}
+.av-gtd-footer-text {
+    font-size: 0.75rem;
+}
+.av-gtd-copyright {
+    padding: 0.5rem 1rem;
+    background: #fff;
+    color: #605035;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+/* =============================================================================
+   スマホ（旧 sp-css/index.css）
+   ============================================================================= */
+@media (max-width: 600px) {
+    .av-gtd-main {
+        padding: 1.2rem 0.6rem 0;
+        margin-bottom: 1rem;
+    }
+    .av-gtd-btns {
+        margin-bottom: 1.8rem;
+    }
+    .av-gtd-btn {
+        width: 90px;
+        height: 90px;
+        font-size: 1.15rem;
+        line-height: 90px;
+    }
+    .av-gtd-question {
+        font-size: 0.85rem;
+    }
+    .av-gtd-caution {
+        width: 90%;
+        margin-bottom: 1.5rem;
+        padding: 14px 14px 14px 70px;
+        background-size: 46px auto, auto;
+        background-position: 12px center, 0 0;
+        font-size: 0.7rem;
+    }
+
+    .av-gtd-contact {
+        display: block;
+        margin: 0 0 1.5rem;
+        text-align: center;
+    }
+    .av-gtd-contact h2 {
+        margin: 0 0 0.6rem;
+        color: #dfdfdf;
+        font-size: 0.95rem;
+    }
+    .av-gtd-contact ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem 4%;
+        width: 80%;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+    }
+    .av-gtd-contact li {
+        width: 46%;
+    }
+    .av-gtd-contact li:first-child:nth-last-child(1) {
+        width: 100%;
+    }
+    .av-gtd-contact li a {
+        display: block;
+        padding: 0.5rem;
+        border-radius: 6px;
+        background: #b8b8b8;
+        color: #000 !important;
+        font-size: 0.85rem;
+        font-weight: 700;
+        line-height: 1.4;
+        text-decoration: none;
+    }
+
+    .av-gtd-groups {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .av-gtd-footer-tel a {
+        font-size: 1.8rem;
+    }
+}

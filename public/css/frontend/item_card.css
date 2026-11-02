@@ -660,14 +660,38 @@
 }
 .reservation-btn:hover { background: var(--ui-accent-hover); color: #fff !important; }
 
+/* スマホ：キャストカードは 3 列（出勤・女の子一覧・新人・動画・トップ共通） */
 @media (max-width: 640px) {
     .cast-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.6rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.4rem;
     }
     .cast-card {
         width: 100%;
+        min-width: 0;
+    }
+    /* 3 列だとカード幅が約 110px になるため、文字を詰めてはみ出さないようにする */
+    .cast-grid .item-card-sizes {
+        font-size: 0.6rem;
+        white-space: normal;
+        overflow: visible;
+        letter-spacing: -0.02em;
+    }
+    .cast-grid .work-time-display {
+        font-size: 0.68rem;
+    }
+    .cast-grid .work-time-display .work-time-frame {
+        box-sizing: border-box;
+        gap: 0.15rem;
+        padding: 3px 4px;
+        white-space: nowrap;
+    }
+    .cast-grid .work-time-icon {
+        display: none;
+    }
+    .cast-grid .work-time-text {
+        font-size: inherit;
     }
 }
 

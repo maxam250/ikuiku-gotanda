@@ -37,7 +37,7 @@ class GalleryController extends Controller
     public function create()
     {
         //
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable()->orderBy('item_name', 'asc')->get();
         $members = Member::where('kind', '!=', '0')->orderBy('id', 'desc')->get();
 
         return view('admin.galleries.create', compact('items',  'members'));
@@ -96,13 +96,13 @@ class GalleryController extends Controller
     public function edit(string $id)
     {
         //
-        $items = Item::orderBy('item_name', 'asc')->get();
         $members = Member::where('kind', '!=', '0')->orderBy('id', 'desc')->get();
 
 
         $gallery = Gallery::with(['images' => function ($query) {
             $query->orderBy('sort', 'asc');
         }])->findOrFail($id);
+        $items = Item::selectable($gallery->item_id)->orderBy('item_name', 'asc')->get();
 
 
         return view('admin.galleries.edit', compact('gallery', 'items',  'members'));

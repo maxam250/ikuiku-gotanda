@@ -40,7 +40,7 @@ class MycostumeController extends Controller
      */
     public function create(Request $request)
     {
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable()->orderBy('item_name', 'asc')->get();
         $categories = MycostumeCate::orderBy('sort', 'asc')->get();
         $selectedItemId = $request->get('item_id');
 
@@ -91,7 +91,7 @@ class MycostumeController extends Controller
      */
     public function edit(Mycostume $mycostume)
     {
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable($mycostume->item_id)->orderBy('item_name', 'asc')->get();
         $categories = MycostumeCate::orderBy('sort', 'asc')->get();
 
         return view('admin.mycostumes.edit', compact('mycostume', 'items', 'categories'));

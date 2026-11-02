@@ -40,7 +40,7 @@ class MyoptionController extends Controller
      */
     public function create(Request $request)
     {
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable()->orderBy('item_name', 'asc')->get();
         $categories = MyoptionCate::orderBy('sort', 'asc')->get();
         $selectedItemId = $request->get('item_id');
 
@@ -91,7 +91,7 @@ class MyoptionController extends Controller
      */
     public function edit(Myoption $myoption)
     {
-        $items = Item::orderBy('item_name', 'asc')->get();
+        $items = Item::selectable($myoption->item_id)->orderBy('item_name', 'asc')->get();
         $categories = MyoptionCate::orderBy('sort', 'asc')->get();
 
         return view('admin.myoptions.edit', compact('myoption', 'items', 'categories'));

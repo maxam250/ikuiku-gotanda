@@ -57,6 +57,7 @@ class SecurityHeaders
                    "https://www.googletagmanager.com " .
                    "https://www.google-analytics.com " .
                    "https://cdn.tiny.cloud " .
+                   "https://www.dto.jp " .      // デリヘルタウンのウィジェット（トップの写メ日記・待機情報）
                    $viteDevServer . "; " .
                    "style-src 'self' 'unsafe-inline' " .
                    "https://fonts.googleapis.com " .
@@ -91,7 +92,9 @@ class SecurityHeaders
                    "https://fujoho.jp " .
                    "https://fuzoku.jp " .
                    "https://ranking-deli.jp " .
-                   "https://fuzokudx.com; " .
+                   "https://fuzokudx.com " .
+                   "https://www.dto.jp " .      // デリヘルタウンのウィジェット
+                   "https://dto.jp; " .
                    "worker-src 'self' blob:; " .
                    "manifest-src 'self'; " .
                    "object-src 'none'; " .

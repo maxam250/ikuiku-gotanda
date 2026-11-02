@@ -83,6 +83,8 @@
 
     @vite(['resources/css/frontend/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/frontend/age_verification.css') }}">
+    {{-- 旧サイト（_gotanda/css/index.css）準拠。base の後に読み込む --}}
+    <link rel="stylesheet" href="{{ asset('css/frontend/age_verification_gotanda.css') }}?v={{ filemtime(public_path('css/frontend/age_verification_gotanda.css')) }}">
     {{-- Google Analytics --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $shop->shop_analytics }}"></script>
     <script>
@@ -92,91 +94,102 @@
         gtag('config', '{{ $shop->shop_analytics }}');
     </script>
 </head>
-<body class="age-verify-page">
+<body class="age-verify-page av-gtd">
+@php
+    $avTel = $shop->shop_tel ?? '';
+    $avTelLink = str_replace(['-', ' '], '', $avTel);
+@endphp
 
-    {{-- 年齢確認カード（画像バナーなし） --}}
-    <div class="av-card" role="main">
-        <div class="av-brand">
-            <a href="#" class="sf-logo-link" aria-label="{{ $shops->shop_name }} トップへ">
-                <img src="{{ asset('images/logo.webp') }}"
-                     alt="{{ $shops->shop_name }}"
-                     class="sf-logo-img"
-                     onerror="this.style.display='none'">
-            </a>
+    {{-- ロゴ（旧 index.tpl #mainArea） --}}
+    <header class="av-gtd-main">
+        <h1>
+            <img src="{{ asset('images/common/header/logo.webp') }}" alt="{{ $shop->shop_name ?? '' }}" width="800" height="380">
+        </h1>
+    </header>
 
-        </div>
+    <main class="av-gtd-contents" role="main">
 
-        {{-- 入場 / 退出 --}}
-        <div class="av-card-actions">
-            <div class="av-action-item">
+        {{-- YES / NO（旧 #btnArea） --}}
+        <section class="av-gtd-btns" aria-label="年齢確認">
+            <div class="av-gtd-btn-item">
                 <form method="POST" action="{{ route('age.verify') }}">
                     @csrf
                     <input type="hidden" name="agree" value="yes">
-                    <button type="submit" class="av-round-btn av-round-btn--enter" aria-label="Enter">
-                        <i class="fas fa-heart" aria-hidden="true"></i>
-                        <span class="av-round-btn-en">Enter</span>
-                    </button>
+                    <button type="submit" class="av-gtd-btn av-gtd-btn--yes">YES</button>
                 </form>
             </div>
-            <div class="av-action-item">
-                <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="av-round-btn av-round-btn--exit" aria-label="Exit">
-                    <span class="av-round-btn-en">Exit</span>
-                </a>
+            <p class="av-gtd-question">あなたは<br>18歳以上ですか？</p>
+            <div class="av-gtd-btn-item">
+                <a href="https://yahoo.co.jp" class="av-gtd-btn av-gtd-btn--no" target="_blank" rel="nofollow noopener noreferrer">NO</a>
             </div>
-        </div>
+        </section>
 
-        {{-- 下段：説明テキスト --}}
-        <div class="av-card-body">
-            <div class="av-age-badge" aria-hidden="true">18+</div>
-            <h1 class="av-title">年齢確認</h1>
-            <p class="av-description">
-                このサイトには成人向けコンテンツが含まれます。<br>
-                あなたは18歳以上ですか？
-            </p>
-            <p class="av-note">
-                当サイトへのアクセスには年齢確認が必要です。18歳未満の方のご利用はお断りしております。上記ボタンをクリックすることで、あなたが18歳以上であることを確認したものとみなします。
-            </p>
-        </div>
+        {{-- 注意書き（旧 #caution） --}}
+        <section class="av-gtd-caution">
+            当サイトは<strong>{{ $shop->shop_name ?? '' }}</strong>のウェブサイトです。<br>
+            18歳未満の方はこれより先の閲覧は固くお断りいたします。
+        </section>
 
-        {{-- 退出リンク --}}
-        <div class="av-exit">
-            <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="av-exit-link">
-                いいえ、サイトを離れる
-            </a>
-        </div>
+        {{-- スマホ：お問い合わせ（旧 sp の #contactArea） --}}
+        <section class="av-gtd-contact">
+            <h2>お問い合わせ</h2>
+            <ul>
+                @if($avTel)
+                <li><a href="tel:{{ $avTelLink }}">電話<br>{{ $avTel }}</a></li>
+                @endif
+                @if(!empty($shop->shop_reservation))
+                <li><a href="{{ $shop->shop_reservation }}" target="_blank" rel="noopener noreferrer">ネット<br>予約</a></li>
+                @endif
+            </ul>
+        </section>
 
-    </div>
-
-    {{-- 優先外部リンク --}}
-    {{-- <section class="flex flex-col items-center gap-1 py-2 space-y-2">
-        <div class="block sm:hidden outlink morenova">
-            <a href="https://www.ginza1-clinic.com/lp/morenova-agent/?media=yaricir" target="_blank"><img src="{{ asset('images/link/morenova/465x68_1.png') }}" alt="モアノヴァエージェント銀座一丁目クリニック"></a>
-        </div>
-    </section> --}}
-
-
-    {{-- 系列店 --}}
-    @if(isset($shopGroups) && $shopGroups->isNotEmpty())
-    <div class="av-shop-groups">
-        @foreach($shopGroups as $sg)
-        <a href="{{ $sg->url ?: '#' }}" target="_blank" rel="noopener noreferrer" class="av-shop-group-item">
-            @if($sg->filename)
-                <img src="{{ Storage::url($sg->filename) }}" alt="{{ $sg->name }}">
-            @elseif($sg->image_url)
-                <img src="{{ $sg->image_url }}" alt="{{ $sg->name }}">
-            @else
-                <span class="av-shop-group-name">{{ $sg->name }}</span>
+        {{-- 求人バナー（旧 #bannerArea） --}}
+        <div class="av-gtd-banners">
+            <a href="{{ !empty($shop->shop_recruit) ? $shop->shop_recruit : route('recruits.index') }}" target="_blank" rel="nofollow noopener"><img src="{{ asset('images/index/banner_recruit.jpg') }}" alt="女性求人情報" loading="lazy"></a>
+            @if(!empty($shop->shop_recruit_mens))
+            <a href="{{ $shop->shop_recruit_mens }}" target="_blank" rel="noopener"><img src="{{ asset('images/index/banner_naikin.jpg') }}" alt="男性求人情報" loading="lazy"></a>
             @endif
-        </a>
-        @endforeach
-    </div>
-    @endif
+        </div>
 
-    <x-links-grouped-list :links="$links ?? collect()" title="" />
+        {{-- グループ店（inc_group.tpl） --}}
+        @if(isset($shopGroups) && $shopGroups->isNotEmpty())
+        <div class="av-gtd-groups">
+            @foreach($shopGroups as $sg)
+            <a href="{{ $sg->url ?: '#' }}" target="_blank" rel="noopener noreferrer">
+                @if($sg->filename)
+                    <img src="{{ Storage::url(str_contains($sg->filename, '/') ? $sg->filename : 'shop-groups/' . $sg->filename) }}" alt="{{ $sg->name }}" loading="lazy">
+                @elseif($sg->image_url)
+                    <img src="{{ $sg->image_url }}" alt="{{ $sg->name }}" loading="lazy">
+                @else
+                    <span class="av-gtd-group-name">{{ $sg->name }}</span>
+                @endif
+            </a>
+            @endforeach
+        </div>
+        @endif
 
-    <footer class="av-footer">
-        <p class="av-footer-copy">&copy; {{ date('Y') }} {{ $shop->shop_name ?? '' }}. All rights reserved.</p>
+        {{-- 各種媒体（旧 #linkArea / link_index_inc.tpl → 管理画面「リンク」） --}}
+        @if(isset($links) && $links->isNotEmpty())
+        <section class="av-gtd-links">
+            <h2>各種媒体</h2>
+            <x-links-grouped-list :links="$links" title="" />
+        </section>
+        @endif
+
+    </main>
+
+    {{-- フッター（旧 #footer #contactArea） --}}
+    <footer class="av-gtd-footer">
+        <h3>{{ $shop->shop_name ?? '' }}</h3>
+        @if($avTel)
+        <p class="av-gtd-footer-tel"><a href="tel:{{ $avTelLink }}">{{ $avTel }}</a></p>
+        @endif
+        @if(!empty($shop->shop_open))
+        <p class="av-gtd-footer-open">営業時間：<span>{{ $shop->shop_open }}</span></p>
+        @endif
+        <p class="av-gtd-footer-text">無店舗型風俗特殊営業届出済みの出張型風俗優良店</p>
     </footer>
+    <div class="av-gtd-copyright">Copyright &copy; {{ $shop->shop_name ?? '' }} All Rights Reserved.</div>
 
 </body>
 </html>

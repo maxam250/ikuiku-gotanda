@@ -23,7 +23,7 @@ class NewfaceController extends Controller
 
         $registeredItemIds = $newfaces->pluck('item_id')->toArray();
 
-        $non_newfaces = Item::with('thumbnail')
+        $non_newfaces = Item::with('thumbnail')->selectable()
             ->whereNotIn('id', $registeredItemIds)
             ->when($search, fn($q) => $q->where('item_name', 'like', "%{$search}%"))
             ->paginate(100)

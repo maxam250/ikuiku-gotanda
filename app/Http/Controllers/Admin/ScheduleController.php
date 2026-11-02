@@ -48,7 +48,7 @@ class ScheduleController extends Controller
         $search = trim($request->input('search', ''));
 
         // 出勤していないキャストを取得
-        $non_schedules = Item::with('thumbnail')
+        $non_schedules = Item::with('thumbnail')->selectable()
         ->whereNotIn('id', $workingItemIds)
         ->when($search !== '', fn($q) => $q->where('item_name', 'like', '%' . $search . '%'))
         ->paginate(100)

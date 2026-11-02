@@ -36,7 +36,7 @@ class PickupController extends Controller
 
 
         // ピックアップしていないキャストを取得
-        $non_pickups = Item::with('thumbnail')
+        $non_pickups = Item::with('thumbnail')->selectable()
         ->whereNotIn('id', $workingItemIds)
         ->when($search, fn($q) => $q->where('item_name', 'like', "%{$search}%"))
         ->paginate(100)

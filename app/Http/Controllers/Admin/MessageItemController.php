@@ -38,6 +38,17 @@ class MessageItemController extends Controller
                     ->where('message_items.receiver_type', 'item')
                     ->where('message_items.is_read', false);
             }, 'unread_count')
+            // 非公開キャストは出さない（ただし未読メッセージがある場合は読めるように残す）
+            ->where(function ($q) {
+                $q->where('items.item_active', 1)
+                    ->orWhereExists(function ($sub) {
+                        $sub->from('message_items')
+                            ->whereColumn('message_items.sender_id', 'items.id')
+                            ->where('message_items.sender_type', 'item')
+                            ->where('message_items.receiver_type', 'admin')
+                            ->where('message_items.is_read', false);
+                    });
+            })
             ->orderByDesc('last_message_at')
             ->orderByDesc('items.id')
             ->get();

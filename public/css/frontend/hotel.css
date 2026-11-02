@@ -1,0 +1,495 @@
+/* ================================================
+   ホテル・スタジオ (hotel.blade.php) — コンパクトテーブル一覧
+   ================================================ */
+
+.hotel-page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem 3rem;
+    box-sizing: border-box;
+}
+
+/* ---- カテゴリフィルタ ---- */
+.hotel-filter {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 0, 180, 0.15);
+}
+
+.hotel-filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hotel-filter-link {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(122, 59, 90, 0.85);
+    background: rgba(255, 45, 120, 0.06);
+    border: 1px solid rgba(255, 45, 120, 0.18);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.hotel-filter-link:hover {
+    background: rgba(255, 45, 120, 0.10);
+    border-color: rgba(255, 45, 120, 0.35);
+    color: #ff2d78;
+    text-decoration: none;
+}
+
+.hotel-filter-link.is-active {
+    background: rgba(255, 45, 120, 0.12);
+    border-color: #ff2d78;
+    color: #ff2d78;
+}
+
+/* ---- メインテーブル（メイン画像〜項目5 横一列） ---- */
+.hotel-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1.5px solid rgba(255, 45, 120, 0.12);
+    border-radius: 1.25rem;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.hotel-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.72rem;
+}
+
+.hotel-table thead th {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: rgba(255, 120, 200, 0.9);
+    letter-spacing: 0.04em;
+    text-align: left;
+    vertical-align: bottom;
+    background: rgba(255, 0, 180, 0.10);
+    border-bottom: 1px solid rgba(255, 0, 180, 0.22);
+    white-space: nowrap;
+}
+
+.hotel-th-img {
+    width: 72px;
+}
+
+.hotel-th-img.is-empty {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    overflow: hidden;
+}
+
+.hotel-table--no-img {
+    min-width: 648px;
+}
+
+.hotel-table tbody tr.hotel-row-main {
+    border-bottom: 1px solid rgba(255, 0, 180, 0.08);
+}
+
+.hotel-table tbody tr.hotel-row-main:hover {
+    background: rgba(255, 0, 180, 0.05);
+}
+
+.hotel-table tbody tr.hotel-row-extra {
+    border-bottom: 1px solid rgba(255, 0, 180, 0.12);
+    background: #fff0f6;
+}
+
+.hotel-table tbody tr.hotel-row-extra:last-child {
+    border-bottom: none;
+}
+
+.hotel-table td {
+    padding: 0.4rem 0.5rem;
+    vertical-align: top;
+    color: #3d1a2e;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+.hotel-td-img {
+    width: 72px;
+    text-align: center;
+}
+
+.hotel-td-img.is-empty {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.hotel-td-text {
+    font-size: 0.72rem;
+    text-align: left;
+}
+
+.hotel-td-name {
+    text-align: left;
+}
+
+/* 列幅バランス */
+.hotel-table thead th:nth-child(2) { width: 20%; }
+.hotel-table thead th:nth-child(3) { width: 25%; }
+.hotel-table thead th:nth-child(4),
+.hotel-table thead th:nth-child(5),
+.hotel-table thead th:nth-child(6),
+.hotel-table thead th:nth-child(7) { width: 12%; }
+
+/* 名前・カテゴリ */
+.hotel-name {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #3d1a2e;
+    line-height: 1.35;
+    margin: 0 0 0.2rem;
+    text-align: left;
+}
+
+.hotel-card-cate {
+    display: inline-block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    color: #fc88d3;
+    background: rgba(255, 0, 180, 0.10);
+    border: 1px solid rgba(255, 0, 180, 0.25);
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-top: 0.15rem;
+}
+
+/* 画像（コンパクト） */
+.hotel-img-btn {
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 4px;
+    overflow: hidden;
+    line-height: 0;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.hotel-img-btn:hover {
+    box-shadow: 0 3px 10px rgba(255, 0, 180, 0.25);
+    transform: translateY(-1px);
+}
+
+.hotel-img-main {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 0, 180, 0.18);
+    display: block;
+}
+
+.hotel-img-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 0, 180, 0.16);
+    display: block;
+}
+
+.hotel-img-list-item {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 0, 180, 0.14);
+    display: block;
+}
+
+/* 追加情報行（リンク・マップ・画像リスト） */
+.hotel-extra {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.25rem;
+    padding: 0.35rem 0.15rem 0.5rem;
+}
+
+.hotel-extra-item {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.hotel-extra-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: rgba(255, 120, 200, 0.85);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.hotel-ext-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #fc88d3;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(252, 136, 211, 0.35);
+    padding-bottom: 1px;
+    word-break: break-all;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.hotel-ext-link:hover {
+    color: #fff;
+    border-color: rgba(255, 0, 180, 0.70);
+}
+
+.hotel-thumb-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.hotel-list-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.55rem;
+}
+
+.hotel-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    max-width: 56px;
+    text-align: center;
+}
+
+.hotel-list-name {
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: rgba(252, 230, 242, 0.75);
+    line-height: 1.25;
+    margin: 0;
+    word-break: break-word;
+}
+
+.hotel-map-wrap {
+    width: 200px;
+    max-width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 0, 180, 0.18);
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.hotel-map-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 120px;
+    border: none;
+}
+
+/* 空状態 */
+.hotel-empty {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: rgba(252, 195, 228, 0.55);
+    font-size: 0.9rem;
+}
+
+.hotel-empty i {
+    font-size: 2rem;
+    color: rgba(255, 0, 180, 0.35);
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+/* ページネーション */
+.hotel-pagination {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.hotel-pagination nav {
+    background: transparent;
+}
+
+.hotel-pagination .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.hotel-pagination .page-item {
+    margin: 0;
+}
+
+.hotel-pagination .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 0.45rem;
+    font-size: 0.72rem;
+    color: rgba(252, 195, 228, 0.75);
+    background: rgba(18, 8, 32, 0.88);
+    border: 1px solid rgba(255, 0, 180, 0.22);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.hotel-pagination .page-link:hover {
+    background: rgba(255, 0, 180, 0.12);
+    border-color: rgba(255, 0, 180, 0.45);
+    color: #fff;
+}
+
+.hotel-pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #ff00b4, #9000ff);
+    border-color: transparent;
+    color: #fff;
+    font-weight: 700;
+}
+
+.hotel-pagination .page-item.disabled .page-link {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* モーダル */
+.hotel-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+.hotel-modal.is-open {
+    display: flex;
+}
+
+.hotel-modal-inner {
+    position: relative;
+    background: rgba(14, 4, 16, 0.97);
+    border: 1px solid rgba(255, 0, 180, 0.28);
+    border-radius: 10px;
+    max-width: 90vw;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+    padding: 1.25rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.hotel-modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.65rem;
+    background: none;
+    border: none;
+    color: rgba(252, 195, 228, 0.65);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.hotel-modal-close:hover {
+    color: #fff;
+}
+
+.hotel-modal-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fce8f4;
+    margin: 0 2rem 0.75rem 0;
+}
+
+.hotel-modal-img {
+    max-width: 100%;
+    max-height: 70vh;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 6px;
+}
+
+/* スマホ：テーブル横スクロール維持 */
+@media (max-width: 640px) {
+    .hotel-page {
+        padding: 0 0.5rem 2.5rem;
+    }
+
+    .hotel-table {
+        min-width: 100%;
+        width:100%;
+        font-size: 0.68rem;
+    }
+
+    .hotel-table thead th,
+    .hotel-table td {
+        padding: 0.35rem 0.4rem;
+    }
+
+    .hotel-img-main {
+        width: 48px;
+        height: 48px;
+    }
+
+    .hotel-th-img:not(.is-empty),
+    .hotel-td-img:not(.is-empty) {
+        width: 56px;
+    }
+
+    .hotel-th-img.is-empty,
+    .hotel-td-img.is-empty {
+        width: 0;
+        min-width: 0;
+        padding: 0;
+    }
+
+    .hotel-table--no-img {
+        min-width: 580px;
+    }
+
+    .hotel-map-wrap {
+        width: 160px;
+    }
+
+    .hotel-map-wrap iframe {
+        height: 100px;
+    }
+}

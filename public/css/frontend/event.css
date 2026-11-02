@@ -1,0 +1,397 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700');
+
+/*　基本設定
+=====================================*/
+#event{}
+#event h3.title{
+	margin: 0 0 1.8rem;
+	font-size: 2.2rem;
+	font-family: 'Noto Sans JP', sans-serif;
+	color: #353535;
+}
+#event h3.title span{
+	display: inline-block;
+	margin-right:1rem;
+	font-size: 1.5rem;
+	color: #444;
+}
+h4{
+	margin: 0 0 1.2rem;
+}
+#event section{
+	margin: 0 0 2.3rem;
+	padding:2.4rem;
+	background:rgba(255,255,255,0.7);
+	border-radius:10px;
+	font-size: 1.2rem;
+}
+#event .sat{ color: blue; }
+#event .sun{ color: red; }
+#event .red{
+	color: #E80B42;
+}
+#event .blue{
+	color: #0770ff;
+}
+#event .pink{
+	color: #ED0F99;
+}
+#event .green{
+	color: #15BD08;
+}
+#event .orange{
+	color:#EB7815;
+}
+
+/*　メイン画像
+=====================================*/
+#photoArea{
+}
+#photoArea .main{}
+
+
+/*　サマリー
+=====================================*/
+#summaryArea{
+	font-size: 1.2rem;
+}
+#summaryArea strong{
+	font-size: 1.5rem;
+}
+
+/*　プロフ
+=====================================*/
+#profArea{
+	width:22%;
+	text-align: center;
+}
+#profArea .img{
+	margin: 0 0 0.6rem;
+}
+#profArea .name{
+	font-size: 1.2rem;
+}
+
+
+/*　開催日時
+=====================================*/
+#dateArea{
+	width:70%;
+}
+#dateArea .date{
+	margin: 0 0 1.2rem;
+	font-size: 1.8rem;
+}
+#dateArea .hosoku{
+	font-size: 0.89rem;
+}
+
+
+/*　料金
+=====================================*/
+#feeArea{}
+#feeArea ul{}
+#feeArea ul li{
+	margin: 0 0 1rem;
+	text-decoration:underline;
+	text-decoration-color:#ddd;
+	text-underline-offset:0.7rem;
+	border-left:5px solid #F583DC;
+	padding-left:0.6rem;
+}
+
+
+/*　コスチューム
+=====================================*/
+#costumeArea{}
+#costumeArea ul{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	width:100%;
+	margin: 0 0 1.5rem;
+}
+#costumeArea ul li{
+	width:240px;
+}
+#costumeArea ul li img{
+	display: block;
+	max-width:100%;
+	margin-bottom: 0.6rem;
+}
+#costumeArea ul li span{
+	display: block;
+	text-align: center;
+}
+#costumeArea p{
+	font-size: 0.85rem;
+}
+
+/*　場所
+=====================================*/
+#placeArea{}
+
+/*　予約
+=====================================*/
+#reserveArea{}
+#reserveArea .link a{
+	display: block;
+	width:70%;
+	margin:2rem auto;
+	padding:1.2rem;
+	background:#F12376;
+	color: #fff;
+	text-align: center;
+}
+
+
+/************************************************
+ * イベント一覧ページ
+ ************************************************/
+.event-section {
+    width: 100%;
+    padding: 2rem 1.5rem;
+}
+
+.event-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+    background: #ffffff;
+    border: 1.5px solid #ffe0ee;
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    max-width: 730px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: none;
+}
+
+.event-card:hover {
+    border:1px solid #fd84c7;
+}
+
+.event-card-image {
+    width: 100%;
+}
+
+.event-card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+.event-card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.event-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ui-text, var(--ui-text));
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--ui-line, var(--ui-line));
+    position: relative;
+}
+
+.event-card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #e794c2 0%, #fd84c7 100%);
+}
+
+.event-card-text {
+    font-size: 0.9rem;
+    color:  #3d1a2e;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.event-card-text-wrap {
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.event-card-text-wrap.is-collapsed {
+    max-height: 10rem;
+}
+
+.event-card-text-wrap.is-collapsed::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5em;
+    background: linear-gradient(to bottom, transparent, var(--ui-surface, var(--ui-surface)));
+    pointer-events: none;
+}
+
+.event-card-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 0.6rem;
+    margin-bottom: 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #ff1ba0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.event-card-toggle:hover {
+    opacity: 0.75;
+}
+
+.event-card-toggle .toggle-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-style: normal;
+    line-height: 1;
+}
+
+.event-card-toggle.is-open .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+.event-card-link a {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background:  #ff1ba0;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 5%;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.event-card-link a:hover {
+    opacity: 0.75;
+}
+
+.event-empty {
+    font-size: 0.9rem;
+    color: var(--ui-text-muted, var(--ui-text-muted));
+    padding: 2rem 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .event-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .event-card {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-section {
+        padding: 1rem 0.75rem;
+    }
+
+    .event-card {
+        padding: 1rem;
+    }
+
+    .event-card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/************************************************
+ * 画像モーダル
+ ************************************************/
+.event-img-zoomable {
+    cursor: zoom-in;
+}
+
+.event-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-modal.is-open {
+    display: flex;
+}
+
+.event-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.event-modal-content {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-modal-content img {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 6px;
+    display: block;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.event-modal-close {
+    position: fixed;
+    top: 1rem;
+    right: 1.25rem;
+    z-index: 2;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.event-modal-close:hover {
+    opacity: 1;
+}
+
+/************************************************
+/*　個別設定
+************************************************/
+
+
+

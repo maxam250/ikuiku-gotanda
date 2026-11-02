@@ -1,0 +1,57 @@
+# Laravel 環境ファイル
+.env
+.env.local
+.env.production
+.env.testing
+auth.json
+
+# Laravel キャッシュ／ログ／一時ファイル
+.phpunit.result.cache
+.php_cs.cache
+.phpactor.json
+/.phpunit.cache
+
+# Laravel ビルド関連
+/public/hot
+/public/storage
+#/public/build
+/public/mix-manifest.json
+/storage/*.key
+bootstrap/cache/*.php
+
+# アップロードファイルを除外（public/uploads）
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# storage ディレクトリの中身は除外、構造は維持（画像など除外）
+/storage/*
+!storage/app/
+!storage/app/public/
+!storage/app/public/.gitignore
+!storage/app/public/.gitkeep
+!storage/framework/
+!storage/framework/cache/
+!storage/framework/sessions/
+!storage/framework/testing/
+!storage/framework/views/
+!storage/logs/
+
+# Node / Composer 依存
+/node_modules
+/vendor
+
+# IDE / エディタの設定ファイル
+/.idea/
+/.vscode/
+/.fleet/
+*.sublime-project
+*.sublime-workspace
+
+# OS一時ファイル
+.DS_Store
+Thumbs.db
+
+# npm/yarn log
+npm-debug.log
+yarn-error.log
+node_modules

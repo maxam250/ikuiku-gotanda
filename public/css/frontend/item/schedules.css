@@ -1,0 +1,28 @@
+.jumpMenu{
+    margin-bottom:3rem;
+}
+
+h3.date{
+    margin-bottom:2rem;
+    font-size: 1.5rem;
+}
+.list .box {
+    width:200px;
+}
+
+
+.onScheduleArea{
+    margin-bottom:3rem;
+    padding:2rem;
+    background:#fff;
+}
+
+.offScheduleArea{
+    margin-bottom:3rem;
+    padding:2rem;
+    background:#fff;
+}
+.offScheduleArea h3{
+    margin-bottom:2rem;
+    font-size: 1.5rem;
+}

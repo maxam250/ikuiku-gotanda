@@ -1,0 +1,222 @@
+
+
+/*
+##########################################################################
+　ギャラリー
+##########################################################################*/
+
+#gallery{
+	margin:0 auto 30px;
+	background:rgba(255,255,255,0.82);
+	box-sizing: border-box;
+}
+
+#gallery h3{
+	margin:0 0 10px;
+	font-size:18px;
+}
+
+/**/
+#gallery .exp{
+	margin: 0 15px 20px;
+	text-align: right;
+	display: inline-block;
+	padding:4px;
+	border: 2px solid #EC7395;
+	color:#EC7395;
+}
+
+/* itemSelectArea */
+#gallery #itemSelectArea{
+	padding:20px;
+	background:#f4f4f4;
+}
+#gallery #itemSelectArea .title{
+	display: inline-block;
+	margin-right: 12px;
+}
+#gallery #itemSelectArea .form{
+	display: inline-block;
+}
+#gallery #itemSelectArea .form select,
+#gallery #itemSelectArea .form option{
+	font-size: 20px;
+	cursor: pointer;
+}
+
+
+/* box */
+
+#gallery .box{
+	width:30%;
+	margin:0 1.5% 6px;
+	padding:8px;
+	border:1px dotted #DDD;
+	box-sizing: border-box;
+}
+
+#gallery .box .img{
+	width:100%;
+	height: 100%;
+	margin:0 ;
+}
+#gallery .box .img img{
+	width:100%;
+}
+#gallery .box .thumb{
+	width:100%;
+	height: 100%;
+	margin:0 ;
+}
+#gallery .box .thumb ul.gallery{
+	width:100%;
+	height: 50px;
+}
+#gallery .box .thumb ul.gallery li{
+	display: inline-block;
+	width:18%;
+	margin-right: 0.5%;
+}
+#gallery .box .thumb ul.gallery li img{
+	width:100%;
+}
+
+#gallery .box .date{
+	font-size:11px;
+}
+#gallery .box .date span{
+	display: inline-block;
+	margin-left:15px;
+	padding:3px 10px;
+	background:#444;
+	color: #afafaf;
+	line-height: 1;
+}
+#gallery .box .title{
+	margin:0 0 10px;
+	font-size:14px;
+}
+
+#gallery .box .model{
+	margin:0 0 4px;
+	font-size:12px;
+	color: #ff589f;
+}
+
+
+
+/*
+##########################################################################
+　ギャラリー 詳細
+##########################################################################*/
+
+#get_gallery{
+	margin:0 auto 30px;
+	background:rgba(255,255,255,0.82);
+	box-sizing: border-box;
+}
+#get_gallery .inner{
+	padding:2.4%;
+}
+#get_gallery .gallery_head{
+	display: table;
+	width:100%;
+	margin: 0 0 30px;
+	padding:2.4%;
+	box-sizing: border-box;
+	border: 1px solid #efefef;
+}
+#get_gallery .gallery_head .img{
+	display: table-cell;
+	vertical-align: top;
+	width:15%;
+}
+#get_gallery .gallery_head .cont{
+	display: table-cell;
+	vertical-align: top;
+	width:74%;
+	padding: 0 3%;
+	
+}
+#get_gallery .gallery_head .date{
+	margin: 0 0 12px;
+	font-size:11px;
+}
+#get_gallery .gallery_head .date span{
+	display: inline-block;
+	margin-left:15px;
+	padding:3px 10px;
+	background:#444;
+	color: #afafaf;
+	line-height: 1;
+}
+#get_gallery .gallery_head .title{
+	margin:0 0 15px;
+	font-size:15px;
+}
+
+#get_gallery .gallery_head .user{
+	margin:0 0 4px;
+	font-size:12px;
+	color: #ff589f;
+}
+#get_gallery .gallery_head .user .link a{
+	display: inline-block;
+	margin-left: 15px;
+	padding:1px 10px;
+	font-size: 11px;
+	background:#0F6CEB;
+	color: #fff;
+	line-height: 1.8;
+}
+#get_gallery .gallery_head .model{
+	margin:0 0 4px;
+	font-size:12px;
+	color: #ff589f;
+}
+#get_gallery .gallery_head .cont .comment{
+}
+/**/
+#get_gallery #imgArea{}
+#get_gallery #imgArea ul.gallery{
+	text-align: center;}
+#get_gallery #imgArea ul.gallery li{
+	display: block;
+	margin: 0 auto 15px ;
+	text-align: center;
+}
+#get_gallery #imgArea ul.gallery li img{
+	box-shadow:2px 2px 2px 2px rgba(0,0,0, 0.06);
+}
+
+/**/
+
+#get_gallery .toGallery{
+	padding-top:30px;
+}
+#get_gallery .toGallery a{
+	display: inline-block;
+	padding:2.2%;
+	background: #FFF;
+	border:1px solid #999;
+	color: #222;
+}
+
+/*
+##########################################################################
+　ギャラリー 非ログイン
+##########################################################################*/
+#gallery #underLoginArea{
+	margin:0 0 40px;
+	padding:4%;
+}
+#gallery #underLoginArea .summary{
+	margin: 0 0 25px;
+}
+#gallery #underLoginArea .toLogin{
+	margin: 0 0 18px;
+}
+#gallery #underLoginArea .toLogin a{}
+#gallery #underLoginArea .toLogin{}
+#gallery #underLoginArea .toLogin a{}
+

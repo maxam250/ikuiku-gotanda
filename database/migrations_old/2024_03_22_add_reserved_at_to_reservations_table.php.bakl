@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        // まずカラムを追加
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->timestamp('reserved_at')->nullable()->after('date');
+        });
+
+        // その後、データを更新
+        DB::statement('UPDATE reservations SET reserved_at = CONCAT(date, " ", time_start) WHERE date IS NOT NULL AND time_start IS NOT NULL');
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->dropColumn('reserved_at');
+        });
+    }
+}; 

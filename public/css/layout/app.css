@@ -1,0 +1,2430 @@
+/*
+ * public/css/layout/app.css
+ * layouts.app（ヘッダー・フッター・2カラム・モバイルメニュー）
+ */
+/* =============================================================================
+   フロント layouts.app — UIトーン + PC時 ヘッダー下2カラム（左:ナビ / 右:メイン）
+   ============================================================================= */
+:root {
+    --ui-bg: #ffecf2;
+    --ui-surface: #fffafb;
+    --ui-bg-gray: #fff0f6;
+    --ui-link: #7a3b5a;
+    --ui-link-hover: #ff2d78;
+    --ui-text: #3d1a2e;
+    --ui-text-white: #ffffff;
+    --ui-text-blue: #ff2d78;
+    --ui-text-pink: #ff2d78;
+    --ui-text-muted: #7a3b5a;
+    --ui-line: #ffe0ee;
+    --ui-line-dark: #ffb7d5;
+    --ui-accent: #ff2d78;
+    --ui-accent-hover: #e52068;
+    --ui-soft: #fff0f6;
+    --ui-shadow: none;
+    --ui-radius: 4px;
+    --panel-bg: rgba(255, 255, 255, 0.88);
+    --panel-border: transparent;
+    --panel-radius: 4px;
+    --nav-bg: #edc9d2;
+    --nav-bg-grad: linear-gradient(90deg, #f9e6e3 0%, #fef1ee 50%, #f9e6e3 100%);
+    --nav-bg-hover: #ff2d78;
+    --nav-text: #866a73;
+    --nav-text-muted: #7a3b5a;
+    --nav-line: #faeeea;
+    --content-width: 1280px;
+    --content-gutter: 32px;
+    --app-header-sticky-offset: 96px; /* JSで実際のheader高さに自動上書き */
+    --app-topnav-height: 0px; /* インフローナビの高さ。画面外なら0 */
+}
+
+body.app-body {
+    color: var(--ui-text);
+    font-family: "Figtree", "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    line-height: 1.6;
+}
+
+.app-container,
+/* .header-main, */
+.app-sidebar,
+.footer-main {
+    background: var(--ui-surface);
+    color: var(--ui-text);
+}
+
+.app-main {
+    background: transparent;
+    color: var(--ui-text);
+}
+
+/* Full HD(1920) 幅を下限に固定。ウィンドウが小さくても縮小せず見切れ、切れ目は出さない */
+body.app-body {
+    background-color: var(--ui-bg);
+    isolation: isolate;
+}
+body.app-body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: var(--ui-bg);
+    background-image: url('../../images/bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 1920px auto;
+    background-size: max(100%, 1920px) auto;
+}
+
+body.app-body .app-container,
+body.app-body .app-body-wrap {
+    background: transparent;
+}
+
+.content-panel,
+.top-section,
+.top-special-events,
+.top-event-section,
+.top-fanclub-posts-section,
+.modern-timeline,
+.shop-widget,
+.cast-search-wrap {
+    background: var(--panel-bg);
+    border: none;
+    border-radius: var(--panel-radius, 4px);
+    box-shadow: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.content-panel {
+    padding: 1.25rem 1.25rem 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.top-section,
+.top-special-events,
+.top-event-section,
+.top-fanclub-posts-section,
+.modern-timeline,
+.shop-widget {
+    padding: 1.25rem 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.header-main {
+    /* border-bottom: 1.5px solid rgba(255, 45, 120, 0.12); */
+    box-shadow: none;
+}
+
+.header-gradient {
+    background: var(--ui-surface) !important;
+    height: auto !important; /* Tailwind h-16/h-20 を上書き → header-upper + header-inner 合計で自動伸長 */
+}
+
+.header-upper{
+    padding:0.3rem 1rem;
+    text-align: right;
+    background: linear-gradient(to right, #fff8fc,  #fcf8ff) !important;
+    line-height: 1;
+}
+
+
+@media (max-width: 480px) {
+    .header-upper{
+        padding:0.4rem 1rem;
+        text-align: right;
+        background: linear-gradient(to right, #fff8fc,  #fcf8ff) !important;
+        line-height: 1;
+    }
+}
+
+/* header-upper内のリンク・ボタンはテキストのみ（border・padding・background除去） */
+.header-upper a,
+.header-upper button,
+.header-upper .header-login-link,
+.header-upper .header-register-link,
+.header-upper .header-auth-link,
+.header-upper .header-auth-logout {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;   /* form.css の button { min-height: 38px } を上書き */
+    height: auto !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    font-size: 0.70rem !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    color: var(--ui-text-link) !important;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.header-upper a:hover,
+.header-upper button:hover {
+    color: var(--ui-accent) !important;
+    background: none !important;
+    text-decoration: none !important;
+}
+.header-inner {
+    /* max-width: 1240px; */
+    margin: 0 auto;
+    padding: 0.5rem 16px 0;
+}
+
+.header-content {
+    min-height: 64px;
+    height: auto !important;
+}
+
+.header-logo-img {
+    filter: none;
+    width: auto;
+    height: 58px;
+}
+.header-catch-img {
+    filter: none;
+    max-width: 320px;
+    height: auto;
+}
+
+.header-catchphrase{
+    margin-top:0.75rem;
+    text-align: center;
+    font-size: 0.725rem;
+}
+.header-catchphrase-text,
+.header-auth-status,
+.mobile-menu-auth-status{
+    color: var(--ui-text-muted);
+}
+
+/* =============================================
+   ヘッダー Open / Phone エリア
+   ============================================= */
+.header-aside {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.85rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-left: 5rem;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+/* ヘッダー内サブナビ（PCのみ） */
+.header-subnav {
+    display: none;
+}
+
+/* --- 各ブロック --- */
+.header-nav-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    padding: 0.42rem 0.75rem 0.42rem 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    white-space: nowrap;
+}
+
+.header-nav-info:hover {
+    background: none;
+}
+
+/* --- アイコン（丸枠なし・ナビアイコンと同色） --- */
+.header-nav-icon-wrap {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    background: none !important;
+    color: var(--nav-text-muted, #7a3b5a);
+    opacity: 0.4;
+}
+
+.header-nav-info--open .header-nav-icon-wrap {
+    background: none !important;
+    color: var(--nav-text-muted, #7a3b5a);
+}
+
+.header-nav-info--phone .header-nav-icon-wrap {
+    background: none !important;
+    color: var(--nav-text-muted, #7a3b5a);
+}
+
+/* --- テキスト縦積み --- */
+.header-nav-info-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    min-width: 0;
+    text-align: left;
+}
+
+.header-nav-label {
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0.18rem;
+}
+
+/* ラベル左のアイコン（OPEN / PHONE） */
+.header-nav-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.header-nav-label-icon {
+    font-size: 1.15em;
+    letter-spacing: 0;
+}
+
+.header-nav-label--open  { color: #f5a623; }
+.header-nav-label--phone { color: var(--ui-accent); }
+
+.header-nav-value {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ui-text);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+.header-nav-value--tel {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: var(--ui-text);
+    transition: color 0.2s ease;
+}
+
+.header-nav-value--tel:hover {
+    color: var(--ui-accent);
+    text-decoration: none;
+}
+
+/* --- 縦区切り線 --- */
+.header-nav-sep {
+    width: 1px;
+    height: 36px;
+    background: var(--ui-line);
+    margin: 0 0.55rem;
+    flex-shrink: 0;
+}
+
+/* 会員：マイページ・ログアウトを常に横1列 */
+.header-auth-area {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1.1rem !important;
+    min-width: 0;
+    max-width: none;
+    flex: 0 0 auto;
+}
+
+.header-auth-form {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+    width: auto !important; /* form.css の form{width:100%} を上書き → overflow-x 防止 */
+}
+
+.header-auth-area .header-auth-link,
+.header-auth-area button.header-auth-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+    padding:0 !important;
+}
+
+
+.header-auth-area button.header-auth-link {
+    font-family: inherit !important;
+    cursor: pointer;
+    vertical-align: middle;
+    font-size: 0.7rem !important;
+}
+
+.header-auth-logout {
+    border: 1px solid var(--ui-line-dark);
+    background: var(--ui-surface);
+    color: var(--ui-text);
+    font-size: 0.7rem;
+}
+
+/* .header-nav a, */
+.mobile-menu a,
+.footer-main a,
+.app-sidebar a {
+    color: var(--ui-text);
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* .header-nav a:hover, */
+.mobile-menu a:hover,
+.footer-main a:hover,
+.app-sidebar a:hover {
+    color: var(--ui-accent);
+}
+
+.header-auth-link,
+.mobile-menu-login-link,
+.mobile-menu-register-link,
+.mobile-menu-auth-link {
+    border: 1px solid var(--ui-line-dark);
+    border-radius: 0;
+    background: var(--ui-surface);
+    padding: 0 !important;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.header-login-link:hover,
+.header-auth-link:hover,
+.mobile-menu-login-link:hover,
+.mobile-menu-register-link:hover,
+.mobile-menu-auth-link:hover {
+    border-color: var(--ui-accent);
+    color: var(--ui-accent);
+}
+
+.header-login-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 3px;
+    background:white;
+    color: var(--ui-link) !important;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.header-login-link:hover {
+    background:#fdf4df;
+    color: var(--ui-link-hover) !important;
+}
+
+.header-login-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.header-register-link {
+    display: inline-flex;
+    align-items: center;
+    margin-left:1rem;
+    color: var(--ui-accent);
+    font-size: 0.775rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.header-register-link:hover {
+    color: var(--ui-accent-hover);
+    text-decoration: none;
+}
+
+.header-reservation-btn,
+.header-recruit-btn,
+.header-reservation-btn:hover,
+.header-recruit-btn:hover  {
+    border-radius: 4px;
+    box-shadow: none;
+    color: var(--ui-text-white);
+}
+
+
+
+.header-reservation-btn{
+    display: flex;
+    background:#f8c829;
+}
+
+.header-reservation-btn i,
+.header-reservation-btn span,
+.header-recruit-btn span{
+    display: inline-block;
+}
+.header-recruit-btn{
+    background:#FFF;
+    color: #ff1ba0;
+    box-sizing: border-box;
+}
+.header-reservation-btn:hover{
+    background:#eeb702;
+}
+.header-recruit-btn:hover{
+    background:#f7e8f1;
+    color: #ff1ba0;
+}
+
+
+
+.header-reservation-icon,
+.header-recruit-icon {
+    opacity: 0.85;
+}
+
+.mobile-menu-overlay {
+    background: rgba(17, 24, 39, 0.45);
+}
+
+.mobile-menu {
+    background: var(--ui-surface);
+    border-left: 1px solid var(--ui-line);
+    border-right: none;
+    box-shadow: none;
+    /* Viteコンパイル済みの left 指定を打ち消し、右からスライド */
+    left: unset !important;
+    right: -100%;
+    transition: right 0.3s ease !important;
+}
+
+.mobile-menu.active {
+    left: unset !important;
+    right: 0;
+}
+
+.mobile-menu-header {
+    border-bottom: 1px solid var(--ui-line);
+    background: var(--ui-surface);
+}
+
+.mobile-menu-title {
+    color: var(--ui-text);
+    font-weight: 700;
+}
+
+.nav-item {
+    border-bottom: 1px solid var(--ui-line);
+    background: var(--ui-surface) !important;
+    padding: 14px 18px;
+}
+
+.nav-item .nav-item-en {
+    color: var(--ui-text-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+.nav-item .nav-item-jp {
+    color: var(--ui-text);
+    font-weight: 700;
+}
+
+.nav-item:hover {
+    background: var(--ui-soft) !important;
+}
+
+.mobile-menu-sns .header-sns-link,
+.header-sns-link {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--ui-line);
+    border-radius: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ui-surface);
+}
+
+.mobile-menu-sns .header-sns-link:hover,
+.header-sns-link:hover {
+    border-color: var(--ui-accent);
+    background: #eff6ff;
+}
+
+.header-sns-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.footer-main {
+    margin-top: 0px;
+    margin-bottom:0;
+    background: var(--ui-bg-gray);
+}
+
+.footer-nav-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px 12px;
+    margin-bottom: 24px;
+}
+
+.footer-nav-list li{
+    margin-bottom: 1.25rem;
+}
+.footer-nav-link {
+    color: var(--ui-text-muted);
+    font-size: 0.725rem;
+    line-height: 1.0;
+}
+
+.footer-nav-link:hover {
+    color: var(--ui-accent);
+}
+.footer-contact-area,
+.footer-copyright {
+    margin: 0;
+    padding: 1.5rem;
+    background: var(--ui-bg);
+    border: none;
+    font-size: 0.6rem;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+}
+.footer-contact-content {
+    text-align:center;
+}
+.footer-contact-content .footer-contact-hours{
+    font-size:clamp(0.75rem, 2vw, 0.9rem);
+    color: var(--ui-text);
+
+}
+.footer-contact-title {
+    color: #666;
+    font-weight: 600;
+    font-size: 0.84rem;
+    letter-spacing: 0.03em;
+}
+
+.footer-contact-tel-link {
+    color: var(--ui-text);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.footer-sns-link,
+.footer-sns-link-youtube,
+.footer-sns-link-tiktok,
+.footer-sns-link-facebook {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--ui-line-dark);
+    border-radius: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ui-text-muted);
+    background: var(--ui-surface);
+}
+
+.footer-sns-link:hover,
+.footer-sns-link-youtube:hover,
+.footer-sns-link-tiktok:hover,
+.footer-sns-link-facebook:hover {
+    border-color: var(--ui-accent);
+    color: var(--ui-accent);
+    background: #eff6ff;
+}
+
+.footer-copyright {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ui-text-muted);
+}
+.footer-copyright-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    gap: 8px 12px;
+    margin-bottom: 2rem;
+}
+
+.footer-copyright-link,
+.footer-copyright-text {
+    color: var(--ui-text-muted);
+    font-size: 0.75rem;
+    max-width: 100%;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.footer-copyright-link {
+    flex-shrink: 1;
+}
+
+.mobile-fixed-nav {
+    border-top: 1px solid var(--ui-line);
+    background: var(--ui-surface);
+    box-shadow: none;
+}
+
+.mobile-fixed-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+.mobile-fixed-nav-link {
+    color: var(--ui-text-muted);
+    font-size: 0.58rem !important;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 8px 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-fixed-nav-link:hover,
+.mobile-fixed-nav-link:focus-visible {
+    color: var(--ui-accent);
+}
+
+.mobile-fixed-nav-icon {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+body.app-body .skip-link {
+    background: var(--ui-accent);
+}
+
+/* 上段バー内のauth areaは強制表示（Tailwindの hidden を上書き） */
+.header-upper .header-auth-area {
+    display: inline-flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+}
+
+/* メインヘッダー行のauth areaは常に非表示（上段バーに移動） */
+.header-content .header-auth-area {
+    display: none !important;
+}
+
+/* app-container を確実に flex 縦積みに */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* app-body-wrap をヘッダー高さを除いた全画面に伸長（ヘッダー直下の空白を防ぐ） */
+.app-body-wrap {
+    flex: 1 1 auto;
+    min-height: calc(100vh - var(--app-header-sticky-offset));
+}
+
+/* lg 未満でメニューが出る幅: 横パディングを抑え、メニューボタンを薄いグレー背景に */
+@media (max-width: 1023px) {
+    body.app-body .header-inner {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.app-body .header-menu-btn {
+        display: none !important;
+    }
+
+    body.app-body .header-reservation-text-mobile,
+    body.app-body .header-recruit-text-mobile {
+        font-weight: 700;
+    }
+}
+
+/* xl 未満: キャッチコピーを表示（Tailwind の .header-catchphrase hidden xl:block を上書き） */
+@media (max-width: 1279px) {
+    body.app-body .header-catchphrase {
+        display: block !important;
+        margin-left: 1.375rem;
+        margin-right: 0;
+        flex: 1 1 auto;
+        min-width: 0;
+        align-self: center;
+        text-align: left;
+    }
+
+    body.app-body .header-catchphrase-text {
+        margin: 0;
+        line-height: 0;
+    }
+
+    body.app-body .header-catch-img {
+        max-width: min(300px, 44vw);
+        height: auto;
+        display: block;
+    }
+
+    body.app-body .header-logo-area {
+        gap: 0.35rem;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    body.app-body .header-catch-img {
+        max-width: min(180px, 48vw) !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    body.app-body .header-content {
+        min-height: 52px;
+    }
+
+    /* ロゴをスマホでやや小さく（縦幅基準） */
+    .header-logo-img {
+        width: auto;
+        height: 36px;
+        max-width: none;
+    }
+
+    /* header-logo-area を幅いっぱいに伸ばしてキャッチコピーを右端へ（モバイルのみ） */
+    body.app-body .header-logo-area {
+        flex: 1 1 auto;
+    }
+
+    /* キャッチコピーをモバイルで右端・大きく */
+    body.app-body .header-catchphrase {
+        margin-left: 2% !important;
+        margin-right: 0;
+    }
+    body.app-body .header-catch-img {
+        max-width: min(220px, 46vw) !important;
+    }
+
+    /* mobile-fixed-nav アイコンを正円に */
+    .mobile-fixed-nav-icon {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        margin-bottom: 3px;
+        font-size: 0.9rem;
+    }
+
+    /* 予約・キャスト募集の正円カラー */
+    .mobile-fixed-nav-link-schedule .mobile-fixed-nav-icon {
+        background: #29bdf8;
+        color: #fff;
+    }
+    .mobile-fixed-nav-link-cast .mobile-fixed-nav-icon {
+        background: #1bcea7;
+        color: #fff;
+    }
+    .mobile-fixed-nav-link-reservation .mobile-fixed-nav-icon {
+        background: #f8c829;
+        color: #fff;
+    }
+    .mobile-fixed-nav-link-home .mobile-fixed-nav-icon {
+        background: #FFF;
+        color: #fa76c3;
+        border: 4px solid #fa76c3;
+    }
+    .mobile-fixed-nav-menu-img {
+        width: 32px;
+        height: 32px;
+        padding:3px;
+        object-fit: contain;
+        border-radius:5px;
+        background: #f3f4f6;
+    }
+}
+
+/* --- PC: 横型ナビ + フルwidth メイン --- */
+
+/* モバイルでは非表示 */
+.app-topnav { display: none; }
+.app-sidebar { display: none !important; }
+
+@media (min-width: 1025px) {
+
+    /* 横型ナビ — E+準拠の薄ピンク × プラム文字、コンテンツ幅に合わせる */
+    .app-topnav {
+        display: block;
+        width: 100%;
+        background: var(--nav-bg-grad, var(--nav-bg, #edc9d2));
+        border-bottom: 2px solid #f4e7e4;
+        overflow: visible;
+        padding: 0;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 10;
+    }
+    .app-topnav::-webkit-scrollbar { display: none; }
+
+    .app-topnav ul.navi {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: stretch;
+        align-items: stretch;
+        width: calc(100% - 64px);
+        max-width: var(--content-width, 1280px);
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        background: transparent;
+    }
+
+    .app-topnav ul.navi--main li {
+        flex: 1 1 0;
+        max-width: none;
+        min-width: 0;
+        margin: 0;
+    }
+
+    .app-topnav ul.navi li a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        margin: 0;
+        padding: 8px 8px;
+        height: 54px;
+        min-width: 0;
+        color: var(--nav-text, #3d1a2e) !important;
+        text-decoration: none;
+        border-right: 1px solid var(--nav-line, #ffb7d5);
+        border-radius: 0 !important;
+        background: transparent !important;
+        width: auto !important;
+        transition: background 0.18s, color 0.18s;
+        box-sizing: border-box;
+        word-break: keep-all;
+        font-weight: 400 !important;
+    }
+
+    .app-topnav ul.navi--main li:last-child a {
+        border-right: none;
+    }
+
+    .app-topnav ul.navi li a:hover,
+    .app-topnav ul.navi li a.is-current {
+        background: var(--nav-bg-hover, #ff2d78) !important;
+        color: #fff !important;
+    }
+
+    .app-topnav ul.navi li a .navi-thumb {
+        display: none;
+    }
+
+    .app-topnav ul.navi li a .navi-link-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .app-topnav ul.navi li a .navi-link-en {
+        display: block;
+        font-size: 0.58rem;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        color: var(--nav-text-muted, #7a3b5a);
+        line-height: 1.2;
+        white-space: nowrap;
+        text-transform: uppercase;
+    }
+
+    .app-topnav ul.navi li a .navi-link-jp,
+    .app-topnav ul.navi li a strong.navi-link-jp {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 700 !important;
+        color: inherit;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    .app-topnav ul.navi li a:hover .navi-link-en,
+    .app-topnav ul.navi li a.is-current .navi-link-en {
+        color: #fff;
+        font-weight: 400 !important;
+    }
+    .app-topnav ul.navi li a:hover .navi-link-jp,
+    .app-topnav ul.navi li a.is-current .navi-link-jp {
+        color: #fff;
+        font-weight: 700 !important;
+    }
+
+    /* サブナビはヘッダー内に出すためトップナビでは非表示 */
+    .app-topnav ul.navi--sub,
+    .app-topnav ul.navi.sub {
+        display: none !important;
+    }
+
+    /* ヘッダー右のサブナビ — 個別の角丸ピンクボタン */
+    .header-subnav {
+        display: block;
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+    .header-subnav ul.navi--main {
+        display: none !important;
+    }
+    .header-subnav ul.navi--sub {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 0.4rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background: transparent;
+        border-radius: 0;
+        overflow: visible;
+    }
+    .header-subnav ul.navi--sub li {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+    .header-subnav ul.navi--sub li a {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        width: auto !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0.42rem 0.9rem !important;
+        border-radius: 999px !important;
+        background: var(--ui-accent, #ff2d78) !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        border: none !important;
+        font-weight: 700 !important;
+        font-size: 0.75rem !important;
+        white-space: nowrap;
+        line-height: 1.2;
+        box-shadow: none !important;
+        transition: background 0.18s ease;
+    }
+    .header-subnav ul.navi--sub li a:hover,
+    .header-subnav ul.navi--sub li a.is-current {
+        background: var(--ui-accent-hover, #e52068) !important;
+        color: #fff !important;
+    }
+    .header-subnav ul.navi--sub li a .navi-link-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.78rem;
+        line-height: 1;
+        color: #fff;
+    }
+    .header-subnav ul.navi--sub li a .navi-link-meta {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+    }
+    .header-subnav ul.navi--sub li a .navi-link-en {
+        display: none;
+    }
+    .header-subnav ul.navi--sub li a .navi-link-jp,
+    .header-subnav ul.navi--sub li a strong.navi-link-jp {
+        font-weight: 700 !important;
+        color: #fff !important;
+        white-space: nowrap;
+    }
+
+    /* ナビ内のお知らせセクションは非表示 */
+    .app-topnav #sideNewsArea { display: none !important; }
+
+    /* メインコンテンツ — ナビと同じ幅 */
+    .app-body-wrap {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        min-height: calc(100vh - var(--app-header-sticky-offset) - 56px);
+    }
+
+    .app-body-wrap .app-main {
+        display: block;
+        width: calc(100% - 64px);
+        max-width: var(--content-width, 1280px);
+        margin: 0 auto;
+        padding: 20px 0 48px;
+        box-sizing: border-box;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .app-body-wrap {
+        display: block;
+    }
+
+    .header-subnav {
+        display: none !important;
+    }
+
+    .app-sidebar {
+        display: none !important;
+    }
+
+    .app-main {
+        max-width: 100%;
+    }
+
+    /* -------------------------------------------------------------------------
+       ドロワー: ヘッダー直下から表示（重なり解消）+ navigation を PC サイドバー寄せ
+       ------------------------------------------------------------------------- */
+    body.app-body .mobile-menu-overlay {
+        top: var(--app-header-sticky-offset);
+    }
+
+    body.app-body .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        top: var(--app-header-sticky-offset);
+        bottom: 0;
+        height: auto;
+        width: min(272px, 88vw);
+        overflow: hidden;
+        z-index: 10050;
+        left: unset !important;
+    }
+
+    body.app-body .mobile-menu-header {
+        flex-shrink: 0;
+        padding: 6px 10px;
+    }
+
+    body.app-body .mobile-menu-title {
+        font-size: 0.95rem;
+    }
+
+    body.app-body .mobile-menu-nav {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 4px 6px 8px 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* base.css の ul.navi（ピンク円）をドロワー内だけ無効化し、PC サイドバーと同系統に */
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi,
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi.sub {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        list-style: none;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi.sub {
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px solid var(--ui-line);
+    }
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi.sub li a {
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        color: var(--ui-text) !important;
+        opacity: 1;
+        min-height: 36px;
+        gap: 10px;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi.sub li a .navi-link-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.1em;
+        color: var(--ui-accent);
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi.sub li a .navi-link-meta {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.3em;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi.sub li a .navi-link-en {
+        font-size: 0.5rem !important;
+        font-weight: 400 !important;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi.sub li a:hover {
+        opacity: 1;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li {
+        display: block;
+        margin: 0 0 1px 0;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li a {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        gap: 20px;
+        width: 100%;
+        height: auto;
+        min-height: 40px;
+        margin: 0;
+        padding: 10px 8px;
+        border-radius: 0;
+        background: transparent !important;
+        color: var(--ui-text) !important;
+        text-align: left;
+        word-break: normal;
+        box-sizing: border-box;
+        border: none !important;
+        text-decoration: none !important;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li a:hover {
+        background: var(--ui-soft) !important;
+        color: var(--ui-accent) !important;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-thumb {
+        display: block;
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        flex-shrink: 0;
+        object-fit: contain;
+    }
+
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 0;
+        gap: 1px;
+    }
+
+    /* JP（主テキスト）—— 上段 */
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-jp {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--ui-text);
+        line-height: 1.25;
+        order: 1;
+    }
+
+    /* EN（サブテキスト）—— 下段・小さめ・薄め */
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-en {
+        display: block;
+        font-size: 0.52rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        color: var(--ui-text-muted);
+        opacity: 0.6;
+        line-height: 1.2;
+        white-space: nowrap;
+        order: 2;
+        margin-top: 1px;
+    }
+    body.app-body .mobile-menu .mobile-menu-nav ul.navi li a:hover .navi-link-jp {
+        color: var(--ui-accent);
+    }
+
+    /* サイドバー内お知らせ（同パーシャル）— ドロワーでは余白を詰める */
+    body.app-body .mobile-menu .mobile-menu-nav #sideNewsArea {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+    }
+
+    body.app-body .mobile-menu-auth {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 6px 8px 10px;
+        margin: 0;
+        border-top: 1px solid var(--ui-line);
+        background: var(--ui-surface);
+    }
+
+    body.app-body .mobile-menu-login-link,
+    body.app-body .mobile-menu-register-link,
+    body.app-body .mobile-menu-auth-link {
+        padding: 6px 10px !important;
+        font-size: 0.8125rem !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        border-radius: 4px;
+        background: var(--ui-surface) !important;
+        color: var(--ui-text) !important;
+        border: 1px solid var(--ui-line-dark) !important;
+        text-align: center;
+        text-decoration: none !important;
+    }
+
+    body.app-body .mobile-menu-register-link {
+        background: var(--ui-accent) !important;
+        color: var(--ui-text-white) !important;
+        border-color: var(--ui-accent) !important;
+    }
+
+    body.app-body .mobile-menu-login-link:hover,
+    body.app-body .mobile-menu-auth-link:hover {
+        border-color: var(--ui-accent) !important;
+        color: var(--ui-accent) !important;
+        background: rgba(67, 111, 231, 0.06) !important;
+    }
+
+    body.app-body .mobile-menu-register-link:hover {
+        background: var(--ui-accent-hover) !important;
+        border-color: var(--ui-accent-hover) !important;
+        color: var(--ui-text-white) !important;
+    }
+}
+
+/* =============================================================================
+   スマホ: 会員メニューアコーディオン（≤1024px、会員ログイン時のみ表示）
+   ============================================================================= */
+.member-mobile-accordion {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .member-mobile-accordion {
+        display: block;
+        background: #dce4e9;
+    }
+
+    .member-mobile-accordion-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 16px;
+        border: none;
+        background: none !important;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--ui-text);
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+    }
+
+    .member-mobile-accordion-toggle:hover {
+        background: #dbeef9;
+    }
+
+    .member-mobile-accordion-icon {
+        font-size: 0.65rem;
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .member-mobile-accordion-toggle[aria-expanded="true"] .member-mobile-accordion-icon {
+        transform: rotate(180deg);
+    }
+
+    .member-mobile-accordion-panel form {
+        width: auto !important; /* form.css の form{width:100%} を上書き */
+    }
+
+    .member-mobile-accordion-panel {
+        border-top: 1px solid var(--ui-line);
+        display: flex;
+        flex-wrap: wrap;
+        padding: 12px 12px;
+        gap: 4px 0;
+    }
+
+    .member-mobile-accordion-panel[hidden] {
+        display: none !important;
+    }
+
+    .member-mobile-accordion-item {
+        display: block;
+        width: 50%;
+        padding: 12px 12px;
+        color: var(--ui-text);
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-decoration: none;
+        background: none;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+
+    .member-mobile-accordion-item:hover {
+        color: var(--ui-accent);
+        background: rgba(67, 111, 231, 0.06);
+        text-decoration: none;
+    }
+
+    .member-mobile-accordion-logout {
+        margin-top: 12px;
+        color: var(--ui-text-muted);
+        background:rgba(255,255,255,0.09);
+    }
+
+    /* ログアウトボタンの縦長を修正（form.css の button { min-height: 38px } を上書き） */
+    .member-mobile-accordion-item {
+        min-height: 0 !important;
+        height: auto !important;
+        line-height: 1.4;
+    }
+}
+
+/* =============================================================================
+   スマホ: ファンクラブコンテンツ別枠（≤1024px、ファンクラブ加入時のみ表示）
+   ============================================================================= */
+.member-fc-shortcut {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .member-fc-shortcut {
+        display: block;
+        padding-left:1rem;
+    }
+    .member-fc-shortcut-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom:12px;
+        padding: 10px 16px;
+        background: linear-gradient(90deg, #5b4fcf 0%, #8b5cf6 100%);
+        border-radius: 4px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 700;
+        transition: opacity 0.15s;
+    }
+
+    .member-fc-shortcut-link:hover {
+        opacity: 0.88;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .member-fc-shortcut-icon {
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .member-fc-shortcut-text {
+        flex: 1;
+    }
+
+    .member-fc-shortcut-arrow {
+        font-size: 1.1rem;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+}
+
+/* =============================================================================
+   Light pink theme overrides
+   ============================================================================= */
+
+/* ヘッダー上段バー */
+.header-upper {
+    background: linear-gradient(90deg, #fff8fb, #fff0f6) !important;
+    border-bottom: 1px solid var(--ui-line);
+}
+
+/* ヘッダーロゴリンク */
+.header-login-link {
+    background: transparent !important;
+    color: var(--ui-text-muted) !important;
+}
+.header-login-link:hover {
+    background: var(--ui-soft) !important;
+    color: var(--ui-accent) !important;
+}
+
+/* キャスト募集ボタン */
+.header-recruit-btn {
+    background: transparent !important;
+    color: var(--ui-text-pink) !important;
+    border: 1.5px solid var(--brand-pink-pale, #ffb7d5) !important;
+    border-radius: 9999px !important;
+}
+.header-recruit-btn:hover {
+    background: rgba(255, 45, 120, 0.08) !important;
+    color: var(--ui-text-pink) !important;
+}
+
+/* オンライン予約ボタン */
+.header-reservation-btn {
+    background: linear-gradient(135deg, #ff2d78, #ff6fa3) !important;
+    border-radius: 9999px !important;
+    box-shadow: none !important;
+}
+.header-reservation-btn:hover {
+    background: linear-gradient(135deg, #e52068, #ff2d78) !important;
+}
+
+/* ナビアイテムホバー */
+.nav-item:hover {
+    background: var(--ui-soft) !important;
+}
+
+/* サイドバーナビホバー */
+.app-sidebar ul.navi li a:hover {
+    background: var(--ui-soft) !important;
+    color: var(--ui-accent) !important;
+}
+
+/* モバイルメニュー */
+.mobile-menu-register-link {
+    background: linear-gradient(135deg, #ff2d78, #ff6fa3) !important;
+    color: var(--ui-text-white) !important;
+    border-color: var(--ui-accent) !important;
+    border-radius: 9999px !important;
+}
+
+/* フッター上段 */
+.footer-contact-area,
+.footer-copyright {
+    background: var(--ui-bg) !important;
+}
+
+/* フッターSNS */
+.footer-sns-link,
+.footer-sns-link-youtube,
+.footer-sns-link-tiktok,
+.footer-sns-link-facebook {
+    background: var(--ui-surface) !important;
+    border: 1.5px solid var(--ui-line) !important;
+    border-radius: 9999px !important;
+}
+.footer-sns-link:hover,
+.footer-sns-link-youtube:hover,
+.footer-sns-link-tiktok:hover,
+.footer-sns-link-facebook:hover {
+    border-color: var(--ui-accent) !important;
+    color: var(--ui-accent) !important;
+    background: var(--ui-soft) !important;
+}
+
+/* モバイル固定ナビ */
+@media (max-width: 1024px) {
+    .mobile-fixed-nav {
+        background: #ffffff !important;
+        border-top: 1.5px solid var(--ui-line) !important;
+        box-shadow: none;
+    }
+    .mobile-fixed-nav-icon {
+        background: var(--ui-soft) !important;
+        color: var(--ui-text-muted) !important;
+    }
+    .mobile-fixed-nav-link-schedule .mobile-fixed-nav-icon {
+        background: #fff0f6 !important;
+        color: var(--ui-accent) !important;
+    }
+    .mobile-fixed-nav-link-cast .mobile-fixed-nav-icon {
+        background: #fff0f6 !important;
+        color: var(--ui-accent) !important;
+    }
+    .mobile-fixed-nav-link-reservation .mobile-fixed-nav-icon {
+        background: linear-gradient(135deg, #ff2d78, #ff6fa3) !important;
+        color: #fff !important;
+    }
+    .mobile-fixed-nav-link-home .mobile-fixed-nav-icon {
+        background: transparent !important;
+        color: var(--ui-text-pink) !important;
+        border: 2px solid var(--ui-text-pink) !important;
+    }
+    .mobile-fixed-nav-menu-img {
+        background: var(--ui-soft) !important;
+    }
+}
+
+/* 会員メニューアコーディオン */
+.member-mobile-accordion {
+    background: var(--ui-bg) !important;
+}
+.member-mobile-accordion-item:hover {
+    color: var(--ui-accent) !important;
+    background: var(--ui-soft) !important;
+}
+
+/* パンくずリスト */
+.breadcrumb {
+    color: var(--ui-text-muted) !important;
+}
+.breadcrumb a {
+    color: var(--ui-text-muted) !important;
+}
+.breadcrumb a:hover {
+    color: var(--ui-accent) !important;
+}
+
+/* 入力フォーム */
+input, textarea, select {
+    background: #ffffff !important;
+    color: var(--ui-text) !important;
+    border-color: var(--ui-line-dark) !important;
+    border-radius: 0.75rem !important;
+}
+input::placeholder, textarea::placeholder {
+    color: var(--brand-text-lt, #b07090) !important;
+}
+
+/* =============================================
+   header-nav レスポンシブ制御
+   ============================================= */
+
+/* モバイル (≤768px): ロゴと同じ行に右寄せ */
+@media (max-width: 768px) {
+    /* header-content は1行 */
+    body.app-body .header-content {
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    /* ロゴ行は残りスペースを占有 */
+    body.app-body .header-logo-area {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    /* nav を左寄せ */
+    body.app-body .header-nav {
+        display: flex !important;
+        flex: 0 0 auto;
+        flex-shrink: 0;
+        justify-content: flex-start;
+        padding-bottom: 0;
+    }
+
+    /* モバイル用コンパクトサイズ */
+    .header-nav-info {
+        padding: 0.25rem 0.5rem 0.25rem 0;
+        gap: 0.35rem;
+        border-radius: 0;
+    }
+
+    .header-nav-icon-wrap {
+        width: auto;
+        height: auto;
+        font-size: 0.7rem;
+    }
+
+    .header-nav-label {
+        font-size: 0.42rem;
+        letter-spacing: 0.13em;
+        margin-bottom: 0.1rem;
+    }
+
+    .header-nav-value {
+        font-size: 0.7rem;
+    }
+
+    .header-nav-value--tel {
+        font-size: 0.8rem;
+        letter-spacing: 0.02em;
+    }
+
+    .header-nav-sep {
+        height: 22px;
+        margin: 0 0.3rem;
+    }
+}
+
+/* タブレット (769px–1024px): 表示・コンパクト */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body.app-body .header-nav {
+        display: flex !important;
+        flex-shrink: 0;
+    }
+
+    /* ロゴエリアの flex: 1 1 auto を抑制してナビ用のスペースを確保 */
+    body.app-body .header-logo-area {
+        flex: 0 0 auto;
+    }
+
+    .header-nav-info {
+        padding: 0.32rem 0.6rem 0.32rem 0;
+        gap: 0.4rem;
+        border-radius: 0;
+    }
+
+    .header-nav-icon-wrap {
+        width: auto;
+        height: auto;
+        font-size: 0.76rem;
+    }
+
+    .header-nav-label {
+        font-size: 0.46rem;
+        letter-spacing: 0.14em;
+        margin-bottom: 0.12rem;
+    }
+
+    .header-nav-value {
+        font-size: 0.76rem;
+    }
+
+    .header-nav-value--tel {
+        font-size: 0.88rem;
+        letter-spacing: 0.03em;
+    }
+
+    .header-nav-sep {
+        height: 28px;
+        margin: 0 0.38rem;
+    }
+}
+
+/* ============================================================
+   ページネーション (.pagination-wrap)
+   form.css / Tailwind utility より後に読まれるものへ !important で上書き
+   ============================================================ */
+.pagination-wrap {
+    margin: 2rem 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.pagination-wrap nav {
+    width: 100%;
+    background: transparent !important;
+}
+
+/* 件数テキスト「Showing X to Y of Z results」 */
+.pagination-wrap p {
+    font-size: 0.82rem !important;
+    color: var(--ui-text-muted) !important;
+    letter-spacing: 0.04em;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.6 !important;
+}
+
+.pagination-wrap p span.font-medium {
+    color: var(--ui-accent) !important;
+    font-weight: 700 !important;
+}
+
+/* ページボタン群ラッパー：border なし・背景色のみ */
+.pagination-wrap span.relative.z-0 {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+    border-radius: 9999px !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: var(--ui-bg-gray) !important;
+    padding: 3px !important;
+}
+
+/* 共通：個別ボタン（Tailwind px-*/py-* と form.css を上書き） */
+.pagination-wrap span.relative.z-0 > a,
+.pagination-wrap span.relative.z-0 > span > span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 34px !important;
+    min-height: unset !important;
+    height: 30px !important;
+    padding: 0 0.6rem !important;
+    margin: 0 !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    background: #ffffff !important;
+    color: var(--ui-text-muted) !important;
+    border: none !important;
+    border-radius: 9999px !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    transition: background 0.15s, color 0.15s;
+    box-sizing: border-box !important;
+}
+
+/* ホバー */
+.pagination-wrap span.relative.z-0 > a:hover {
+    background: var(--ui-soft) !important;
+    color: var(--ui-accent) !important;
+    text-decoration: none !important;
+}
+
+/* 現在のページ */
+.pagination-wrap span[aria-current="page"] > span {
+    background: linear-gradient(135deg, #ff2d78, #ff6fa3) !important;
+    color: #fff !important;
+    cursor: default !important;
+}
+
+/* 無効（前へ・次へ）*/
+.pagination-wrap span[aria-disabled="true"] > span {
+    background: #fff8fb !important;
+    color: var(--brand-pink-pale, #ffb7d5) !important;
+    cursor: default !important;
+}
+
+/* SVGアイコン（前へ・次へ矢印）*/
+.pagination-wrap svg {
+    width: 1rem !important;
+    height: 1rem !important;
+    flex-shrink: 0;
+}
+
+/* スマホ：前へ・次へのみ表示（border なし・背景のみ） */
+.pagination-wrap .flex.justify-between a,
+.pagination-wrap .flex.justify-between span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 32px !important;
+    min-height: unset !important;
+    padding: 0 1.2rem !important;
+    margin: 0 !important;
+    background: var(--ui-bg-gray) !important;
+    color: var(--ui-text-muted) !important;
+    border: none !important;
+    border-radius: 9999px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    transition: background 0.15s, color 0.15s;
+}
+
+.pagination-wrap .flex.justify-between a:hover {
+    background: var(--ui-soft) !important;
+    color: var(--ui-accent) !important;
+    text-decoration: none !important;
+}
+/* ============================================================
+   外部リンク (.outlink)
+   ============================================================ */
+.outlink{
+    width:465px;
+    max-width:100%;
+    margin:auto;
+    padding:1rem 0;
+    text-align:center;
+}
+.outlink img{
+    display:block;
+    width:auto;
+    max-width:100%;
+    margin:auto;
+}
+
+/* =============================================================================
+   SITE FOOTER — Premium Dark "Rouge Noir" Design
+   =============================================================================
+   クラス prefix: sf-  (site-footer の短縮)
+   ============================================================================= */
+
+/* ── ラッパー ── */
+.site-footer {
+    background: #190008;
+    color: #f0d8e4;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* ── トップのアクセントライン ── */
+.sf-accent-line {
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        transparent   0%,
+        #ff2d78      20%,
+        #ff6fa3      50%,
+        #ff2d78      80%,
+        transparent 100%
+    );
+}
+
+/* ── メインボディ ── */
+.sf-body {
+    max-width: 1312px;
+    margin: 0 auto;
+    padding: 3.5rem 2.5rem;
+    box-sizing: border-box;
+}
+
+/* ── 2カラムグリッド ── */
+.sf-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* =============================================================================
+   ブランドカラム
+   ============================================================================= */
+.sf-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.sf-logo-link {
+    display: inline-block;
+    transition: opacity 0.2s;
+    text-decoration: none !important;
+}
+.sf-logo-link:hover { opacity: 0.75; }
+
+.sf-logo-img {
+    max-width: 180px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.88;
+    display: block;
+}
+
+.sf-brand-copy {
+    font-size: 0.7rem;
+    color: #7a4060;
+    letter-spacing: 0.1em;
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* ── ブロック共通ラベル ── */
+.sf-block-label {
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ff2d78;
+    margin: 0 0 0.38rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    line-height: 1;
+}
+.sf-block-label i { font-size: 0.55rem; }
+
+/* ── 電話ブロック ── */
+.sf-tel-block {
+    border-left: 2px solid rgba(255, 45, 120, 0.45);
+    padding-left: 0.9rem;
+}
+.sf-tel {
+    display: block;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #ffffff !important;
+    letter-spacing: 0.05em;
+    text-decoration: none !important;
+    line-height: 1.2;
+    transition: color 0.2s;
+}
+.sf-tel:hover { color: #ff6fa3 !important; }
+
+/* ── 営業時間ブロック ── */
+.sf-hours-block {
+    border-left: 2px solid rgba(255, 255, 255, 0.07);
+    padding-left: 0.9rem;
+}
+.sf-hours {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #d8b0c8;
+    margin: 0;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+}
+
+/* ── SNS ── */
+.sf-sns {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+.sf-sns-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 45, 120, 0.1);
+    border: 1px solid rgba(255, 45, 120, 0.28);
+    color: #c080a0 !important;
+    font-size: 0.88rem;
+    text-decoration: none !important;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.sf-sns-btn:hover {
+    background: #ff2d78 !important;
+    border-color: #ff2d78 !important;
+    color: #fff !important;
+    transform: translateY(-2px);
+}
+.sf-sns-yt:hover  { background: #ff0000 !important; border-color: #ff0000 !important; }
+.sf-sns-tt:hover  { background: #1a1a1a !important; border-color: #555 !important; }
+.sf-sns-fb:hover  { background: #1877f2 !important; border-color: #1877f2 !important; }
+
+/* =============================================================================
+   ナビゲーションカラム
+   ============================================================================= */
+
+.sf-nav-heading {
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #ff2d78;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(255, 45, 120, 0.2);
+    line-height: 1;
+}
+
+.sf-nav-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sf-nav-list li { margin: 0; }
+
+.sf-nav-link {
+    display: flex;
+    flex-direction: column;
+    padding: 0.6rem 0.4rem 0.6rem 0;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: padding-left 0.15s ease, background 0.15s ease;
+    gap: 2px;
+}
+.sf-nav-link:hover {
+    padding-left: 0.35rem;
+    background: rgba(255, 45, 120, 0.07);
+}
+
+/* EN ラベル */
+.sf-nav-link em {
+    font-style: normal;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    color: #f3cdd8;
+    line-height: 1.2;
+    text-transform: uppercase;
+    transition: color 0.15s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* JP テキスト */
+.sf-nav-link span {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #f0d8e4 !important;
+    line-height: 1.3;
+    transition: color 0.15s;
+}
+
+.sf-nav-link:hover em   { color: #ff8fb3; }
+.sf-nav-link:hover span { color: #fff !important; }
+
+/* =============================================================================
+   コピーライトバー
+   ============================================================================= */
+.sf-bottom {
+    background: #0d0003;
+    border-top: 1px solid rgba(255, 45, 120, 0.08);
+    padding: 0.9rem 2rem;
+    text-align: center;
+}
+.sf-copyright {
+    font-size: 0.65rem;
+    color: #3a1428;
+    letter-spacing: 0.08em;
+    margin: 0;
+    line-height: 1;
+}
+
+/* =============================================================================
+   レスポンシブ
+   ============================================================================= */
+@media (max-width: 1024px) {
+    .sf-bottom {
+        padding-bottom: calc(0.9rem + 64px); /* mobile-fixed-nav の高さ分 */
+    }
+}
+
+@media (max-width: 900px) {
+    .sf-nav-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .sf-body {
+        padding: 2rem 1.25rem;
+    }
+    .sf-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .sf-nav-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .sf-brand {
+        gap: 1rem;
+    }
+    .sf-bottom {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sf-body {
+        padding: 1.75rem 1rem;
+    }
+    .sf-nav-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sf-tel {
+        font-size: 1.25rem;
+    }
+    .sf-logo-img {
+        max-width: 140px;
+    }
+}
+
+/* =============================================================================
+   HEADER ENHANCEMENTS — ヘッダーの視覚的洗練
+   ============================================================================= */
+
+/* ヘッダーロゴ — 縦幅で合わせる */
+.header-logo-img {
+    width: auto !important;
+    height: 58px !important;
+    max-width: none !important;
+}
+
+/* ── ヘッダー：スクロール固定（sticky）。ナビはヘッダ外で流す ── */
+.header-gradient.header-main {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    overflow: visible;
+}
+
+/* ── PC: ナビが隠れたときだけ出す menu（ヘッダ上・角丸なし） ── */
+.header-nav-toggle-wrap {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+@media (min-width: 1025px) {
+    .header-nav-toggle-wrap {
+        display: flex;
+        justify-content: center;
+    }
+    .header-nav-toggle-wrap.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+}
+.header-nav-toggle {
+    width: auto;
+    min-width: 64px;
+    height: auto;
+    padding: 4px 14px 3px;
+    background: #ffecf2;
+    color: #c9a17e;
+    border: none;
+    border-radius: 0 0 8px 8px !important;
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    box-shadow: none;
+    transition: color 0.15s, background 0.15s;
+}
+.header-nav-toggle:hover {
+    color: #d4b08c;
+    background: #ffe4ee;
+}
+.header-nav-toggle-label {
+    font-size: 0.56rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    line-height: 1;
+    pointer-events: none;
+}
+.header-nav-toggle-icon {
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1;
+    transform: rotate(0deg);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+.header-nav-toggle.is-open .header-nav-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* ── PCナビ：スクロール後のフライアウト（ヘッダ下からスライド） ── */
+.app-topnav-inner {
+    overflow: hidden;
+}
+.app-topnav-flyout {
+    display: none;
+}
+@media (min-width: 1025px) {
+    .app-topnav-flyout {
+        display: grid;
+        grid-template-rows: 0fr;
+        position: fixed;
+        top: var(--app-header-sticky-offset, 96px);
+        left: 0;
+        right: 0;
+        z-index: 9998;
+        overflow: hidden;
+        pointer-events: none;
+        transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-bottom: none !important;
+        background: var(--nav-bg-grad, var(--nav-bg, #edc9d2));
+    }
+    .app-topnav-flyout.is-open {
+        grid-template-rows: 1fr;
+        pointer-events: auto;
+        box-shadow: 0 4px 16px rgba(70, 40, 50, 0.08);
+    }
+    .app-topnav-flyout .app-topnav-inner {
+        min-height: 0;
+    }
+}
+
+/* ヘッダー下部の電話番号 — より目立つ演出 */
+.header-nav-value--tel {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em;
+}
+
+/* =============================================================================
+   PC トップナビ — アイコン表示
+   ============================================================================= */
+@media (min-width: 1025px) {
+
+    /* アイコンを表示（デフォルトは非表示だったため上書き） */
+    .app-topnav ul.navi li a .navi-link-icon {
+        display: block !important;
+        font-size: 0.64rem;
+        color: var(--nav-text-muted, #7a3b5a);
+        line-height: 1;
+        margin-bottom: 5px;
+        opacity: 0.4;             /* 薄め */
+        transition: color 0.18s, opacity 0.18s;
+    }
+
+    .app-topnav ul.navi li a:hover .navi-link-icon,
+    .app-topnav ul.navi li a.is-current .navi-link-icon {
+        color: rgba(255, 255, 255, 0.7) !important;
+        opacity: 0.7;
+    }
+
+    /* アイコン分の高さ調整 */
+    .app-topnav ul.navi li a {
+        height: 66px !important;
+        gap: 0;
+    }
+
+    /* JP が上、EN が下のレイアウト */
+    .app-topnav ul.navi li a .navi-link-meta {
+        gap: 0;
+    }
+
+    /* JP（主テキスト）—— 上段 */
+    .app-topnav ul.navi li a .navi-link-jp,
+    .app-topnav ul.navi li a strong.navi-link-jp {
+        font-size: 0.8rem;
+        font-weight: 700 !important;
+        line-height: 1.25;
+    }
+
+    /* EN（サブテキスト）—— 下段・小さめ */
+    .app-topnav ul.navi li a .navi-link-en {
+        font-size: 0.5rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        opacity: 0.7;
+        line-height: 1.2;
+        margin-top: 1px;
+    }
+
+    .app-topnav ul.navi li a:hover .navi-link-en,
+    .app-topnav ul.navi li a.is-current .navi-link-en {
+        opacity: 0.85;
+    }
+
+    /* サブナビ ヘッダー内ピルボタン — 最初の1個（オプション）を強調 */
+    .header-subnav ul.navi--sub li:first-child a {
+        background: linear-gradient(135deg, #ff2d78, #ff6fa3) !important;
+        box-shadow: 0 2px 8px rgba(255, 45, 120, 0.3) !important;
+    }
+    .header-subnav ul.navi--sub li:first-child a:hover {
+        background: linear-gradient(135deg, #e52068, #ff2d78) !important;
+        box-shadow: 0 4px 12px rgba(255, 45, 120, 0.45) !important;
+        transform: translateY(-1px);
+    }
+}
+
+/* =============================================================================
+   モバイル固定ナビ — プレミアム再配色
+   ============================================================================= */
+@media (max-width: 1024px) {
+
+    /* ロゴサイズをモバイル用に調整（縦幅基準） */
+    .header-logo-img {
+        width: auto !important;
+        height: 36px !important;
+        max-width: none !important;
+    }
+
+    /* 電話アイコン（1番目）— ピンクグラデーション強調 */
+    .mobile-fixed-nav-link-home .mobile-fixed-nav-icon {
+        background: linear-gradient(135deg, #ff2d78, #ff6fa3) !important;
+        color: #fff !important;
+        border: none !important;
+    }
+
+    /* キャストアイコン — ローズ */
+    .mobile-fixed-nav-link-cast .mobile-fixed-nav-icon {
+        background: rgba(255, 45, 120, 0.12) !important;
+        color: #ff2d78 !important;
+        border: 1.5px solid rgba(255, 45, 120, 0.3) !important;
+    }
+
+    /* スケジュールアイコン — アンバー系 */
+    .mobile-fixed-nav-link-schedule .mobile-fixed-nav-icon {
+        background: rgba(245, 158, 11, 0.12) !important;
+        color: #f59e0b !important;
+        border: 1.5px solid rgba(245, 158, 11, 0.3) !important;
+    }
+
+    /* メニューアイコン — ニュートラル */
+    .mobile-fixed-nav-link-menu .mobile-fixed-nav-icon {
+        background: rgba(120, 80, 100, 0.1) !important;
+        color: var(--ui-text-muted) !important;
+    }
+
+    /* テキストサイズ統一 */
+    .mobile-fixed-nav-link {
+        font-size: 0.55rem !important;
+    }
+}
+
+/* フッターロゴサイズ拡大 */
+.sf-logo-img {
+    max-width: 220px !important;
+}
+
+/* =============================================================================
+   モバイル ヘッダー — 電話番号のはみ出し防止
+   ============================================================================= */
+@media (max-width: 768px) {
+    /* ロゴを小さめに */
+    .header-logo-img {
+        height: 30px !important;
+    }
+
+    /* PC用の左マージンを解除 */
+    body.app-body .header-aside {
+        margin-left: 0.5rem;
+        flex: 0 1 auto;
+    }
+
+    /* 電話番号を縮小（上の 1.05rem !important を上書き） */
+    .header-nav-value--tel {
+        font-size: 0.72rem !important;
+        letter-spacing: 0.01em;
+    }
+}
+
+@media (max-width: 380px) {
+    .header-logo-img {
+        height: 26px !important;
+    }
+
+    .header-nav-value--tel {
+        font-size: 0.66rem !important;
+        letter-spacing: 0;
+    }
+}

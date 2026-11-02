@@ -1,0 +1,308 @@
+/**
+ * resources/css/dashboard/item.css — キャストマイページ Vite エントリ
+ */
+/* 共通スタイルをインポート */
+@import '../common.css';
+
+/* ================================================
+   Item（キャスト）固有のスタイル
+   ================================================ */
+@layer components {
+    /* アイテム管理画面レイアウト */
+    .item-body {
+        @apply min-h-screen flex;
+        @apply bg-gradient-to-br from-pink-50 to-purple-50;
+    }
+
+    .item-container {
+        @apply flex w-full;
+    }
+
+    /* サイドバー */
+    .item-sidebar {
+        @apply w-64 bg-gradient-to-b from-pink-600 to-purple-600 text-white;
+        @apply fixed h-screen;
+        @apply overflow-y-auto;
+        @apply transition-all duration-300;
+        @apply shadow-xl;
+    }
+
+    .item-sidebar-collapsed {
+        @apply w-16;
+    }
+
+    .item-sidebar-logo {
+        @apply p-4 border-b border-pink-500;
+        @apply text-xl font-bold text-center;
+    }
+
+    .item-sidebar-nav {
+        @apply p-4;
+    }
+
+    .item-sidebar-item {
+        @apply flex items-center px-4 py-3 mb-2 rounded-lg;
+        @apply text-pink-100 hover:bg-white hover:bg-opacity-20 hover:text-white;
+        @apply transition-all duration-200;
+        @apply cursor-pointer;
+    }
+
+    .item-sidebar-item-active {
+        @apply bg-white bg-opacity-20 text-white;
+        @apply shadow-lg;
+    }
+
+    .item-sidebar-icon {
+        @apply w-5 h-5 mr-3;
+    }
+
+    /* メインコンテンツエリア */
+    .item-main {
+        @apply flex-1 ml-64;
+        @apply transition-all duration-300;
+    }
+
+    .item-main-collapsed {
+        @apply ml-16;
+    }
+
+    /* ヘッダー */
+    .item-header {
+        @apply bg-white shadow-md;
+        @apply px-6 py-4;
+        @apply flex items-center justify-between;
+        @apply sticky top-0 z-50;
+        @apply border-b-4 border-pink-500;
+    }
+
+    .item-header-title {
+        @apply text-2xl font-bold;
+        @apply bg-gradient-to-r from-pink-600 to-purple-600;
+        @apply bg-clip-text text-transparent;
+    }
+
+    .item-header-actions {
+        @apply flex items-center space-x-4;
+    }
+
+    /* コンテンツエリア */
+    .item-content {
+        @apply p-6;
+    }
+
+    /* プロフィールカード */
+    .profile-card {
+        @apply bg-white rounded-xl shadow-lg overflow-hidden;
+        @apply hover:shadow-2xl transition-all duration-300;
+    }
+
+    .profile-card-header {
+        @apply bg-gradient-to-r from-pink-500 to-purple-500;
+        @apply p-6 text-white;
+    }
+
+    .profile-card-avatar {
+        @apply w-24 h-24 rounded-full border-4 border-white;
+        @apply shadow-lg mx-auto;
+    }
+
+    .profile-card-name {
+        @apply text-2xl font-bold text-center mt-4;
+    }
+
+    .profile-card-body {
+        @apply p-6;
+    }
+
+    /* ギャラリーグリッド */
+    .gallery-grid {
+        @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+    }
+
+    .gallery-item {
+        @apply relative overflow-hidden rounded-lg;
+        @apply cursor-pointer;
+        @apply aspect-square;
+    }
+
+    .gallery-item-image {
+        @apply w-full h-full object-cover;
+        @apply transition-transform duration-300;
+    }
+
+    .gallery-item:hover .gallery-item-image {
+        @apply scale-110;
+    }
+
+    .gallery-item-overlay {
+        @apply absolute inset-0 bg-black bg-opacity-0;
+        @apply transition-all duration-300;
+        @apply flex items-center justify-center;
+    }
+
+    .gallery-item:hover .gallery-item-overlay {
+        @apply bg-opacity-40;
+    }
+
+    .gallery-item-actions {
+        @apply opacity-0;
+        @apply transition-opacity duration-300;
+        @apply flex space-x-2;
+    }
+
+    .gallery-item:hover .gallery-item-actions {
+        @apply opacity-100;
+    }
+
+    /* スケジュールカード */
+    .schedule-card {
+        @apply bg-white rounded-lg shadow-md p-4 mb-4;
+        @apply border-l-4 border-pink-500;
+        @apply hover:shadow-lg transition-all duration-200;
+    }
+
+    .schedule-date {
+        @apply text-sm text-gray-600 mb-2;
+    }
+
+    .schedule-time {
+        @apply text-lg font-bold text-pink-600;
+    }
+
+    .schedule-status {
+        @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+    }
+
+    .schedule-status-available {
+        @apply bg-green-100 text-green-800;
+    }
+
+    .schedule-status-booked {
+        @apply bg-red-100 text-red-800;
+    }
+
+    .schedule-status-pending {
+        @apply bg-yellow-100 text-yellow-800;
+    }
+
+    /* 予約リスト */
+    .booking-list {
+        @apply space-y-4;
+    }
+
+    .booking-item {
+        @apply bg-white rounded-lg shadow-md p-4;
+        @apply flex items-center justify-between;
+        @apply hover:shadow-lg transition-shadow duration-200;
+    }
+
+    .booking-info {
+        @apply flex-1;
+    }
+
+    .booking-customer {
+        @apply font-semibold text-gray-800;
+    }
+
+    .booking-time {
+        @apply text-sm text-gray-600;
+    }
+
+    .booking-actions {
+        @apply flex space-x-2;
+    }
+
+    /* メッセージエリア */
+    .message-list {
+        @apply space-y-3;
+    }
+
+    .message-item {
+        @apply bg-white rounded-lg shadow-sm p-4;
+        @apply hover:shadow-md transition-shadow duration-200;
+    }
+
+    .message-item-unread {
+        @apply bg-pink-50 border-l-4 border-pink-500;
+    }
+
+    .message-header {
+        @apply flex items-center justify-between mb-2;
+    }
+
+    .message-sender {
+        @apply font-semibold text-gray-800;
+    }
+
+    .message-time {
+        @apply text-xs text-gray-500;
+    }
+
+    .message-body {
+        @apply text-gray-700 text-sm;
+    }
+
+    /* 統計カード */
+    .stat-card-item {
+        @apply bg-gradient-to-br from-pink-500 to-purple-600;
+        @apply text-white rounded-xl shadow-lg p-6;
+        @apply hover:shadow-2xl transition-shadow duration-300;
+    }
+
+    .stat-card-item-icon {
+        @apply w-12 h-12 bg-white bg-opacity-20 rounded-full;
+        @apply flex items-center justify-center mb-4;
+    }
+
+    .stat-card-item-label {
+        @apply text-sm opacity-90 mb-1;
+    }
+
+    .stat-card-item-value {
+        @apply text-3xl font-bold;
+    }
+
+    /* アップロードエリア */
+    .upload-area {
+        @apply border-2 border-dashed border-pink-300 rounded-lg;
+        @apply p-8 text-center;
+        @apply hover:border-pink-500 hover:bg-pink-50;
+        @apply transition-all duration-200;
+        @apply cursor-pointer;
+    }
+
+    .upload-icon {
+        @apply w-16 h-16 mx-auto mb-4 text-pink-400;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+        .item-sidebar {
+            @apply -left-64;
+        }
+
+        .item-sidebar-open {
+            @apply left-0;
+        }
+
+        .item-main {
+            @apply ml-0;
+        }
+
+        .item-header {
+            @apply px-4 py-3;
+        }
+
+        .item-content {
+            @apply p-4;
+        }
+
+        .gallery-grid {
+            @apply grid-cols-2 gap-2;
+        }
+
+        .profile-card-avatar {
+            @apply w-20 h-20;
+        }
+    }
+}

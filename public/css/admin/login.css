@@ -1,0 +1,63 @@
+html, body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    background:#f7f7f7;
+}
+#loginArea{
+    position: relative;
+    width:400px;
+    margin:auto;
+    padding:1.5rem;
+    border-radius:4px;
+    background:#FFF;
+    /* border:1px solid #666; */
+}
+/* title */
+#loginArea .title{
+    display: flex;
+    margin-bottom:2rem;
+}
+#loginArea .title svg#logo{
+    width:90px;
+    margin-right: 1rem;
+}
+#loginArea .title .text{
+    font-size: 3rem;
+    font-weight: bold;
+    color: #00a0e9;
+}
+#loginArea .title .text strong{
+    display: block;
+    font-size: 1.1rem;
+    color: #555;
+}
+#loginArea .title .text span{
+    display: block;
+    line-height: 1;
+}
+/* form */
+#loginArea input[type='text'],#loginArea input[type='password'] {
+    width:100%;
+    margin:0.5rem 0;
+    padding:0.8rem;
+    box-sizing: border-box;
+    border: 1px solid #2ea0e9;
+    font-size: 1.2rem;
+}
+#loginArea input::placeholder{
+    color: #CCC;
+}
+
+#loginArea button[type='submit']{
+    width:100%;
+    margin:0.5rem 0;
+    padding:0.4rem;
+    margin:1rem auto;
+    background:#363a40;
+    color: #FFF;
+    font-size: 1.0rem;
+    line-height: 1.8;
+    cursor: pointer;
+}

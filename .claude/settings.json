@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep *)",
+      "Bash(\"C:/xampp/mysql/bin/mysql.exe\" -u root -e \"DROP DATABASE IF EXISTS old_mysql; CREATE DATABASE old_mysql CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\")",
+      "Bash(\"C:/xampp/mysql/bin/mysql.exe\" -u root --force old_mysql)",
+      "Bash(\"C:/xampp/mysql/bin/mysql.exe\" -u root --binary-mode=1 --force old_mysql)",
+      "PowerShell(python --version 2>&1)",
+      "PowerShell(python3 --version 2>&1)",
+      "Bash(\"C:/xampp/mysql/bin/mysql.exe\" -u root --default-character-set=utf8mb4 -e \"SELECT item_id, item_name FROM item_data ORDER BY item_id DESC LIMIT 5;\" old_mysql)",
+      "Bash(C:/xampp/mysql/bin/mysql.exe -u root --default-character-set=utf8mb4 -e ' *)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -e \"SHOW DATABASES LIKE 'old_db';\" 2>&1)",
+      "PowerShell(\\(Get-Item \"G:\\\\マイドライブ\\\\dev\\\\ヤリ新宿\\\\DB\\\\2026.06.15\\\\yaricir_shinjuku.sql\"\\).Length / 1MB)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root old_mysql \"--default-character-set=utf8mb4\" \"--execute=source G:/�}�C�h���C�u/dev/�����V�h/DB/2026.06.15/old_mysql/yarisugi_shinjuku.sql\" 2>&1)",
+      "PowerShell(& \"C:\\\\xampp\\\\php\\\\php.exe\" \"c:\\\\xampp\\\\htdocs\\\\yaricir-shinjuku-project\\\\yaricir_shinjuku\\\\fix_null_csv.php\" 2>&1)",
+      "Read(//c/xampp/mysql/data/**)",
+      "Read(//c/xampp/mysql/bin/**)",
+      "PowerShell(Get-Content \"C:\\\\xampp\\\\mysql\\\\data\\\\mysql_error.log\" | Select-Object -Last 100 | Where-Object { $_ -match \"\\(started|Aborting|crash|shutdown|socket|ERROR\\)\" })",
+      "Bash(grep -E \"\\\\.\\(blade\\\\.php|php\\)$\")",
+      "Bash(xargs grep -l \"top_newface\")",
+      "Bash(xargs grep -l \"top-pickup\\\\|top-rank\\\\|top-schedule\")",
+      "Read(//c/xampp/htdocs/delivery-cute-project/delivery-cute/**)",
+      "Bash(ls \"C:\\\\xampp\\\\htdocs\\\\delivery-cute-project\\\\delivery-cute\")",
+      "Read(//c/xampp/htdocs/delivery-cute-project/delivery-cute/config/**)",
+      "Read(//c/xampp/htdocs/delivery-cute-project/delivery-cute/app/**)",
+      "Read(//c/xampp/htdocs/delivery-cute-project/delivery-cute/resources/views/admin/settings/**)",
+      "Read(//c/xampp/htdocs/delivery-cute-project/delivery-cute/resources/views/admin/**)",
+      "Read(//c/xampp/htdocs/delivery-cute-project/delivery-cute/database/migrations/**)",
+      "Bash(python -c \"import sys,json; t=[t for t in json.load\\(sys.stdin\\).get\\('tables',[]\\) if 'newface' in t.get\\('name',''\\)]; print\\(t\\)\")"
+    ],
+    "additionalDirectories": [
+      "C:\\xampp\\htdocs\\delivery-cute-project\\delivery-cute\\resources\\views",
+      "C:\\xampp\\mysql\\data"
+    ]
+  }
+}

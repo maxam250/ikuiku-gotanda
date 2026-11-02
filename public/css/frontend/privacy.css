@@ -1,0 +1,38 @@
+/* CSS Document */
+
+/*
+##########################################################################
+　プライバシーポリシー
+##########################################################################*/
+#privacy{}
+
+#privacy h3{}
+#privacy section{
+	padding:2.5%;
+}
+
+#privacy section ul{}
+#privacy section ul li{
+	padding:1.8% 0;
+	border-bottom:1px dotted #999;
+}
+#privacy section ul li ol{}
+#privacy section ul li ol li{
+	border: none !important;
+	padding:0.8% 0 0;
+	list-style:disc inside;
+}
+#privacy .enactment{
+	margin: 0 0 30px;
+	padding:1.5%;
+	background:#f0f0f0;
+}
+
+
+#privacy section#shop{
+
+}
+#privacy section#shop p{
+	padding:2.2%;
+
+}

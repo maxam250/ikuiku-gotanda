@@ -1,0 +1,46 @@
+section > h3{
+    padding-left:0.5rem;
+    border-left:5px solid #AAA;
+    font-weight:100;
+    font-size: 1rem;
+    margin-bottom:1.5rem;
+}
+#updateArea{
+    margin-bottom:4rem;
+}
+
+.list .box{
+    width:auto;
+    background:#f6f6f6;
+}
+.list .box > div{
+    margin:0 0 !important;
+}
+.list .box .img{
+    width:100%;
+    text-align: center;
+}
+.list .box .button{
+    margin:0rem 0;
+}
+.list .box .button .btn{
+    font-size:0.7rem;
+    line-height: 1;
+}
+.list .box .caption{
+    margin-bottom:2px;
+}
+.list .box .caption input{
+    width:100% !important;
+}
+
+
+
+#uploadArea{
+    border: 1px solid #DDD;
+    padding:2rem;
+    margin-bottom:4rem;
+}
+
+
+#contentArea{}

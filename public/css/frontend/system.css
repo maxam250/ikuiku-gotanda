@@ -1,0 +1,1549 @@
+@charset "utf-8";
+
+/* =============================================================================
+   システムページ (system.blade.php)
+   ============================================================================= */
+
+/* ページ共通ラッパー */
+.sys-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0 4rem;
+    width: 100%;
+}
+
+/* サービス概要グリッド */
+#summary {
+    margin-bottom: 40px;
+    padding:1.8rem;
+    background: repeating-linear-gradient(
+  45deg,
+  #f4ebff,
+  #f4ebff 12px,
+  transparent 12px,
+  transparent 18px
+);
+
+}
+#summary .summary-title {
+    background:rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+    border-radius:50px;
+    padding: 0.75rem 1.25rem;
+    font-size:clamp(1.0rem, 4vw, 1.5rem);
+    text-align: center;
+    font-weight: bold;
+    color: #aaa;
+}
+#summary .summary-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+#summary .summary-content section > h3{
+    font-size:clamp(0.8rem, 1.5vw, 1.5rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #8757b4;
+    text-align: center;
+}
+#summary .summary-content section >img{
+    display: block ;
+    margin-bottom:1.5rem;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+#summary section {
+    padding: 16px;
+    border: 10px solid  #e4d5ff;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+#summary section h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #8757b4;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#summary section p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* タブレット・スマホ: 概要は1カラム、各ブロックは画像左・見出し＋本文は右 */
+@media (max-width: 1023px) {
+    #summary .summary-content {
+        grid-template-columns: 1fr;
+        gap: clamp(12px, 3vw, 18px);
+    }
+
+    #summary .summary-content section {
+        display: grid;
+        grid-template-columns: minmax(96px, 34vw) minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        column-gap: 14px;
+        row-gap: 6px;
+        align-items: start;
+    }
+
+    #summary .summary-content section > img {
+        grid-column: 1;
+        grid-row: 1 / -1;
+        margin-bottom: 0;
+        width: 100%;
+        max-height: 200px;
+        height: auto;
+        object-fit: cover;
+        align-self: start;
+    }
+
+    #summary .summary-content section > h3 {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: left;
+        margin-bottom: 4px;
+        font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+    }
+
+    #summary .summary-content section > p {
+        grid-column: 2;
+        grid-row: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    #summary .summary-content section {
+        grid-template-columns: minmax(88px, 30%) minmax(0, 1fr);
+        column-gap: 10px;
+    }
+
+    #summary .summary-content section > img {
+        max-height: 160px;
+    }
+}
+
+/* 各サービスセクション（アキバウォーク / オンライン / ファンクラブ） */
+.sys-service {
+    --svc-accent: #3b82f6;
+    --svc-accent-soft: rgba(59, 130, 246, 0.12);
+    --svc-surface: #ffffff;
+    margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+    padding: clamp(1.25rem, 3vw, 1.85rem);
+    border-radius: 14px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: linear-gradient(165deg, var(--svc-surface) 0%, #fafbfc 100%);
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 12px 28px -8px rgba(15, 23, 42, 0.08);
+}
+
+.sys-service--walk {
+    --svc-accent: #45c9e0;
+    --svc-accent-soft: rgba(37, 212, 235, 0.12);
+}
+
+.sys-service--online {
+    --svc-accent: #ac84f1;
+    --svc-accent-soft: rgba(124, 58, 237, 0.12);
+}
+
+.sys-service--fanclub {
+    --svc-accent: #f189b8;
+    --svc-accent-soft: rgba(219, 39, 119, 0.12);
+}
+
+.sys-service__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 3px solid var(--svc-accent-soft);
+    position: relative;
+}
+
+.sys-service__head::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 20%;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--svc-accent);
+}
+.sys-service__head span {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--svc-accent);
+    border: 1px solid var(--svc-accent);
+    border-radius: 6px;
+}
+.sys-service__head div {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+.sys-service__title {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: clamp(1.15rem, 2.5vw, 2.35rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #4f596e;
+}
+.sys-service__title span {
+    display: inline-block;
+    margin-right: 0.85em;
+    width: 90px;
+}
+.sys-service__title span img {
+    display: block;
+}
+.sys-service__body {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+}
+
+.sys-service__footer.link {
+    margin-top: clamp(1.1rem, 2.5vw, 1.5rem);
+    padding-top: 0.25rem;
+}
+
+/* カード（できること / 料金 / 流れ） */
+.sys-service-card {
+    margin: 0;
+    padding: clamp(1rem, 2.5vw, 1.35rem);
+    border-radius: 10px;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.sys-service-card__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.9rem;
+    padding: 0.35rem 0 0.65rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #1e293b;
+    border-bottom: 1px dashed rgba(15, 23, 42, 0.12);
+}
+
+.sys-service-card__title::before {
+    content: "";
+    width: 4px;
+    height: 1.1em;
+    border-radius: 2px;
+    background: var(--svc-accent);
+    flex-shrink: 0;
+}
+
+.sys-service-card__content > p:last-child {
+    margin-bottom: 0;
+}
+
+.sys-service-card p,
+.sys-plan-cell p,
+.sys-plan-single p {
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.75;
+    margin: 0 0 0.65rem;
+}
+
+.sys-service-note {
+    margin-top: 0.5rem !important;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.86rem !important;
+    color: #64748b !important;
+    background: var(--svc-accent-soft);
+    border-radius: 1px;
+    border-left: 3px solid var(--svc-accent);
+}
+
+.sys-service-nominate{
+    color: #535455;
+}
+.sys-service-nominate__item{
+    display:flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    /* gap:1.25rem; */
+    padding:0.75rem 1.25rem;
+    background:#f8fcff;
+    border-radius:8px;
+}
+
+.sys-service-nominate__item strong{
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    background: var(--svc-accent);
+    border-radius: 3px;
+    color: #fff;
+    font-size:clamp(0.6rem, 1.0vw, 0.8rem);
+    white-space: nowrap;
+}
+.sys-service-nominate__item p{
+    font-size: clamp(0.85rem, 2.0vw, 1.10rem) !important;
+    margin: 0 0.8rem;
+    font-weight: bold;
+    color:#727575;
+    line-height:1.2 !important;
+}
+.sys-service-nominate__item p span{
+    display: inline-block;
+    margin-right: 0.85em;
+    font-size: 0.75rem !important;
+
+}
+
+.sys-service-nominate > p{
+    font-size: 0.75rem !important;
+}
+
+/* 画像ブロック */
+.sys-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem 1.25rem;
+}
+
+/* アイコンセル（円形・センター揃え） */
+.sys-plan-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.55rem;
+    min-width: 0;
+    margin-bottom: 1rem;
+}
+
+.sys-plan-cell .sys-plan-img {
+    width: clamp(90px, 18vw, 136px);
+    height: clamp(90px, 18vw, 136px);
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.12);
+    flex-shrink: 0;
+}
+
+.sys-plan-cell p {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #475569;
+    margin: 0;
+    line-height: 1.3;
+}
+.sys-plan-andmore {
+    width:480px;
+    max-width:84%;
+    margin:0 auto 2rem;
+    align-items: center;
+    text-align: center;
+    gap: 0.55rem;
+    min-width: 0;
+}
+.sys-plan-andmore p{
+    font-size: 0.82rem;
+    color:#3bc0b9;
+}
+
+/* 最後のセル（補足テキスト）は全幅・横並び */
+.sys-plan-over {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
+    padding-top: 0.85rem;
+    margin-top: 0.25rem;
+    border-top: 1px dashed rgba(15, 23, 42, 0.1);
+}
+
+.sys-plan-over .sys-plan-img {
+    width: clamp(80px, 18vw, 220px);
+    height: clamp(80px, 18vw, 220px);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.sys-plan-over p {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #475569;
+    text-align: left;
+    line-height: 1.75;
+    align-self: center;
+}
+
+.sys-plan-single {
+    min-width: 0;
+}
+
+.sys-plan-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.75rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1);
+    object-fit: cover;
+}
+
+.sys-plan-single .sys-plan-img {
+    max-width: min(100%, 520px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sys-plan-single p {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+@media (max-width: 840px) {
+    .sys-plan-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .sys-plan-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .sys-plan-cell .sys-plan-img {
+        width: 68px;
+        height: 68px;
+    }
+
+    .sys-plan-over {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .sys-plan-over .sys-plan-img {
+        width: calc(50% - 0.5rem);
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .sys-service-nominate__item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .sys-service-nominate__item strong {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+    }
+
+    .sys-service-nominate__item p {
+        font-size: 0.75rem !important;
+        margin: 0;
+        line-height: 1.3 !important;
+    }
+
+    .sys-service-nominate__item p span {
+        font-size: 0.65rem !important;
+    }
+}
+
+/* ご利用の流れ アコーディオン（details/summary） */
+details.plan-flow.sys-service-card > summary.sys-service-card__flow_title,
+details.plan-flow.sys-service-card > summary.sys-service-card__title {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    margin: -0.35rem -0.35rem 0;   /* カード内padding分を相殺して端まで広げる */
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    background: var(--svc-accent-soft);
+    border: 1px solid color-mix(in srgb, var(--svc-accent) 30%, transparent);
+    justify-content: flex-start;
+    transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+details.plan-flow.sys-service-card > summary.sys-service-card__flow_title::-webkit-details-marker,
+details.plan-flow.sys-service-card > summary.sys-service-card__title::-webkit-details-marker {
+    display: none;
+}
+details.plan-flow.sys-service-card > summary.sys-service-card__flow_title::marker,
+details.plan-flow.sys-service-card > summary.sys-service-card__title::marker {
+    content: none;
+}
+details.plan-flow.sys-service-card > summary.sys-service-card__flow_title::after,
+details.plan-flow.sys-service-card > summary.sys-service-card__title::after {
+    content: "▼";
+    font-size: 0.65rem;
+    color: var(--svc-accent);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+details.plan-flow.sys-service-card[open] > summary.sys-service-card__flow_title::after,
+details.plan-flow.sys-service-card[open] > summary.sys-service-card__title::after {
+    transform: rotate(180deg);
+}
+details.plan-flow.sys-service-card[open] > summary.sys-service-card__flow_title,
+details.plan-flow.sys-service-card[open] > summary.sys-service-card__title {
+    margin-bottom: 0.9rem;
+    border-radius: 8px 8px 0 0;
+}
+details.plan-flow.sys-service-card > summary.sys-service-card__flow_title:hover,
+details.plan-flow.sys-service-card > summary.sys-service-card__title:hover {
+    background: color-mix(in srgb, var(--svc-accent) 20%, transparent);
+    box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--svc-accent) 35%, transparent);
+}
+
+/* ご利用の流れ */
+.sys-flow-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: sys-flow;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.sys-flow-steps > li {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
+    gap: 0.65rem 1rem;
+    padding: 0.85rem 0 0.85rem 2.35rem;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    align-items: start;
+}
+
+.sys-flow-steps > li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sys-flow-steps > li::before {
+    counter-increment: sys-flow;
+    content: counter(sys-flow);
+    position: absolute;
+    left: 0;
+    top: 0.78rem;
+    width: 1.65rem;
+    height: 1.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--svc-accent);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px var(--svc-accent-soft);
+}
+
+.sys-flow-steps__label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--svc-accent);
+    line-height: 1.45;
+}
+
+.sys-flow-steps__text {
+    display: block;
+    font-size: 0.88rem;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+@media (max-width: 560px) {
+    .sys-flow-steps > li {
+        grid-template-columns: 1fr;
+        padding-left: 2.35rem;
+        padding-top: 0.65rem;
+    }
+
+    .sys-flow-steps__label {
+        margin-bottom: 0.25rem;
+    }
+}
+
+/* リンクボタン */
+.link {
+    margin-top: 16px;
+    text-align: right;
+}
+
+.sys-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    color: var(--svc-accent);
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+}
+
+.sys-btn:hover {
+    opacity: 0.85;
+    color: var(--svc-accent);
+    text-decoration: underline;
+}
+
+/* オプション・支払い・規約セクション（見出しは下部の .sys-heading に統一） */
+section.sys-section {
+    max-width: none;
+    margin: 0;
+}
+
+section.sys-section h3 {
+    font-size: inherit;
+    font-weight: inherit;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    color: inherit;
+}
+
+section.sys-section h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #bbb;
+}
+
+section.sys-section > div {
+    margin-bottom: 20px;
+}
+
+section.sys-section p {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.7;
+}
+
+section.sys-section ul {
+    list-style: disc;
+    padding-left: 1.5em;
+}
+
+section.sys-section ul li {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+/* オプション一覧 */
+.sys-section--options{
+    margin-bottom:3rem;
+}
+section.sys-section.sys-section--options h3{
+    border:none;
+     margin-bottom: 2.25rem;
+     text-align: center;
+}
+.sys-section--options .sys-options-panel {
+    padding: clamp(1rem, 2.5vw, 1.35rem);
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+    box-shadow: 0 4px 18px -6px rgba(15, 23, 42, 0.07);
+}
+.sys-section--options .sys-options-panel.free-options {
+    background: linear-gradient(180deg, #f0f9ff 0%, #e4f4ff 100%);
+}
+.sys-section--options .sys-options-panel.paid-options {
+    background: linear-gradient(180deg, #fff1f2 0%, #ffecea 100%);
+}
+.sys-section--options .sys-options-panel h4{
+    font-size: 1.2rem;
+}
+.sys-section--options .sys-options-panel p{
+    font-size: 0.85rem;
+}
+.sys-section--options .sys-options-panel.my-options {
+    border: 4px solid #b3d0ff;
+}
+.sys-section--options .sys-options-panel.my-costumes {
+    border: 4px solid #ffadd3;
+}
+
+.sys-options-subhead {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 1.85rem !important;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px dashed rgba(15, 23, 42, 0.12);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #334155;
+}
+
+.sys-options-subhead::before {
+    content: "";
+    width: 4px;
+    height: 1em;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+.sys-options-panel.free-options .sys-options-subhead::before {
+    background: linear-gradient(180deg, #82b2ff 0%, #60a5fa 100%);
+}
+.sys-options-panel.paid-options .sys-options-subhead::before {
+    background: linear-gradient(180deg, #ff7cb9 0%, #eb61b1 100%);
+}
+.sys-option-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px 12px;
+    margin-bottom: 1.5rem;
+    justify-items: start;
+}
+
+.sys-option-item {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 208px;
+    min-width: 0;
+    padding: 14px 12px 12px;
+    /* border: 1px solid rgba(15, 23, 42, 0.08); */
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    /* box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05); */
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sys-option-item:hover {
+    border-color: rgba(251, 191, 36, 0.45);
+    box-shadow: 0 6px 16px -4px rgba(15, 23, 42, 0.1);
+}
+
+.sys-option-img {
+    width: 108px;
+    height: 108px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+.sys-option-name {
+    width: 100%;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ui-text, #3d1a2e);
+    margin-bottom: 6px;
+    line-height: 1.35;
+    max-width: 100%;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+.sys-option-body {
+    width: 100%;
+    font-size: 0.7rem !important;
+    color: #94a3b8;
+    line-height: 1.45;
+    margin-bottom: 4px;
+    flex-grow: 1;
+    /* 親 .sys-option-item は text-align:center のため説明文だけ左寄せ */
+    align-self: stretch;
+    text-align: left;
+    /* DB の改行をそのまま表示 */
+    white-space: pre-line;
+}
+
+.sys-option-price {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ui-accent, #436fe7);
+    margin-top: auto;
+    padding-top: 6px;
+    letter-spacing: 0.02em;
+}
+
+.sys-option-section-title {
+    margin-top: 1.35rem !important;
+}
+
+.sys-option-empty {
+    grid-column: 1 / -1;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin: 0.25rem 0 0.5rem;
+}
+
+@media (max-width: 400px) {
+    .sys-option-grid {
+        grid-template-columns: 1fr;
+        justify-items: stretch;
+    }
+
+    .sys-option-item {
+        max-width: none;
+    }
+}
+
+/* 統一料金テーブル */
+.sys-course-fee-block {
+    margin-bottom: 28px;
+}
+
+.sys-course-body {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.sys-fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.sys-fee-table th {
+    background: var(--ui-accent, #436fe7);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: center;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.sys-fee-table td {
+    padding: 10px 12px;
+    text-align: center;
+    border: 1px solid var(--ui-line, #e5e7eb);
+    font-weight: 600;
+    color: var(--ui-text, #3d1a2e);
+    background: #fff;
+}
+
+.sys-fee-note {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #888;
+    margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+    .sys-fee-table {
+        font-size: 0.8rem;
+    }
+    .sys-fee-table th,
+    .sys-fee-table td {
+        padding: 7px 6px;
+    }
+}
+
+/* 会員登録バナー */
+.sys-member-section {
+    max-width: 860px;
+    margin: 5.5rem auto 40px;
+    padding: 0 16px;
+}
+
+.sys-member-banner {
+    padding: 28px 24px;
+    border: 1px solid #f4c67a;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #fff8ee 0%, #fff4e0 100%);
+}
+
+.sys-member-banner h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #9a3412;
+}
+
+.sys-member-banner > p {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.sys-member-benefits {
+    padding: 16px 20px;
+    border: 1px solid #f4c67a;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.sys-member-benefits h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #c2410c;
+}
+
+.sys-benefit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sys-check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.sys-check-mark {
+    color: #f97316;
+    flex-shrink: 0;
+    font-weight: 700;
+}
+
+.sys-member-btn-wrap {
+    text-align: center;
+}
+
+.sys-member-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #f97316;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+}
+
+.sys-member-btn:hover {
+    background: #ea6c0a;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* レスポンシブ */
+@media (max-width: 640px) {
+    .sys-page {
+        padding: 0 0px 36px;
+    }
+
+    .sys-service {
+        padding: 1rem 0.95rem;
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .sys-plan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sys-plan-single p {
+        text-align: left;
+    }
+
+    .sys-plan-single .sys-plan-img {
+        max-width: 100%;
+    }
+
+    section.sys-section {
+        padding: 0 12px;
+    }
+
+    .sys-member-section {
+        padding: 0 12px;
+    }
+
+    .sys-member-banner {
+        padding: 20px 16px;
+    }
+}
+
+/* ============================================================
+   light-theme — 料金・サービス・オプション・注意事項
+   (system.blade.php の .sys-page 配下)
+   ============================================================ */
+
+/* ── セクション共通：背景色で仕切り ── */
+.sys-page {
+    max-width: none;
+    width: calc(100% + 2.5rem);
+    margin: 0 -1.25rem;
+    padding: 0;
+}
+.sys-section {
+    padding: 2.75rem 1.5rem 3rem;
+    margin: 0;
+    border-bottom: none;
+}
+.sys-section:nth-of-type(odd) {
+    background: rgba(255, 255, 255, 0.55);
+}
+.sys-section:nth-of-type(even) {
+    background: rgba(255, 236, 242, 0.92);
+}
+#sys-price { background: #ffffff; }
+#sys-service { background: #fff3f8; }
+#sys-option-free { background: #ffe8f2; }
+#sys-payment { background: #fff8fb; }
+#sys-notes { background: #ffecf4; }
+
+/* ── h2 / h3 / p 共通テキスト（白ベース） ── */
+.sys-page h3 { color: var(--ui-text, #3d1a2e); }
+.sys-page h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ui-text, #3d1a2e);
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+}
+.sys-page p {
+    color: var(--ui-text, #3d1a2e);
+    font-size: 0.9rem;
+    line-height: 1.85;
+    margin-bottom: 0.75rem;
+}
+
+/* ── 見出し：中央寄せ・サイズ大きめ ── */
+section.sys-section h3.sys-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.35rem;
+    width: 100%;
+    margin: 0 0 2rem;
+    padding: 0 0 0.25rem;
+    border-bottom: none;
+    position: relative;
+}
+.sys-heading::after {
+    content: none;
+}
+.sys-heading-en {
+    font-family: var(--title-mincho, "Noto Serif JP", serif);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--title-ink, #1a1216);
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+}
+.sys-heading-ja {
+    font-family: var(--title-mincho, "Noto Serif JP", serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--brand-pink, #ff2d78);
+    letter-spacing: 0.22em;
+    line-height: 1.5;
+}
+.sys-heading-ja::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 2px;
+    margin: 0.55rem auto 0;
+    background: var(--brand-pink, #ff2d78);
+}
+.sys-heading-link {
+    display: block;
+    width: 100%;
+    margin-top: 0.15rem;
+    text-align: center;
+}
+.sys-heading-link a {
+    color: var(--ui-accent, #ff2d78);
+    text-decoration: none;
+    font-weight: 700;
+}
+.sys-heading-link a:hover {
+    color: var(--ui-accent-hover, #e52068);
+}
+
+@media (max-width: 768px) {
+    .sys-heading-en { font-size: 1.55rem; }
+    .sys-heading-ja { font-size: 0.92rem; }
+}
+
+/* ── 固定料金バー ── */
+.sys-fixed-fees {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.sys-fixed-fee {
+    flex: 1 1 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-line);
+    border-radius: 8px;
+    text-align: center;
+}
+@media (max-width: 600px) {
+    .sys-fixed-fee {
+    flex: 1 1 30%;}
+}
+
+.sys-fixed-fee-label {
+    font-size: 0.82rem;
+    color: var(--ui-text-muted, #7a3b5a);
+    letter-spacing: 0.05em;
+}
+.sys-fixed-fee-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--ui-text, #3d1a2e);
+}
+.sys-fixed-fee-value small { font-size: 0.7em; color: var(--ui-text-muted, #7a3b5a); margin-left: 2px; }
+
+@media (max-width: 600px) {
+    .sys-fixed-fee-value {
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+}
+
+/* ── コース料金テーブル ── */
+.sys-courses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+.sys-course-block {
+    flex: 1 1 260px;
+    position: relative;
+    background: #ffffff;
+    border: 1px solid var(--ui-line, #ffe0ee);
+    border-radius: 4px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: none;
+    transition: transform 0.22s ease, border-color 0.22s ease;
+}
+.sys-course-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff2d78 0%, #ff8fb3 50%, #ff2d78 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+.sys-course-block:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 45, 120, 0.35);
+}
+.sys-course-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--ui-text, #3d1a2e);
+    margin: 0;
+    padding: 1.1rem 1.25rem 0.85rem;
+    letter-spacing: 0.06em;
+    background: #fff5f8;
+    border-bottom: 1px solid var(--ui-line, #ffe0ee);
+}
+.sys-course-body {
+    font-size: 0.9rem;
+    color: var(--ui-text-muted, #7a3b5a);
+    margin: 0.75rem 1.25rem 0;
+    line-height: 1.7;
+}
+.sys-fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+.sys-fee-table thead tr {
+    background: #fff5f8;
+}
+.sys-fee-table th {
+    padding: 0.5rem 1rem;
+    text-align: left;
+    color: var(--ui-text-muted, #7a3b5a);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ui-line, #ffe0ee);
+}
+.sys-fee-table tbody tr {
+    transition: background 0.15s;
+}
+.sys-fee-table tbody tr:hover {
+    background: #fff5f8;
+}
+.sys-fee-table td,.sys-fee-table th {
+    padding: 0.65rem 1rem;
+    color: var(--ui-text, #3d1a2e);
+    background: #ffffff;
+    border: none;
+    border-bottom: 1px solid #ffe8f0;
+    font-weight: 400;
+}
+.sys-fee-table tbody tr:last-child td,
+.sys-fee-table tbody tr:last-child th {
+    border-bottom: none;
+    padding-bottom: 1.1rem;
+}
+.sys-fee-table tbody th {
+    padding: 0.65rem 1rem;
+    color: var(--ui-text, #3d1a2e);
+    background: #ffffff;
+    border-bottom: 1px solid #ffe8f0;
+    font-weight: 500;
+    font-size: 1.75rem;
+    text-align: left;
+}
+.sys-fee-table tbody td:nth-child(2) {
+    border-right: 1px solid #ffe0ee;
+    padding-right: 1.75rem;
+}
+.sys-fee-table tbody th:nth-child(3) {
+    padding-left: 1.75rem;
+}
+.sys-fee-price {
+    font-weight: 800 !important;
+    font-size: 1.75rem;
+    color: var(--ui-accent, #ff2d78) !important;
+    text-align: right;
+    letter-spacing: 0.02em;
+}
+.sys-fee-price small {
+    font-size: 0.85em;
+    color: var(--ui-text-muted, #7a3b5a);
+    margin-left: 2px;
+    font-weight: 400;
+}
+
+/* ── 基本サービス 5列 ── */
+.sys-service-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+}
+.sys-service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.42rem 0.5rem;
+    background: #ffffff;
+    border: 1px solid var(--ui-line, #ffe0ee);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ui-text, #3d1a2e);
+    text-align: center;
+    transition: border-color 0.2s;
+    max-width: none;
+    width: auto;
+}
+.sys-service-item:hover { border-color: rgba(255,45,120,0.35); box-shadow: none; }
+.sys-service-icon {
+    font-size: 1.4rem;
+    color: var(--ui-accent);
+}
+@media (max-width: 600px) {
+    .sys-service-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── オプション（ピル型） ── */
+.sys-option-group {
+    margin-bottom: 1.25rem;
+}
+.sys-option-group:last-child { margin-bottom: 0; }
+section.sys-section h4.sys-option-group-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #ff6090;
+    margin-bottom: 0.6rem;
+    padding-left: 0.6rem;
+    border-left: 3px solid var(--ui-accent);
+}
+.sys-option-list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.sys-option-list .sys-option-item {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    max-width: none;
+    padding: 0.4rem 0.9rem;
+    background: #ffffff;
+    border: 1px solid var(--ui-line, #ffe0ee);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    box-shadow: none;
+}
+.sys-option-list .sys-option-item:hover {
+    border-color: rgba(255,45,120,0.35);
+    box-shadow: none;
+}
+.sys-option-list .sys-option-name {
+    color: var(--ui-text, #3d1a2e);
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+.sys-option-list .sys-option-price {
+    font-weight: 700;
+    color: var(--ui-accent, #ff2d78);
+    font-size: 0.82rem;
+    margin-top: 0;
+    padding-top: 0;
+}
+.sys-option-list .sys-option-price small { font-size: 0.75em; color: var(--ui-text-muted, #7a3b5a); }
+.sys-option-list .sys-option-body {
+    font-size: 0.72rem;
+    color: var(--ui-text-muted, #7a3b5a);
+    white-space: normal;
+    text-align: left;
+}
+
+/* ── クレジットカード ── */
+.sys-payment-body {
+    background: #ffffff;
+    border: 1px solid var(--ui-line, #ffe0ee);
+    border-radius: 10px;
+    padding: 1.5rem;
+    line-height: 1.85;
+    font-size: 0.9rem;
+    color: var(--ui-text, #3d1a2e);
+}
+.sys-payment-body p { margin-bottom: 0.75rem; color: var(--ui-text, #3d1a2e); }
+.sys-payment-body p:last-of-type { margin-bottom: 1.25rem; }
+.sys-payment-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ui-text-muted, #7a3b5a);
+    background: #fff5f8;
+    border-left: 3px solid var(--ui-accent, #ff2d78);
+    padding: 0.6rem 0.8rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 1.25rem !important;
+}
+.sys-payment-note i { color: var(--ui-accent, #ff2d78); flex-shrink: 0; margin-top: 2px; }
+
+/* ── 決済ボタン ── */
+.sys-btn-payment {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--ui-accent);
+    color: #fff;
+    transition: background 0.2s;
+}
+.sys-btn-payment:hover { background: var(--ui-accent-hover); color: #fff; }
+
+/* ── 注意事項 ── */
+.sys-notes-list {
+    list-style: none;
+    margin: 0 0 2rem; 
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+.sys-notes-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--ui-text, #3d1a2e);
+    line-height: 1.7;
+    background: #ffffff;
+    border-radius: 6px;
+    margin-bottom: 0;
+}
+.sys-notes-list li::before {
+    content: '！';
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--ui-accent);
+    background: rgba(255,45,120,0.12);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+/* ── その他 ── */
+.sys-empty {
+    color: var(--ui-text-muted, #7a3b5a);
+    font-size: 0.85rem;
+}
+
+.sys-note-block {
+    margin-bottom: 1.5rem;
+}
+.sys-note-block:last-child { margin-bottom: 0; }
+.sys-note-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ui-text, #3d1a2e);
+    margin-bottom: 0.4rem;
+}
+.sys-note-subtitle {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--brand-pink, #ff2d78);
+    margin-bottom: 0.45rem;
+}
+.sys-note-content {
+    font-size: 0.9rem;
+    color: var(--ui-text, #3d1a2e);
+    line-height: 1.85;
+}
+.sys-note-content p,
+.sys-note-content li {
+    color: var(--ui-text, #3d1a2e);
+}
+
+/* ── コース料金：スマホ 1段表示 ── */
+
+/* コースブロック：768px以下で縦1列 */
+@media (max-width: 768px) {
+    .sys-courses {
+        flex-direction: column;
+    }
+    .sys-course-block {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+}
+
+/* 料金テーブル：640px以下で1コース1行 */
+@media (max-width: 640px) {
+    .sys-course-body {
+        font-size: 0.8rem;
+        margin: 0.6rem 0.9rem 0;
+    }
+
+    /* テーブル全体をブロック化してグリッド制御を可能にする */
+    .sys-fee-table,
+    .sys-fee-table tbody {
+        display: block;
+        width: 100%;
+    }
+
+    /* 各 <tr>（4セル = 2コース分）を 2列グリッドで2段表示に */
+    .sys-fee-table tbody tr {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        border-bottom: 1px solid #ffe8f0;
+        padding: 0.25rem 0;
+    }
+    .sys-fee-table tbody tr:last-child {
+        border-bottom: none;
+        padding-bottom: 1rem;
+    }
+
+    /* 1コース目：上段 */
+    .sys-fee-table tbody th:nth-child(1) {
+        grid-column: 1; grid-row: 1;
+        white-space: nowrap;
+        padding: 0.4rem 0.9rem;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+    }
+    .sys-fee-table tbody td:nth-child(2) {
+        grid-column: 2; grid-row: 1;
+        white-space: nowrap;
+        padding: 0.4rem 0.9rem;
+        font-size: 1.2rem;
+        text-align: right;
+        border: none;
+        border-right: none !important;
+    }
+
+    /* 2コース目：下段 */
+    .sys-fee-table tbody th:nth-child(3) {
+        grid-column: 1; grid-row: 2;
+        white-space: nowrap;
+        padding: 0.4rem 0.9rem;
+        font-weight: 600;
+        background: transparent;
+        border: none;
+        border-top: 1px solid #ffe8f0 !important;
+    }
+    .sys-fee-table tbody td:nth-child(4) {
+        grid-column: 2; grid-row: 2;
+        white-space: nowrap;
+        padding: 0.4rem 0.9rem;
+        font-size: 1.2rem;
+        text-align: right;
+        border: none;
+        border-top: 1px solid #ffe8f0 !important;
+    }
+    .sys-fee-table tbody th{
+        font-size: 1.2rem;
+    }
+    .sys-fee-price {
+        font-size: 1.2rem !important;
+    }
+    .sys-fee-price small {
+        font-size: 0.78em;
+    }
+}

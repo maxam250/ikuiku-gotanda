@@ -1,0 +1,590 @@
+.member-page {
+    background: #fff;
+    color: #0f172a;
+    min-height: 100vh;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+.member-shell {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 3rem;
+}
+
+.member-page-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 1rem;
+    align-items: start;
+}
+
+.member-page-header {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.member-page-header-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 1.25rem;
+}
+
+.member-page-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #0f172a;
+}
+
+.member-page-user {
+    margin: 0;
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+.member-page-main {
+    display: grid;
+    gap: 1rem;
+    padding-right: 0.75rem;
+}
+
+.member-right-column {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    padding-top: 0.25rem;
+}
+
+.member-right-column--pc {
+    margin-top: 0.75rem;
+}
+
+.member-section {
+    background: #f4f7fd;
+    /* border: 1px solid #ebeef3; */
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.member-mobile-membernav {
+    margin-bottom: 1rem;
+}
+
+.member-section-title {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.member-grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+}
+
+/* ファンクラブ詳細: 1ページ1投稿をメインカラム幅いっぱいに */
+.member-section--fanclub-posts {
+    min-width: 0;
+}
+
+.member-fanclub-channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    width: 100%;
+}
+
+.member-fanclub-channel-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.79rem;
+    color: #334155;
+    background: #fff;
+    cursor: default;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.member-fanclub-channel-tab:not(.is-active) {
+    opacity: 0.8;
+}
+
+.member-fanclub-channel-tab.is-active {
+    border-color: #0f172a;
+    background: #0f172a;
+    color: #fff;
+}
+
+.member-fanclub-post-counter {
+    margin: 0 0 0.75rem;
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+.member-fanclub-post-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.member-fanclub-post {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.member-fanclub-post__body {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+}
+
+.member-fanclub-post__body > * {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.member-fanclub-post img,
+.member-fanclub-post video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.member-fanclub-post__pager {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.member-fanclub-post__pager .member-pagination {
+    margin-top: 0;
+}
+
+.member-fanclub-child-counter {
+    margin: 0 0 0.75rem;
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+.member-fanclub-child-pager {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.member-fanclub-child-pager .member-pagination {
+    margin-top: 0;
+}
+
+.member-pagination--child .pagination--child-nav {
+    align-items: stretch;
+}
+
+.member-pager-child-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    max-width: min(100%, 14rem);
+    text-align: left;
+    line-height: 1.25;
+    word-break: break-word;
+    background:#f9f9f9 !important;
+}
+
+.member-pager-child-li--next .member-pager-child-link {
+    text-align: right;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.member-pager-child-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #334155;
+}
+
+.member-pager-child-link--disabled .member-pager-child-title {
+    color: #94a3b8;
+}
+
+.member-pager-child-arrow {
+    flex-shrink: 0;
+    border: none !important;
+}
+
+.member-card {
+    border: 3px solid #c9ebff;
+    border-radius: 10px;
+    padding: 1.2rem;
+    background: #fff;
+}
+
+.member-card-title {
+    margin: 0 0 1.4rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.member-meta-title {
+    margin: 0 0 1.4rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.member-meta {
+    margin: 0.2rem 0;
+    color: #475569;
+    font-size: 0.8rem;
+}
+
+.member-meta.description {
+    margin: 0.2rem 0 2rem;
+    color: #475569;
+    font-size: 0.8rem;
+}
+
+.member-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding:1rem;
+}
+
+.member-actions-column {
+    flex-direction: column;
+}
+
+.member-btn {
+    display: inline-block;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.79rem;
+    text-decoration: none;
+    color: #0f172a;
+    background: #fff;
+}
+
+.member-btn-primary {
+    border-color: #0f172a;
+    background: #0f172a;
+    color: #fff;
+}
+
+.member-tag {
+    display: inline-block;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.75rem;
+    color: #334155;
+    background: #fff;
+}
+
+.member-tag--active {
+    border-color: #86efac;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.member-tag--paused {
+    border-color: #fcd34d;
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.member-tag--canceled {
+    border-color: #fca5a5;
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.member-empty {
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 1rem;
+    color: #64748b;
+    background: #fff;
+}
+
+.member-page-footer {
+    padding: 1.25rem 1rem 2rem;
+    color: #64748b;
+}
+
+.member-topnav-inner {
+    max-width: 1120px;
+    height: 64px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.member-topnav-brand-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.member-topnav-brand {
+    font-weight: 700;
+    color: #0b3a66;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.member-topnav-brand-sub {
+    color: #23679f;
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+.member-topnav-links {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.member-topnav-link {
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    color: #225275;
+    text-decoration: none;
+    font-size: 0.88rem;
+}
+
+.member-topnav-link.is-active {
+    background: #1d4e89;
+    color: #fff;
+}
+
+.member-topnav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.member-topnav-site,
+.member-topnav-user {
+    color: #225275;
+    font-size: 0.88rem;
+}
+
+.member-topnav-site {
+    text-decoration: none;
+}
+
+.member-topnav-logout {
+    border: 1px solid #93b7d3;
+    border-radius: 8px;
+    background: #f8fcff;
+    color: #0b3a66;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.88rem;
+}
+
+.member-topnav-toggle {
+    display: none;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    color: #475569;
+    padding: 0.3rem;
+}
+
+.member-topnav-mobile {
+    display: none;
+    border-top: 1px solid #cfe0ef;
+    background: #f8fcff;
+}
+
+.member-topnav-mobile-links {
+    padding: 0.75rem 1rem;
+}
+
+.member-topnav-mobile-link,
+.member-topnav-mobile-logout {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+    border: 1px solid #d6e4f0;
+    border-radius: 8px;
+    color: #1f4f73;
+    text-decoration: none;
+    background: #fff;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.member-topnav-mobile-link.is-active {
+    background: #1d4e89;
+    color: #fff;
+}
+
+.member-drawer-head {
+    border: 1px solid #d6e4f0;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.member-drawer-user {
+    margin: 0 0 0.5rem;
+    font-size: 0.92rem;
+    color: #1f4f73;
+    font-weight: 600;
+}
+
+.member-drawer-quick {
+    display: grid;
+    gap: 0.35rem;
+}
+
+@media (max-width: 1024px) {
+    .member-page-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .member-right-column {
+        display: none;
+    }
+
+    .member-right-column,
+    .member-right-column--pc {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .member-page-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* アカウント情報フォーム（member.account）— .form-group / nth-child 依存を避けた2カラム */
+.member-account-field {
+    display: grid;
+    grid-template-columns: 13rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+    row-gap: 0.25rem;
+    align-items: start;
+    padding: 0.5rem 0;
+}
+
+.member-account-field > label {
+    margin: 0;
+    padding: 0.55rem 0.65rem;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 6px;
+    background: var(--form-label-bg, #f9fafb);
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.member-account-field > :not(label) {
+    min-width: 0;
+}
+
+.member-account-field .unit {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+@media screen and (max-width: 767px) {
+    .member-account-field {
+        grid-template-columns: 1fr;
+    }
+
+    .member-account-field > label {
+        margin-bottom: 0.35rem;
+    }
+}
+
+/* Laravel pagination::default（member ファンクラブ詳細など） */
+.member-pagination {
+    margin: 1rem 0 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.member-pagination .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.member-pagination .pagination li {
+    margin: 0;
+}
+
+.member-pagination .pagination li a,
+.member-pagination .pagination li span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    padding: 0.4rem 0.55rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    color: #334155;
+    background: #fff;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.member-pagination .pagination li a:hover {
+    border-color: #94a3b8;
+    background: #f8fafc;
+}
+
+.member-pagination .pagination li.active span {
+    border-color: #0f172a;
+    background: #0f172a;
+    color: #fff;
+}
+
+.member-pagination .pagination li.disabled span {
+    opacity: 0.45;
+    cursor: default;
+}

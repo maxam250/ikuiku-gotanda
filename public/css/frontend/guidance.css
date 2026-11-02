@@ -1,0 +1,143 @@
+@charset "utf-8";
+
+/* =============================================================================
+   ご利用ガイド (guidance.blade.php)
+   ============================================================================= */
+
+.guide-page {
+    max-width: 96%;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+}
+
+/* ---- タブヘッダー ---- */
+.guide-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.guide-tab {
+    appearance: none;
+    border: 2px solid #e9e9e9;
+    background: #fff;
+    color: #333;
+    border-radius: 999px;
+    padding:  16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.guide-tab:hover {
+    border-color: #9a9a9a;
+}
+.guide-tab.is-active {
+    background: #ff1ba0;
+    color: #fff;
+    border-color: #ff1ba0;
+}
+
+/* ---- タブ本文 ---- */
+.guide-tab-panel {
+    display: none;
+    border: 1px solid #e9e9e9;
+    border-radius: 10px;
+    background: #fff;
+    padding: 18px;
+}
+.guide-tab-panel.is-active {
+    display: block;
+}
+.guide-card + .guide-card {
+    margin-top: 3rem;
+}
+.guide-card h3 {
+    display: inline-block;
+    min-width: 120px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align:center;
+    background: #ff6fc3;
+    color: #fff;
+    margin: 0 0 1.5rem;
+    padding:3px 7px;
+    border-radius: 4px;
+}
+.guide-card p {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: #444;
+    margin: 0;
+}
+.guide-card a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4f46e5;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.guide-card a:hover {
+    text-decoration: underline;
+}
+
+/* ---- お問い合わせボックス ---- */
+.guide-contact-box {
+    margin-top: 40px;
+    background: #fff;
+    border: 1px solid #d4d4d4;
+    border-radius: 12px;
+    padding: 28px 32px;
+    text-align: center;
+}
+.guide-contact-box p {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 14px;
+}
+.guide-contact-btn {
+    display: inline-block;
+    background: #ff1ba0;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 10px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid #ff1ba0;
+    transition: opacity 0.2s ease;
+}
+.guide-contact-btn:hover {
+    opacity: 0.9;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ---- レスポンシブ ---- */
+@media (max-width: 640px) {
+    .guide-page {
+        padding: 0 12px 48px;
+    }
+    .guide-tabs {
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+    .guide-tab {
+        font-size: 0.8rem;
+        padding: 7px 12px;
+    }
+    .guide-tab-panel {
+        padding: 14px;
+    }
+    .guide-card h3 {
+        font-size: 0.92rem;
+    }
+    .guide-card p {
+        font-size: 0.85rem;
+    }
+    .guide-contact-box {
+        padding: 20px 18px;
+    }
+}

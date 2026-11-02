@@ -1,0 +1,69 @@
+# ファイルアップロードサイズ制限
+<IfModule mod_php.c>
+    php_value upload_max_filesize 20M
+    php_value post_max_size 25M
+</IfModule>
+LimitRequestBody 26214400
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # 301リダイレクト（旧URL → 新URL）
+    # ※ %{THE_REQUEST} でブラウザの実リクエストのみに適用し、
+    #    Laravel の内部リライト（index.php）では発火しないようにする
+    RewriteRule ^admin(/.*)?$     /kanrigamen$1 [R=301,L]
+    RewriteRule ^companion\.php$  /item         [R=301,L]
+    RewriteRule ^system\.php$     /system       [R=301,L]
+    RewriteRule ^schedule\.php$   /schedule     [R=301,L]
+    RewriteRule ^event\.php$      /event        [R=301,L]
+    RewriteRule ^ranking\.php$    /rank         [R=301,L]
+    RewriteRule ^hotel\.php$      /hotel        [R=301,L]
+    RewriteRule ^play\.php$       /options      [R=301,L]
+    RewriteRule ^twitter\.php$    /x            [R=301,L]
+    RewriteRule ^movie\.php$      /movie        [R=301,L]
+    RewriteRule ^newface\.php$    /newface      [R=301,L]
+    RewriteRule ^top\.php$        /top          [R=301,L]
+
+    # クローラーを管理・キャスト・会員エリアからブロック
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver|msnbot|ahrefsbot|semrushbot|dotbot|mj12bot|rogerbot|blexbot|petalbot) [NC]
+    RewriteCond %{REQUEST_URI} ^/(kanrigamen|item|member)(/|$) [NC]
+    RewriteRule .* - [F,L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+</IfModule>
+
+# 検索エンジンクローラーによる画像・動画へのアクセスを禁止
+<IfModule mod_rewrite.c>
+    # 検索エンジンのUser-Agentをブロック
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver|msnbot|ahrefsbot|semrushbot|dotbot|mj12bot|rogerbot|blexbot|petalbot) [NC]
+    # 画像ファイルへのアクセスをブロック
+    RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp|svg|bmp|ico|tiff|tif)$ [NC]
+    RewriteRule .* - [F,L]
+    
+    # 動画ファイルへのアクセスをブロック
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver|msnbot|ahrefsbot|semrushbot|dotbot|mj12bot|rogerbot|blexbot|petalbot) [NC]
+    RewriteCond %{REQUEST_URI} \.(mp4|mov|avi|wmv|flv|webm|mkv|m4v|3gp|ogv)$ [NC]
+    RewriteRule .* - [F,L]
+    
+    # 画像・動画ディレクトリへのアクセスをブロック
+    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver|msnbot|ahrefsbot|semrushbot|dotbot|mj12bot|rogerbot|blexbot|petalbot) [NC]
+    RewriteCond %{REQUEST_URI} ^/(images|sp-images|videos|movies)/ [NC]
+    RewriteRule .* - [F,L]
+</IfModule>

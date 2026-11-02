@@ -1,0 +1,381 @@
+/**
+ * resources/css/dashboard/member.css — 会員マイページ Vite エントリ
+ */
+/* 共通スタイルをインポート */
+@import '../common.css';
+
+/* ================================================
+   Member（会員）固有のスタイル
+   ================================================ */
+@layer components {
+    /* 会員管理画面レイアウト */
+    .member-body {
+        @apply min-h-screen flex;
+        @apply bg-gradient-to-br from-blue-50 to-indigo-50;
+    }
+
+    .member-container {
+        @apply flex w-full;
+    }
+
+    /* サイドバー */
+    .member-sidebar {
+        @apply w-64 bg-gradient-to-b from-blue-600 to-indigo-600 text-white;
+        @apply fixed h-screen;
+        @apply overflow-y-auto;
+        @apply transition-all duration-300;
+        @apply shadow-xl;
+    }
+
+    .member-sidebar-collapsed {
+        @apply w-16;
+    }
+
+    .member-sidebar-logo {
+        @apply p-4 border-b border-blue-500;
+        @apply text-xl font-bold text-center;
+    }
+
+    .member-sidebar-nav {
+        @apply p-4;
+    }
+
+    .member-sidebar-item {
+        @apply flex items-center px-4 py-3 mb-2 rounded-lg;
+        @apply text-blue-100 hover:bg-white hover:bg-opacity-20 hover:text-white;
+        @apply transition-all duration-200;
+        @apply cursor-pointer;
+    }
+
+    .member-sidebar-item-active {
+        @apply bg-white bg-opacity-20 text-white;
+        @apply shadow-lg;
+    }
+
+    .member-sidebar-icon {
+        @apply w-5 h-5 mr-3;
+    }
+
+    /* メインコンテンツエリア */
+    .member-main {
+        @apply flex-1 ml-64;
+        @apply transition-all duration-300;
+    }
+
+    .member-main-collapsed {
+        @apply ml-16;
+    }
+
+    /* ヘッダー */
+    .member-header {
+        @apply bg-white shadow-md;
+        @apply px-6 py-4;
+        @apply flex items-center justify-between;
+        @apply sticky top-0 z-50;
+        @apply border-b-4 border-blue-500;
+    }
+
+    .member-header-title {
+        @apply text-2xl font-bold;
+        @apply bg-gradient-to-r from-blue-600 to-indigo-600;
+        @apply bg-clip-text text-transparent;
+    }
+
+    .member-header-actions {
+        @apply flex items-center space-x-4;
+    }
+
+    /* ユーザープロフィールカード */
+    .member-profile-card {
+        @apply bg-white rounded-xl shadow-lg overflow-hidden;
+        @apply hover:shadow-2xl transition-all duration-300;
+    }
+
+    .member-profile-header {
+        @apply bg-gradient-to-r from-blue-500 to-indigo-500;
+        @apply p-6 text-white;
+    }
+
+    .member-avatar {
+        @apply w-24 h-24 rounded-full border-4 border-white;
+        @apply shadow-lg mx-auto;
+    }
+
+    .member-name {
+        @apply text-2xl font-bold text-center mt-4;
+    }
+
+    .member-rank {
+        @apply text-sm text-center mt-2 opacity-90;
+    }
+
+    .member-profile-body {
+        @apply p-6;
+    }
+
+    /* コンテンツエリア */
+    .member-content {
+        @apply p-6;
+    }
+
+    /* ダッシュボードウィジェット */
+    .member-widget {
+        @apply bg-white rounded-lg shadow-md p-6 mb-6;
+        @apply hover:shadow-lg transition-shadow duration-200;
+    }
+
+    .member-widget-header {
+        @apply flex items-center justify-between mb-4 pb-4 border-b border-gray-200;
+    }
+
+    .member-widget-title {
+        @apply text-xl font-bold text-gray-800;
+    }
+
+    .member-widget-icon {
+        @apply w-8 h-8 text-blue-500;
+    }
+
+    /* ポイントカード */
+    .point-card {
+        @apply bg-gradient-to-br from-yellow-400 to-orange-500;
+        @apply text-white rounded-xl shadow-lg p-6;
+        @apply hover:shadow-2xl transition-shadow duration-300;
+    }
+
+    .point-card-label {
+        @apply text-sm opacity-90 mb-2;
+    }
+
+    .point-card-value {
+        @apply text-4xl font-bold mb-2;
+    }
+
+    .point-card-subtext {
+        @apply text-xs opacity-80;
+    }
+
+    /* 予約カード */
+    .reservation-card {
+        @apply bg-white rounded-lg shadow-md p-4 mb-4;
+        @apply border-l-4 border-blue-500;
+        @apply hover:shadow-lg transition-all duration-200;
+    }
+
+    .reservation-date {
+        @apply text-sm text-gray-600 mb-2;
+    }
+
+    .reservation-cast {
+        @apply text-lg font-bold text-blue-600 mb-1;
+    }
+
+    .reservation-course {
+        @apply text-sm text-gray-700;
+    }
+
+    .reservation-status {
+        @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-2;
+    }
+
+    .reservation-status-confirmed {
+        @apply bg-green-100 text-green-800;
+    }
+
+    .reservation-status-pending {
+        @apply bg-yellow-100 text-yellow-800;
+    }
+
+    .reservation-status-cancelled {
+        @apply bg-red-100 text-red-800;
+    }
+
+    /* 履歴リスト */
+    .history-list {
+        @apply space-y-3;
+    }
+
+    .history-item {
+        @apply bg-white rounded-lg shadow-sm p-4;
+        @apply hover:shadow-md transition-shadow duration-200;
+        @apply border-l-4 border-gray-300;
+    }
+
+    .history-date {
+        @apply text-xs text-gray-500 mb-2;
+    }
+
+    .history-title {
+        @apply font-semibold text-gray-800 mb-1;
+    }
+
+    .history-details {
+        @apply text-sm text-gray-600;
+    }
+
+    /* クーポンカード */
+    .coupon-card {
+        @apply bg-white rounded-lg shadow-md overflow-hidden;
+        @apply hover:shadow-lg transition-shadow duration-200;
+    }
+
+    .coupon-header {
+        @apply bg-gradient-to-r from-purple-500 to-pink-500;
+        @apply text-white p-4 text-center;
+    }
+
+    .coupon-discount {
+        @apply text-3xl font-bold mb-1;
+    }
+
+    .coupon-title {
+        @apply text-sm;
+    }
+
+    .coupon-body {
+        @apply p-4;
+    }
+
+    .coupon-expiry {
+        @apply text-xs text-gray-600 text-center;
+    }
+
+    .coupon-code {
+        @apply bg-gray-100 text-gray-800 font-mono text-sm;
+        @apply px-3 py-2 rounded text-center mt-2;
+    }
+
+    /* お気に入りグリッド */
+    .favorite-grid {
+        @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+    }
+
+    .favorite-item {
+        @apply relative overflow-hidden rounded-lg;
+        @apply bg-white shadow-md;
+        @apply hover:shadow-xl transition-all duration-300;
+        @apply cursor-pointer;
+    }
+
+    .favorite-image {
+        @apply w-full aspect-square object-cover;
+    }
+
+    .favorite-info {
+        @apply p-3;
+    }
+
+    .favorite-name {
+        @apply font-semibold text-gray-800 text-sm;
+    }
+
+    .favorite-heart {
+        @apply absolute top-2 right-2;
+        @apply w-8 h-8 bg-red-500 text-white rounded-full;
+        @apply flex items-center justify-center;
+        @apply shadow-lg;
+    }
+
+    /* メッセージボックス */
+    .message-box {
+        @apply bg-white rounded-lg shadow-md p-4 mb-4;
+    }
+
+    .message-box-unread {
+        @apply bg-blue-50 border-l-4 border-blue-500;
+    }
+
+    .message-box-header {
+        @apply flex items-center justify-between mb-2;
+    }
+
+    .message-box-sender {
+        @apply font-semibold text-gray-800;
+    }
+
+    .message-box-time {
+        @apply text-xs text-gray-500;
+    }
+
+    .message-box-content {
+        @apply text-gray-700 text-sm;
+    }
+
+    .message-unread-badge {
+        @apply bg-red-500 text-white text-xs;
+        @apply px-2 py-1 rounded-full;
+    }
+
+    /* 統計カード */
+    .member-stat-card {
+        @apply bg-gradient-to-br from-blue-500 to-indigo-600;
+        @apply text-white rounded-xl shadow-lg p-6;
+        @apply hover:shadow-2xl transition-shadow duration-300;
+    }
+
+    .member-stat-icon {
+        @apply w-12 h-12 bg-white bg-opacity-20 rounded-full;
+        @apply flex items-center justify-center mb-4;
+    }
+
+    .member-stat-label {
+        @apply text-sm opacity-90 mb-1;
+    }
+
+    .member-stat-value {
+        @apply text-3xl font-bold;
+    }
+
+    /* ランクバッジ */
+    .rank-badge {
+        @apply inline-flex items-center px-3 py-1 rounded-full;
+        @apply text-sm font-semibold;
+    }
+
+    .rank-badge-bronze {
+        @apply bg-amber-700 text-white;
+    }
+
+    .rank-badge-silver {
+        @apply bg-gray-400 text-gray-900;
+    }
+
+    .rank-badge-gold {
+        @apply bg-yellow-400 text-yellow-900;
+    }
+
+    .rank-badge-platinum {
+        @apply bg-purple-600 text-white;
+    }
+
+    /* モバイル対応 */
+    @media (max-width: 768px) {
+        .member-sidebar {
+            @apply -left-64;
+        }
+
+        .member-sidebar-open {
+            @apply left-0;
+        }
+
+        .member-main {
+            @apply ml-0;
+        }
+
+        .member-header {
+            @apply px-4 py-3;
+        }
+
+        .member-content {
+            @apply p-4;
+        }
+
+        .favorite-grid {
+            @apply grid-cols-2 gap-2;
+        }
+
+        .member-avatar {
+            @apply w-20 h-20;
+        }
+    }
+}

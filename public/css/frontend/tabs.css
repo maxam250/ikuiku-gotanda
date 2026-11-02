@@ -1,0 +1,94 @@
+@charset "utf-8";
+
+
+#tabsbox .links{
+	text-align:right;
+}
+
+#tabhead{
+	padding:0rem 1.2rem 0px;
+	border-bottom:none;
+}
+#tabhead li{
+	position:relative;
+	display: inline-block;
+	margin-right: 4px;
+	background:#EEE;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+#tabhead .on{
+	background:#fff;
+	color: #333;
+}
+#tabArea .tabNavi li.active a{
+	color: #777;
+}
+
+#tabhead li a{
+	display: block;
+	text-decoration:none;
+	padding:1.2rem;
+	text-align: center;
+	color: #777;
+	line-height: 2.5rem;
+}
+
+#tabhead .on a:link,
+#tabhead .on a:visited,
+#tabhead .on a:hover{
+	font-weight:bold;
+	color:#333;
+}
+
+#tabbody{
+}
+
+#tabbody dt{
+	display:none;
+	margin-top:-1px;
+	padding:1.2rem;
+	background-color:#FFF;
+}
+
+#tabbody .current{
+	display:block;
+}
+
+#tabbody h2{
+	display:none;
+	margin-bottom:6px;
+	font-size:100%;
+}
+
+#tabbody ul{
+	margin-bottom:-6px;
+}
+
+#tabbody li{
+	margin-bottom:6px;
+	list-style-position:inside;
+}
+
+/*float clear*/
+#tabhead{
+	margin: 0;
+	overflow:hidden;
+	zoom:1;
+}
+
+#tabhead:after{
+	content:"";
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+
+
+#tabhead:before{
+	height:1em;
+	overflow:visible;
+}
+

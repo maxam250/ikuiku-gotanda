@@ -1,0 +1,527 @@
+/* ================================================
+   ランキングページ — Premium Dark Design
+   ================================================ */
+
+/* ---- メインセクション ---- */
+.ranking-section {
+    width: 100%;
+    padding: 2rem 1.5rem;
+}
+
+.ranking-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* ---- カテゴリブロック ---- */
+.ranking-category {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 45, 120, 0.12);
+}
+
+.ranking-category:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* ---- カテゴリタイトル ---- */
+.ranking-category-header {
+    margin-bottom: 1.75rem;
+    text-align: center;
+}
+
+.ranking-category-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--ui-accent);
+    text-transform: uppercase;
+    margin: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    position: relative;
+}
+
+.ranking-category-title::before,
+.ranking-category-title::after {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 45, 120, 0.5));
+    vertical-align: middle;
+}
+
+.ranking-category-title::after {
+    background: linear-gradient(90deg, rgba(255, 45, 120, 0.5), transparent);
+}
+
+/* ---- ランキングリスト ---- */
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ---- ランキングアイテム（各ランキング枠） ---- */
+.ranking-item {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 1.25rem;
+    border: 1.5px solid #ffe0ee;
+    padding: 1.25rem 1.25rem 1.5rem;
+    box-sizing: border-box;
+    box-shadow: none;
+}
+
+/* ---- ランキングヘッダー（タイトル） ---- */
+.ranking-header {
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #ffe0ee;
+}
+
+.ranking-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #3d1a2e;
+    margin: 0 0 0.35rem 0;
+    letter-spacing: 0.05em;
+}
+
+.ranking-title-image {
+    margin: 0 0 0.35rem 0;
+}
+
+.ranking-title-image img {
+    max-height: 36px;
+    width: auto;
+    display: block;
+}
+
+.ranking-description {
+    font-size: 0.73rem;
+    color: #7a3b5a;
+    line-height: 1.7;
+    margin: 0.4rem 0 0;
+}
+
+/* ================================================
+   キャストグリッド — 5列 (PC) / 3列 (Mobile)
+   ================================================ */
+.ranking-cast-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.85rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ranking-row--more {
+    margin-top: 0.85rem;
+}
+
+/* ================================================
+   キャストカード — 基本（4位以下）
+   ================================================ */
+.ranking-cast-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.6rem 0.55rem 0.75rem;
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1.5px solid #ffe0ee;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    overflow: hidden;
+}
+
+.ranking-cast-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 45, 120, 0.3);
+    box-shadow: 0 6px 18px rgba(255, 45, 120, 0.1);
+}
+
+/* ---- ランクバッジ（クラウン ＋ 数字） ---- */
+.ranking-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 0.5rem;
+}
+
+/* クラウン（4位以下には表示されない） */
+.ranking-crown {
+    line-height: 1;
+}
+
+/* 順位数字バッジ */
+.ranking-number {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff0f6;
+    color: #7a3b5a;
+    font-weight: 800;
+    font-size: 0.72rem;
+    border-radius: 5px;
+}
+
+/* ---- キャスト画像 — ranking scoped ---- */
+.ranking-cast-item .cast-image {
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--ui-bg-gray);
+}
+
+.ranking-cast-item:hover .cast-image img {
+    transform: scale(1.06);
+}
+
+/* ---- キャスト情報テキスト — ranking scoped ---- */
+.ranking-cast-item .cast-body {
+    width: 100%;
+    text-align: center;
+}
+
+/* .ranking-cast-item .cast-name {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.ranking-cast-item .cast-name a {
+    color: #b8b8cc;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.ranking-cast-item .cast-name a:hover {
+    color: var(--ui-accent);
+} */
+
+/* .ranking-cast-item .item-card-sizes {
+    font-size: 0.72rem;
+    color: #55556a;
+    margin: 0 0 0.15rem;
+    letter-spacing: 0.01em;
+} */
+
+.ranking-cast-text {
+    margin: 0.25rem 0 0;
+    font-size: 0.68rem;
+    color: #55556a;
+    line-height: 1.5;
+}
+
+/* ================================================
+   ★★★  1 位  — GOLD CHAMPION
+   ================================================ */
+.ranking-cast-item.rank-1 {
+    background: linear-gradient(165deg, #fff5e4 0%, #ffffff 55%, #fff8fb 100%);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    box-shadow:
+        0 0 0 1px rgba(255, 215, 0, 0.08),
+        0 0 28px rgba(255, 215, 0, 0.14),
+        inset 0 1px 0 rgba(255, 215, 0, 0.1);
+}
+
+.ranking-cast-item.rank-1:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 215, 0, 0.8);
+    box-shadow:
+        0 0 0 1px rgba(255, 215, 0, 0.2),
+        0 10px 36px rgba(255, 215, 0, 0.22),
+        inset 0 1px 0 rgba(255, 215, 0, 0.12);
+}
+
+/* シマーライン（上辺） */
+.ranking-cast-item.rank-1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #B8860B 15%,
+        #FFD700 35%,
+        #FFFACD 50%,
+        #FFD700 65%,
+        #B8860B 85%,
+        transparent 100%);
+    animation: shimmer-gold 3s ease-in-out infinite;
+}
+
+@keyframes shimmer-gold {
+    0%, 100% { opacity: 0.65; }
+    50%       { opacity: 1; }
+}
+
+/* "No.1" 画像バッジ */
+.ranking-cast-item.rank-1 .cast-image::after {
+    content: 'No.1';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #FFD700;
+    color: #4a3000;
+    font-size: 0.55rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    line-height: 1.5;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* クラウン */
+.rank-1 .ranking-crown {
+    font-size: 1.7rem;
+    color: #FFD700;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6));
+    animation: crown-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes crown-glow {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5)); }
+    50%       { filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.95)); }
+}
+
+/* 順位バッジ */
+.rank-1 .ranking-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+    background: linear-gradient(135deg, #FFD700 0%, #C8960A 100%);
+    color: #3c2600;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.35);
+}
+
+/* 名前 */
+.rank-1 .cast-name {
+    font-size: 0.82rem;
+}
+
+.rank-1 .cast-name a {
+    color: var(--ui-accent);
+}
+
+.rank-1 .cast-name a:hover {
+    color: var(--ui-accent-hover);
+}
+
+/* ================================================
+   ★★  2 位  — SILVER
+   ================================================ */
+.ranking-cast-item.rank-2 {
+    background: linear-gradient(165deg, #fff8fb 0%, #ffffff 100%);
+    border: 1px solid rgba(192, 192, 192, 0.38);
+    box-shadow:
+        0 0 18px rgba(192, 192, 192, 0.07),
+        inset 0 1px 0 rgba(192, 192, 192, 0.07);
+}
+
+.ranking-cast-item.rank-2:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200, 200, 200, 0.65);
+    box-shadow: 0 8px 28px rgba(192, 192, 192, 0.14);
+}
+
+.ranking-cast-item.rank-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent, #808080 20%, #C8C8C8 45%, #e8e8e8 50%, #C8C8C8 55%, #808080 80%, transparent);
+    opacity: 0.8;
+}
+
+.rank-2 .ranking-crown {
+    font-size: 1.3rem;
+    color: #C0C0C0;
+    filter: drop-shadow(0 0 4px rgba(200, 200, 200, 0.4));
+}
+
+.rank-2 .ranking-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.82rem;
+    background: linear-gradient(135deg, #C8C8C8 0%, #888888 100%);
+    color: #1e1e1e;
+    border-radius: 6px;
+}
+
+.rank-2 .cast-name a {
+    color: var(--ui-accent);
+}
+
+/* ================================================
+   ★  3 位  — BRONZE
+   ================================================ */
+.ranking-cast-item.rank-3 {
+    background: linear-gradient(165deg, #fff5e4 0%, #ffffff 100%);
+    border: 1px solid rgba(210, 130, 60, 0.38);
+    box-shadow:
+        0 0 16px rgba(205, 127, 50, 0.07),
+        inset 0 1px 0 rgba(205, 127, 50, 0.07);
+}
+
+.ranking-cast-item.rank-3:hover {
+    transform: translateY(-4px);
+    border-color: rgba(210, 130, 60, 0.65);
+    box-shadow: 0 8px 28px rgba(205, 127, 50, 0.14);
+}
+
+.ranking-cast-item.rank-3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent, #8B4A1A 20%, #CD7F32 45%, #e8a060 50%, #CD7F32 55%, #8B4A1A 80%, transparent);
+    opacity: 0.8;
+}
+
+.rank-3 .ranking-crown {
+    font-size: 1.1rem;
+    color: #CD7F32;
+    filter: drop-shadow(0 0 3px rgba(205, 127, 50, 0.35));
+}
+
+.rank-3 .ranking-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.82rem;
+    background: linear-gradient(135deg, #CD7F32 0%, #8B4A1A 100%);
+    color: #fff0e0;
+    border-radius: 6px;
+}
+
+.rank-3 .cast-name a {
+    color: var(--ui-accent);
+}
+
+/* ================================================
+   FC ランキング
+   ================================================ */
+.ranking-fc-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    font-size: 0.68rem;
+    color: var(--ui-accent);
+    font-weight: 700;
+    margin: 0.2rem 0 0;
+}
+
+.ranking-fc-empty {
+    font-size: 0.78rem;
+    color: #3a3a52;
+    padding: 0.5rem 0;
+    list-style: none;
+    text-align: center;
+}
+
+/* ================================================
+   レスポンシブ
+   ================================================ */
+
+/* タブレット */
+@media (max-width: 1024px) {
+    .ranking-cast-list {
+        gap: 0.7rem;
+    }
+}
+
+/* モバイル — 3列 */
+@media (max-width: 768px) {
+    .ranking-section {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .ranking-category {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .ranking-item {
+        padding: 0.9rem 0.65rem 1.1rem;
+    }
+
+    .ranking-cast-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.55rem;
+    }
+
+    .ranking-row--more {
+        margin-top: 0.55rem;
+    }
+
+    .rank-1 .ranking-crown { font-size: 1.4rem; }
+    .rank-2 .ranking-crown { font-size: 1.1rem; }
+    .rank-3 .ranking-crown { font-size: 0.95rem; }
+
+    .rank-1 .ranking-number { width: 27px; height: 27px; font-size: 0.82rem; }
+    .rank-2 .ranking-number,
+    .rank-3 .ranking-number { width: 25px; height: 25px; font-size: 0.75rem; }
+
+    /* .ranking-cast-item .cast-name { font-size: 0.72rem; }
+    .ranking-cast-item .item-card-sizes { font-size: 0.66rem; }
+    .ranking-cast-text { font-size: 0.62rem; } */
+}
+
+/* スモールモバイル */
+@media (max-width: 480px) {
+    .ranking-section {
+        padding: 0.75rem 0.45rem;
+    }
+
+    .ranking-cast-list {
+        gap: 0.4rem;
+    }
+
+    .ranking-cast-item {
+        padding: 0.5rem 0.4rem 0.6rem;
+    }
+
+    .ranking-number {
+        width: 20px;
+        height: 20px;
+        font-size: 0.65rem;
+    }
+
+    .rank-1 .ranking-number { width: 24px; height: 24px; font-size: 0.78rem; }
+
+    .ranking-crown         { font-size: 0.9rem; }
+    .rank-1 .ranking-crown { font-size: 1.2rem; }
+
+    /* .ranking-cast-item .cast-name { font-size: 0.65rem; }
+    .ranking-cast-item .item-card-sizes { font-size: 0.63rem; }
+    .ranking-cast-text { font-size: 0.58rem; } */
+
+    .ranking-badge {
+        margin-bottom: 0.4rem;
+    }
+}

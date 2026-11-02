@@ -1,0 +1,255 @@
+/* ================================================
+   アクセスページ スタイル
+   ================================================ */
+
+.access-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* マップ */
+.access-map {
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.access-map iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
+/* 住所ブロック */
+.access-address {
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+}
+
+.access-address-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative;
+}
+
+.access-address-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #e794c2 0%, #fd84c7 100%);
+}
+
+.access-address-text {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.8;
+    margin: 0.75rem 0 0 0;
+}
+
+/* 駅からのアクセス セクション */
+.access-guide-section {
+    margin-top: 2.5rem;
+}
+
+.access-guide-heading {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 2rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative;
+}
+
+.access-guide-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #e794c2 0%, #fd84c7 100%);
+}
+
+/* 駅カードグリッド */
+.access-station-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* 駅カード */
+.access-station-card {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.access-station-card:last-child {
+    border-bottom: none;
+}
+
+.access-station-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.access-station-number {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e794c2;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 50%;
+}
+
+.access-station-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.access-station-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.access-station-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #555;
+    line-height: 1.7;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.access-station-steps li:last-child {
+    border-bottom: none;
+}
+
+.access-station-steps li::before {
+    content: '';
+    flex-shrink: 0;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e794c2;
+    margin-top: 0.55rem;
+}
+
+/* お問い合わせ */
+.access-contact {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.access-contact-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    position: relative;
+    display: inline-block;
+}
+
+.access-contact-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #e794c2 0%, #fd84c7 100%);
+}
+
+.access-contact-desc {
+    font-size: 0.875rem;
+    color: #555;
+    margin: 1rem 0 0.75rem;
+}
+
+.access-contact-tel {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #e794c2;
+    margin: 0 0 0.25rem 0;
+}
+
+.access-contact-hours {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 0;
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.access-station-card {
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+.access-station-card:nth-child(1) { animation-delay: 0.1s; }
+.access-station-card:nth-child(2) { animation-delay: 0.2s; }
+.access-station-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* レスポンシブ */
+
+@media (max-width: 768px) {
+    .access-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .access-map iframe {
+        height: 300px;
+    }
+
+    .access-contact-tel {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .access-section {
+        padding: 1rem 0.75rem;
+    }
+}

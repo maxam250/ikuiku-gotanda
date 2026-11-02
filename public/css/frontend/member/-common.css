@@ -1,0 +1,665 @@
+@charset "utf-8";
+
+body{
+    background:white;
+}
+
+header{
+    /* border:4px solid #f00 */
+}
+
+footer{
+
+}
+
+table{
+    width:100%;
+    border-collapse: collapse;
+}
+table th,table td{
+    padding:5px;
+    border: 1px solid #ddd;
+	font-size:0.8rem;
+}
+table th{
+    background:#F3F3F3;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    table th,table td{
+        display: block;
+    }
+    table td input.size_m{
+        width:100%;
+    }
+}
+
+
+
+/* web fonts
+======================================================= */
+@import url('https://fonts.googleapis.com/earlyaccess/notosansjp.css');
+/*
+##########################################################################
+タグ初期設定
+##########################################################################*/
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+html{
+	height: 100%;
+}
+body {
+	position: relative;
+	text-align:left;
+	padding:0;
+	margin:0;
+	font-family: 'Noto Sans JP', sans-serif;
+	color:#727272;
+}
+h1,h2,h3,h4,h5,h6,p,ul,li,dl,dd,dt,table,th,td{
+	margin:0;
+	padding:0;
+}
+li{	list-style:none;}
+img{max-width:100%;}
+/*リンク*/
+a{
+	color: #e794c2;
+	text-decoration:none;
+}
+a:hover{
+	/* text-decoration:underline; */
+}
+
+/*タイトルタグ*/
+
+h1{
+	margin :0 0 3rem;
+	padding:0.8rem;
+	/* background:#f6f6f6; */
+    background:#73bddd;
+    color: #FFF !important;
+	font-size: 0.9rem;
+}
+h2{
+	margin :0 0 3rem;
+	padding:0.8rem;
+	/* background:#f6f6f6; */
+    background:#73bddd;
+    color: #FFF !important;
+	font-size: 0.9rem;
+}
+h3{
+    width:auto;
+}
+
+/*
+##########################################################################
+ユーティリティタグ設定
+##########################################################################*/
+
+/*【clearfix決定版】*/
+.clearfix:after,
+.section:after,
+ul:after,
+#container:after,
+#navi:after,
+#pageNavi:after,
+#subNavi:after,
+.inner:after,
+.section:after,
+.wrap:after{
+	content:url(../../images/spacer.gif);/* 1x1の透過gif */
+	display:block;
+	clear:both;
+	height:0;
+}
+.clearfix_for_ie7{
+	zoom: 1;}
+
+.section{width:auto;}
+.box{float:left;}
+.left{float:left;}
+.right{float:right;}
+.clear{clear:both;}
+.flexSection{display: flex;justify-content: space-between;}
+.flexSection:after{margin-left:auto;}
+.hint{font-size: 0.8rem; color: #999;}
+
+
+/*
+##########################################################################
+box
+##########################################################################*/
+.list{
+	display: flex;
+	flex-wrap: wrap;
+	width:100%;
+}
+.list .box{
+    width:160px;
+	padding:0.5rem;
+	border:1px solid #dfdfdf;
+	margin:0 0.2rem 1rem;
+	text-align: center;
+}
+.list .box.active{
+    background:#FFF;
+}
+.list .box.passive{
+    background:#555;
+    color: #DDD;
+}
+.list .box .img{
+	margin-bottom:1.2rem;
+}
+.list .box .img img{
+	display: block;
+}
+.list .box .name{
+	margin-bottom:0.5rem;
+}
+.list .box .new{
+	font-size: 0.6rem;
+	color: #e794c2;
+}
+
+/*
+##########################################################################
+list table
+##########################################################################*/
+.listTbl{
+	width:100%;
+    border-collapse: collapse;
+}
+.listTbl th,.listTbl td{
+}
+.listTbl thead th{
+    background:#eee;
+}
+.listTbl tbody th,
+.listTbl tbody td{
+    background:#fff;
+}
+.listTbl tbody .handle{
+    width:65px;
+}
+.listTbl tbody .action{
+    width:150px;
+}
+.listTbl .size_5{
+    width:5%;
+}
+.listTbl .size_6{
+    width:6%;
+}
+.listTbl .size_7{
+    width:7%;
+}
+.listTbl .size_8{
+    width:8%;
+}
+.listTbl .size_9{
+    width:9%;
+}
+.listTbl .size_10{
+    width:10%;
+}
+.listTbl .size_15{
+    width:15%;
+}
+.listTbl .size_20{
+    width:20%;
+}
+.listTbl .size_25{
+    width:25%;
+}
+.listTbl .size_30{
+    width:30%;
+}
+.listTbl .size_35{
+    width:35%;
+}
+.listTbl .size_40{
+    width:40%;
+}
+.listTbl .size_45{
+    width:45%;
+}
+.listTbl .size_50{
+    width:50%;
+}
+.listTbl .size_55{
+    width:55%;
+}
+.listTbl .size_60{
+    width:60%;
+}
+.listTbl .size_65{
+    width:65%;
+}
+.listTbl .size_70{
+    width:70%;
+}
+.listTbl .size_75{
+    width:75%;
+}
+.listTbl .size_80{
+    width:80%;
+}
+.listTbl .size_85{
+    width:85%;
+}
+.listTbl .size_90{
+    width:90%;
+}
+.listTbl .left{
+    text-align:left;
+}
+.listTbl .center{
+    text-align:center;
+}
+.listTbl .right{
+    text-align:right;
+}
+
+
+/*
+##########################################################################
+レイアウト
+##########################################################################*/
+
+#wrapper{
+	width:100%;
+	min-width: 1260px;
+	height: 100%;
+}
+#container{
+	padding-top:100px;
+	display:flex;
+}
+#side{
+	width:150px ;
+	padding:0;
+	background:#FFF;
+}
+main {
+    width:100%;
+    min-height: 1200px;
+    margin:0 0 0;
+    padding:1rem;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 767px) {
+    #wrapper{
+        min-width: 100%;
+    }
+    main {
+        min-height: 50vh;
+    }
+    #side{
+        display: none;
+    }
+}
+
+
+
+/*
+##########################################################################
+ビヘイビア
+##########################################################################*/
+
+/* フェードアウトアニメーションのスタイル */
+.fadeOut {
+    animation-name: fadeOutEffect;
+    animation-duration: 0.5s; /* アニメーションの時間、ここでは0.5秒 */
+    animation-fill-mode: forwards; /* アニメーションが終了した状態を保持 */
+}
+
+@keyframes fadeOutEffect {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/*
+##########################################################################
+ヘッダー
+##########################################################################*/
+
+/* header
+===================================================*/
+header{
+	display: flex;
+	align-items: center;
+	width:100%;
+	margin-bottom:2px;
+}
+header .titleArea{
+    display: flex;
+    align-items: center;
+    width:100%;
+}
+header .titleArea h2{
+    width:140px;
+}
+header .titleArea .name{
+    width: calc(100% - 140px);
+    padding-left:1rem;
+    box-sizing: border-box;
+}
+
+
+
+@media screen and (max-width: 767px) {
+
+    header .titleArea h2{
+        display: inline-block;
+        white-space: nowrap;
+    }
+    header .titleArea .name{
+        width: auto;
+    }
+}
+
+
+
+/* logoArea
+===================================================*/
+#logoArea{
+    width:54px;
+}
+#logoArea a{
+	display: block;
+	width:100%;
+	height:100%;
+	z-index:99;
+}
+
+#logoArea a svg#logo{
+	display: block;
+    padding:0.2rem;
+}
+
+/* navi
+===================================================*/
+
+ul.navi{
+	margin: 0 auto;
+}
+ul.navi li{
+
+}
+ul.navi li a{
+    position: relative;
+    display:block;
+	margin: auto ;
+    padding:0.65rem 0.4rem;
+	border-bottom:1px solid #eee;
+    font-size: 0.84rem;
+}
+
+ul.navi li:nth-last-child(1) a{
+    border:none;
+}
+ul.navi li a:hover{
+    background:#f6f6f6;
+}
+ul.navi li span.badge{
+    position: absolute;
+    right:2px;
+    top:5px;
+    display: inline-block;
+    width:30px;
+    background:#F00;
+    padding:0 0.2rem;
+    line-height: 30px;
+    border-radius:50vmax;
+    color: white;
+    text-align: center;
+}
+
+ul#settings li a{
+    background:#e77fb9;
+    color: #fff;
+}
+
+ul#settings li a:hover{
+    background:#cc609c;
+}
+ul.setting li.logout{
+    margin-top:3rem;
+}
+
+
+
+@media screen and (max-width: 767px) {
+
+    #side ul.navi{
+        display: none;
+    }
+}
+
+
+/*
+##########################################################################
+各ページ共通
+##########################################################################*/
+/* line awesome */
+.las{
+    font-size: 150%;
+}
+
+/* toPageArea */
+
+.toPageArea{
+    margin:0 0 2rem;
+}
+.toPageArea a{
+    display: inline-block;
+    padding:0.3rem 0;
+    margin-right:1rem;
+    color: #3f3f6f;
+    border-bottom:4px solid #d3d7dd;
+}
+.toPageArea a:hover{
+    border-bottom:4px solid #a0d3ea;
+}
+.toPageArea a::before{
+    font-family: "Line Awesome Brands", "Line Awesome Free";
+    margin-right: 0.4rem;
+    font-size: 1.4rem;
+}
+.toPageArea a.create::before{
+    content: "\f0fe";
+}
+.toPageArea a.cate::before{
+    content: "\f37f";
+    /*content: "\f86d;*/
+}
+.toPageArea a.lists::before{
+    content: "\f15c";
+}
+.toPageArea a.point::before{
+    content: "\f288";
+}
+.toPageArea a.history::before{
+    content: "\f1ea";
+}
+
+/* contentArea */
+
+.contentArea{
+    width:auto;
+    padding:1.5rem 0;
+}
+
+/* transitionArea */
+.PageTransitionArea {
+    width:auto;
+    margin-bottom:2rem;
+}
+.back{
+    width: auto;
+    margin-bottom:15px;
+}
+.back a {
+    display: inline-block;
+    padding:8px;
+    color: #fff;
+    background:rgb(255, 166, 0);
+    border-radius:5px;
+}
+.back a::before{
+    content:"〈　";
+}
+.back a:hover {
+    background:rgb(255, 182, 45);
+}
+
+/* link */
+.link a{
+    display: inline-block;
+    padding:0.3rem 1rem;
+    background:#FFF;
+    border:2px  solid #57add0;
+    color:#57add0;
+    font-size: 0.8rem;
+    border-radius:50vmax;
+}
+.link a:hover{
+    background:#57add0;
+    color: white;
+}
+/* message */
+.MessageArea {
+    margin-bottom:1.5rem;
+    color: #f00;
+}
+.MessageArea .hintArea{
+    padding:1.8rem;
+    margin:1rem;
+    background:#FFF;
+    border-radius:8px;
+    font-size: 1rem;
+    color: #555;
+}
+.MessageArea .hintArea p::before{
+    display: inline-block;
+    margin-right: 0.8rem;
+    font-family: "Line Awesome Brands", "Line Awesome Free";
+    content: "\f075";
+    font-size: 1.5rem;
+}
+
+
+/* registerFormArea */
+
+.registerFormArea{
+    max-width:450px;
+    margin: 0 0 2rem;
+    padding:1rem;
+    background: #FFF;
+    border:2px solid #57add0
+}
+.registerFormArea h3{
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.add{
+    width: auto;
+}
+
+/* listTableArea  /index */
+
+.listTableArea{
+
+    width:auto;
+}
+
+.ListArea{
+    width: auto;
+}
+
+/* formArea */
+.formArea{
+    width:auto;
+
+}
+
+/*
+##########################################################################
+コンポーネント
+##########################################################################*/
+
+
+/*
+##########################################################################
+フッター
+##########################################################################*/
+footer{
+	width:100%;
+	padding:3rem  ;
+    box-sizing: border-box;
+	background:#CCC;
+}
+footer small{
+    color: #555;
+}
+
+
+
+
+
+/*
+##########################################################################
+アイコン　https://design-library.jp/lab/category/icon
+##########################################################################*/
+/* 矢印 */
+/* < */
+.pre, .next {
+    background:#57add0 !important;
+    border: none  !important;
+}
+.pre::before{
+    margin-right:0.5rem;
+    content:"\0ab";
+}
+
+/* > */
+.next::after{
+    margin-left:0.5rem;
+    content:"\0bb";
+}
+
+/* ソートハンドル */
+.sort-handle {
+    display: inline-block;
+    vertical-align: middle;
+    color: #333;
+    line-height: 1;
+    width: 1em;
+    cursor: grab;
+    font-size: 1.5rem;
+  }
+
+  .sort-handle > span {
+    display: block;
+    height: 1px;
+    background: currentColor;
+    border-radius: 0.1em;
+  }
+
+  .sort-handle > span + span {
+    margin-top: 0.22em;
+  }

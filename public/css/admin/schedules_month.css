@@ -1,0 +1,354 @@
+
+#itemList{
+    margin:auto !important;
+    padding:0 2rem !important;
+}
+#calenderArea{
+    padding:0 2rem !important;
+}
+
+.jumpMenu{
+    margin-bottom:3rem !important;
+}
+
+/* calender - テーブル表示の強制 */
+#calenderArea table{
+    width:100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    border: 1px solid #ddd !important;
+    display: table !important; /* Tailwindのdisplayをオーバーライド */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#calenderArea table thead{
+    display: table-header-group !important; /* テーブルヘッダーの強制 */
+}
+
+#calenderArea table tbody{
+    display: table-row-group !important; /* テーブルボディの強制 */
+}
+
+#calenderArea table tr{
+    display: table-row !important; /* テーブル行の強制 */
+}
+
+#calenderArea table th,
+#calenderArea table td{
+    width: 14.28% !important; /* 7列のため各列14.28% */
+    background:#f9f9f9 !important;
+    vertical-align: top !important;
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    min-height: 120px !important;
+    position: relative !important;
+    display: table-cell !important; /* テーブルセルの強制 */
+    box-sizing: border-box !important;
+}
+
+#calenderArea table thead th{
+    background:#eee !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    display: table-cell !important; /* テーブルセルの強制 */
+}
+
+#calenderArea table tbody td {
+    height: 120px !important;
+    min-height: 120px !important;
+    display: table-cell !important; /* テーブルセルの強制 */
+}
+
+/* カレンダーセルのグリッド表示を無効化 */
+#calenderArea .calendar-day {
+    display: table-cell !important; /* テーブルセル表示を強制 */
+    grid-template-columns: none !important;
+    flex-direction: column !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    min-height: 120px !important;
+    aspect-ratio: auto !important; /* アスペクト比の無効化 */
+}
+
+/* Tailwindのグリッド関連クラスを無効化 */
+#calenderArea .grid,
+#calenderArea .grid-cols-7,
+#calenderArea .gap-2,
+#calenderArea .flex,
+#calenderArea .flex-col {
+    display: table-cell !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    flex-direction: initial !important;
+}
+
+#calenderArea .navigation{
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-bottom:1rem !important;
+    align-items: center !important;
+}
+
+#calenderArea .navigation h3{
+    font-size: 1.2rem !important;
+    margin: 0 !important;
+}
+
+#calenderArea .navigation a{
+    display: block !important;
+}
+
+#calenderArea .navigation .flex {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+}
+
+#calenderArea .navigation .itemBox {
+    font-size: 0.8rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+}
+
+#calenderArea .navigation .itemBox .img{
+    width:80px !important;
+    height: 80px !important;
+    margin-right:1rem !important;
+    margin-bottom:0 !important;
+    flex-shrink: 0 !important;
+}
+
+#calenderArea .navigation .itemBox .img img{
+    width:80px !important;
+    height: 80px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+}
+
+#calenderArea .navigation .pre,
+#calenderArea .navigation .next{
+    width:150px !important;
+    text-align: center !important;
+    padding: 8px 16px !important;
+    background: #007bff !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    transition: background-color 0.3s !important;
+}
+
+#calenderArea .navigation .pre:hover,
+#calenderArea .navigation .next:hover{
+    background: #0056b3 !important;
+}
+
+#calenderArea select{
+    padding:3px 20px 3px 3px !important;
+    font-size: 0.8rem !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+}
+
+#calenderArea .time{
+    margin-bottom:0.8rem !important;
+}
+
+#calenderArea .status{
+    display: block !important;
+    margin-bottom:0.8rem !important;
+}
+
+#calenderArea .apply{
+    margin-bottom:0.8rem !important;
+}
+
+.btn{
+    display: block !important;
+}
+
+.btn-del{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width:30px !important;
+    height: 30px !important;
+    margin-right:0 !important;
+    border-radius:50% !important;
+    background:#777 !important;
+    border:none !important;
+    font-size: 1rem !important;
+    color: #fff !important;
+    position: absolute !important;
+    top: 4px !important;
+    right: 4px !important;
+    z-index: 5 !important;
+    cursor: pointer !important;
+}
+
+.btn-del:hover {
+    background: #555 !important;
+}
+
+/* スケジュール要素のスタイル */
+#calenderArea .schedule-list {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    padding: 4px !important;
+    margin-bottom: 4px !important;
+    font-size: 0.75rem !important;
+}
+
+#calenderArea .status{
+    position: relative !important;
+    padding-right: 36px !important;
+}
+
+#calenderArea .request {
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    font-size: 0.7rem !important;
+    margin-bottom: 2px !important;
+}
+
+#calenderArea .request.add {
+    background: #fff3cd !important;
+    color: #856404 !important;
+    border: 1px solid #ffeaa7 !important;
+}
+
+#calenderArea .request.delete {
+    background: #f8d7da !important;
+    color: #721c24 !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+#calenderArea .request.update {
+    background: #cce7ff !important;
+    color: #0c5460 !important;
+    border: 1px solid #bee5eb !important;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    #calenderArea{
+        padding: 0 1rem !important;
+    }
+
+    #calenderArea table th,
+    #calenderArea table td{
+        padding: 4px !important;
+        font-size: 0.8rem !important;
+        min-height: 100px !important;
+    }
+
+    #calenderArea .navigation {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+
+    #calenderArea .navigation .flex {
+        order: 1 !important;
+    }
+
+    #calenderArea .navigation .pre {
+        order: 0 !important;
+    }
+
+    #calenderArea .navigation .next {
+        order: 2 !important;
+    }
+
+    #calenderArea table {
+        display: table !important; /* モバイルでもテーブル表示を維持 */
+    }
+
+    #calenderArea table thead,
+    #calenderArea table tbody,
+    #calenderArea table tr,
+    #calenderArea table th,
+    #calenderArea table td {
+        display: table-cell !important; /* モバイルでもテーブル表示を維持 */
+    }
+}
+
+/* より具体的なセレクタでTailwindをオーバーライド */
+body #calenderArea table,
+body #calenderArea table thead,
+body #calenderArea table tbody,
+body #calenderArea table tr,
+body #calenderArea table th,
+body #calenderArea table td {
+    display: table !important;
+}
+
+body #calenderArea table thead {
+    display: table-header-group !important;
+}
+
+body #calenderArea table tbody {
+    display: table-row-group !important;
+}
+
+body #calenderArea table tr {
+    display: table-row !important;
+}
+
+body #calenderArea table th,
+body #calenderArea table td {
+    display: table-cell !important;
+}
+
+/* ── jumpMenu 横並びレイアウト ──────────────── */
+.jumpMenu-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.cast-name-search {
+    width: 200px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.875rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    height: 36px;
+    box-sizing: border-box;
+}
+.cast-name-search:focus {
+    outline: none;
+    border-color: #6b7280;
+}
+.jumpMenu-wrap select {
+    width: 200px !important;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+/* ── セレクトカスタム矢印 ────────────────────── */
+.select-wrap {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+}
+.select-wrap select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 200px !important;
+    padding-right: 28px !important;
+    cursor: pointer;
+}
+.select-wrap::after {
+    content: '▼';
+    font-size: 9px;
+    color: #555;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}

@@ -1,0 +1,365 @@
+
+
+#ImgUploader,#VideoUploader,#ThumbnailVideoUploader{
+    margin-bottom:2.5rem;
+    padding:1.3rem;
+    background:white;
+    border:1px solid #ddd;
+}
+#ImgUploader h3, #VideoUploader h3, #ThumbnailVideoUploader h3{
+    margin-bottom:1rem;
+}
+#ImgUploader h3 i, #VideoUploader h3 i, #ThumbnailVideoUploader h3 i{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.2rem;
+    height: 4.2rem;
+    background: #fff;
+    font-size: 2rem;
+    margin-right: 0.7rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(231, 232, 235, 0.3);
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+#ImgUploader h3 i{
+    color: #5d89f0;
+}
+#ThumbnailVideoUploader h3 i{
+    color: #da447d;
+}
+#VideoUploader h3 i{
+    color: #fac021;
+}
+.uploader-section{
+    margin-bottom:1rem;
+    padding:1.2rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.uploader-section.photo{
+    background: linear-gradient(135deg, #e9effc 0%, #dbebff 100%);
+    border: 1px solid #bfdbfe;
+}
+.uploader-section.thumb{
+    background: linear-gradient(135deg, #fff6fd 0%, #ffecf8 100%);
+    border: 1px solid #e0b7da;
+}
+.uploader-section.video{
+    background: linear-gradient(135deg, #fffde9 0%, #f8f5d3 100%);
+    border: 1px solid #fde68a;
+}
+
+
+#uploadedImages{
+    line-height: 2;
+    padding:10px;
+}
+#uploadImages img {
+    background:#DDD;
+    border:1px solid #CCC;
+}
+
+#imageList {
+    width:auto;
+}
+
+#imageList ul{
+    width:auto;
+}
+#imageList ul li{
+    min-width:240px;
+    margin:0 5px 1rem 0;
+    padding:8px;
+    border:1px solid #DDD;
+}
+#imageList ul li div{
+    margin-bottom:0.5rem;
+    font-size: 0.75rem;
+    align-items:center;
+}
+#imageList ul li div.img{
+
+}
+#imageList ul li div.img img{
+    width:100%;
+}
+#imageList ul li .file{
+    width:100% !important;
+}
+#imageList ul li .file input[type='file']{
+    max-width:100% !important;
+    font-size: 0.8rem !important;
+}
+#imageList ul li div.check{
+
+}
+#imageList ul li div.del{
+    margin-left:1rem;
+}
+
+
+/* editSection */
+section.editSection{
+    margin:0 0 3rem;
+}
+.editSection h3 {
+    margin:0 0 1.5rem;
+    font-weight:bold;
+}
+.editSection h3 span{
+    display: inline-block;
+    margin-left:1rem;
+    font-size: 0.8rem;
+}
+.editSection h3 span.hint{
+    display: inline-block;
+    margin-left:2rem;
+    padding:0.2rem 0.8rem;
+    background:#F4F4F4;
+}
+.editSection input{
+    display: block;
+}
+.editSection p.img{
+    width:80px;
+}
+.editSection p.img img{
+    width:100%;
+}
+.editSection label{
+    display: flex;
+    align-items: center;
+    margin-bottom:1rem;
+    padding:5px;
+}
+.editSection label:nth-child(even){
+    background:#f9f9f9;
+}
+
+
+.editSection label input{
+    margin-right: 0.8rem;
+}
+/* itemInfoArea
+ * <table><form>… のため DOM によっては form table th が効かず、高いセル（TinyMCE 等）で
+ * th の縦位置だけズレる。セクション単位で上揃えを固定する。 */
+#itemInfoArea table th,
+#itemInfoArea table td,
+#loginSection table th,
+#loginSection table td {
+    vertical-align: top;
+}
+
+
+/* optionArea */
+#optionArea {}
+/* optionPayArea */
+#optionPayArea {}
+
+
+/* profileArea */
+#profileArea {}
+#profileArea label{
+   flex-wrap: wrap;
+}
+#profileArea label p{
+    width:100%;
+}
+#profileArea label input{
+    width:100%;
+
+}
+
+/* #profileArea ul{}
+#profileArea ul li{
+    display: block;
+    margin-bottom:2rem;
+}
+#profileArea ul li p{
+    margin-bottom:0.5rem;
+}
+#profileArea ul li textarea{
+    min-height: 3rem;
+} */
+
+/* itemIconArea */
+#itemIconArea {}
+#itemIconArea label p{
+    margin-right:1rem;
+}
+
+/* ── キャスト登録フォーム 入力幅 ─────────────────── */
+.modern-register-form .modern-input {
+    width: 240px;
+    flex: none;
+    min-width: unset;
+}
+
+/* ── キャスト一覧タブ ─────────────────────────────── */
+.items-tab-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.items-tab-btn {
+    padding: 0.35rem 1.1rem;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s;
+}
+.items-tab-btn.is-active {
+    background: #3b82f6;
+    color: #fff;
+    border-color: #3b82f6;
+}
+.items-tab-btn[data-filter="passive"].is-active {
+    background: #6b7280;
+    border-color: #6b7280;
+}
+
+/* ── ドラッグ並び替え ───────────────────────────── */
+.sortable-list .box {
+    cursor: grab;
+}
+.sortable-list .box.ui-sortable-helper {
+    cursor: grabbing;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+.sortable-list .sortable-placeholder {
+    visibility: visible !important;
+    background: #eff6ff;
+    border: 2px dashed #93c5fd;
+    border-radius: 6px;
+    min-height: 120px;
+}
+
+/* ── サムネイル正方形 ────────────────────────────── */
+.list .box .img img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+/* ── アイコン行 ──────────────────────────────────── */
+.item-icon-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0.25rem 0 0.4rem;
+    min-height: 1rem;
+    flex-wrap: nowrap;
+}
+.item-icon-row i {
+    display:block;
+    font-size: 0.7rem;
+    color: #FFF !important;
+}
+
+.item-icon-row span {
+    display: inline-block;
+    /* width: 16px; */
+    padding:0.2rem !important;
+    border-radius: 3px;
+}
+.item-icon-row span.item_url  { background: #ffa530; }
+.item-icon-row span.item_twitter  { background: #1b1b1b; }
+.item-icon-row span.item_video  { background: #be1da9; }
+.item-icon-row span.loginid  { background: #4919f5; }
+
+.list .box.active .item-icon-row i { color: #6b7280; }
+
+/* ── アクションボタン 均等幅・極小サイズ ─────────── */
+.list .box .action-buttons {
+    display: flex;
+    gap: 0.2rem;
+    width: 100%;
+}
+.list .box .action-buttons > * {
+    flex: 1;
+    display: flex;
+}
+.list .box .action-buttons form {
+    flex: 1;
+}
+.admin-btn-xs {
+    padding: 0.18rem 0.3rem;
+    font-size: 0.65rem;
+    min-width: unset;
+    width: 100%;
+    white-space: nowrap;
+}
+.admin-btn-xs i {
+    font-size: 0.6rem;
+    margin-right: 0.15rem;
+}
+
+/* ── ページネーション ────────────────────────── */
+.pagination-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    flex-wrap: wrap;
+}
+.pagination-wrap nav {
+    display: flex;
+}
+.pagination-info {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+/* ── 名前検索フォーム ────────────────────────── */
+.items-search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+    width:200px;
+}
+.items-search-input {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    width: 140px;
+    height: 28px;
+}
+.items-search-input:focus {
+    outline: none;
+    border-color: #6b7280;
+}
+.items-search-btn {
+    padding: 0 1.5rem;
+    height: 28px;
+    background: #4b5563;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    line-height: 1;
+}
+.items-search-btn:hover {
+    background: #374151;
+}
+.items-search-clear {
+    padding: 0 0.3rem;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    text-decoration: none;
+}
+.items-search-clear:hover {
+    color: #374151;
+}

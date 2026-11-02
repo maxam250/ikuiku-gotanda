@@ -1,0 +1,20 @@
+.onPickup {
+    margin-bottom:3rem;
+    padding:1.5rem;
+    background:#FFF;
+}
+
+.offPickup {
+    padding:1.5rem;
+    background:#f9f9f9;
+}
+
+.onPickup h3, .offPickup h3{
+    font-size: 1.2rem;
+    margin-bottom:2rem;
+}
+
+.offPickup .list .box{
+    width:90px;
+    font-size: 0.7rem;
+}

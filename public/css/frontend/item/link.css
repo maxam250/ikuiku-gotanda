@@ -1,0 +1,8 @@
+.bannerArea{
+    margin-bottom:2rem;
+    padding:2rem;
+    background:#FFF;
+}
+.bannerArea a{
+    display: inline-block;
+}

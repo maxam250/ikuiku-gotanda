@@ -1,0 +1,33 @@
+
+/*
+##########################################################################
+よくある質問
+##########################################################################*/
+
+#faq{
+}
+#faq .ques{
+	padding:1.8% 1.8% 1.8% 60px;
+	margin:0 0 6px;
+	background:url(../images/faq/title_q.png) no-repeat 12px 12px #53cc7d;
+	border-radius:8px;
+	font-size:1.0rem;
+	font-weight:bold;
+	color: #FFF;
+	
+}
+#faq .ans{
+	padding:1.8% 1.8% 1.8% 60px;
+	margin:0 0 20px;
+	background:url(../images/faq/title_a.png) no-repeat 12px 12px #FFF;
+	border:1px solid #DDD;
+	border-radius:8px;
+	font-size:14px;
+	line-height:1.7;
+	color: #444;
+}
+
+#faq .ans a{
+	text-decoration: underline;
+	color: blue;
+}

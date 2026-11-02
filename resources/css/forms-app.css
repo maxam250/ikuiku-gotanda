@@ -1,0 +1,139 @@
+/**
+ * resources/css/forms-app.css
+ * 会員／キャストダッシュ board 向け（Vite）。公開サイトのラジオ等は public/css/form.css
+ */
+
+/* Bootstrap reset for form elements */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    all: unset;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* 基本的なフォームグループのスタイル */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* 入力フィールドの基本スタイル */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* サイズクラス */
+.size_30p {
+    width: 30% !important;
+    min-width: 300px;
+}
+
+.size_m {
+    width: 300px !important;
+}
+
+.size_l {
+    width: 400px !important;
+}
+
+.size_s {
+    width: 100px !important;
+}
+
+/* textarea specific */
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group textarea.size_30p {
+    min-height: 100px;
+}
+
+/* unit class for grouped inputs */
+.unit {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.unit input {
+    flex: 0 0 auto;
+}
+
+/* チェックボックスとラジオボタン */
+.form-group input[type="checkbox"],
+.form-group input[type="radio"] {
+    all: revert;
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .size_30p,
+    .size_m,
+    .size_l {
+        width: 100% !important;
+        min-width: auto;
+    }
+
+    .unit {
+        flex-wrap: wrap;
+    }
+}
+
+/* 無効化された要素 */
+.form-group input:disabled,
+.form-group textarea:disabled,
+.form-group select:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+/* エラー表示 */
+.form-group .error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* 必須マーク */
+.form-group label.required::after {
+    content: " *";
+    color: #dc3545;
+}

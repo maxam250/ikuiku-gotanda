@@ -1,0 +1,210 @@
+
+#itemList{
+    margin:auto;
+    padding:0 2rem;
+}
+#calenderArea{
+    padding:0 2rem;
+}
+
+.jumpMenu{
+    margin-bottom:3rem;
+}
+
+
+/* calender */
+#calenderArea table{
+    width:100%;
+    table-layout: fixed;
+}
+#calenderArea table th,#calenderArea table td{
+    width:auto;
+    background:#f9f9f9;
+    vertical-align: top;
+}
+#calenderArea table thead th{
+    background:#eee;
+}
+
+/**/
+
+#calenderArea .itemBox {
+    margin-bottom:1rem;
+    font-size: 0.8rem;
+}
+#calenderArea .itemBox .img{
+    width:80px;
+    margin-right:2rem;
+    margin-bottom:0.5rem;
+}
+
+#calenderArea .itemBox .img img{
+    width:80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius:8px;
+}
+
+/**/
+
+#calenderArea .navigation{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:1rem;
+}
+#calenderArea .navigation h3{
+    font-size: 1.2rem;
+}
+#calenderArea .navigation a{
+    display: block;
+}
+#calenderArea .navigation .flex {
+    align-items: center;
+}
+#calenderArea .navigation .pre,#calenderArea .navigation .next{
+    width:150px;
+    text-align: center;
+}
+#calenderArea span.weekday{
+    display: none;
+}
+
+#calenderArea  select{
+    padding:3px 20px 3px 3px;
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 120px;
+}
+
+#calenderArea  .time{
+    margin-bottom:0.8rem;
+}
+#calenderArea  .time select{
+    display: inline-block;
+    width: auto;
+    min-width: 80px;
+}
+#calenderArea  .status{
+    display: block;
+    margin-bottom:0.8rem;
+}
+#calenderArea  .request{
+    padding:0.2rem;
+    margin-bottom:0.8rem;
+    text-align: center;
+}
+#calenderArea  .request.add{
+    border:1px solid #07d385;
+    color: #07d385;
+}
+#calenderArea  .request.delete{
+    border:1px solid #c22de7;
+    color: #c22de7;
+}
+#calenderArea  .request.update{
+    border:1px solid #3360f5;
+    color: #3360f5;
+}
+
+.btn{
+    display: block !important;
+    margin:5px auto !important;
+}
+.btn-del{
+    display: inline-block;
+    /* width:30px;
+    height: 30px; */
+    padding:0.3rem;
+    margin-top:0.4rem;
+    border-radius:50vmax;
+    background:#777;
+    border:none;
+    font-size: 0.78rem;
+    color: #fff;
+    /* float:right; */
+}
+
+
+
+
+/* PCサイズでのレイアウト改善 */
+@media screen and (min-width: 768px) {
+    #calenderArea table th,
+    #calenderArea table td {
+        min-height: 150px;
+        padding: 12px;
+    }
+
+    /* PCサイズでは空のセルを表示 */
+    #calenderArea table td.noframe {
+        display: table-cell;
+    }
+
+    #calenderArea .time select {
+        font-size: 0.75rem;
+        padding: 2px 4px;
+    }
+
+    #calenderArea .status select {
+        font-size: 0.75rem;
+        padding: 2px 4px;
+        width: auto;
+        min-width: 70px;
+    }
+
+    #calenderArea .btn {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    #calenderArea .btn-del {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+
+    #calenderArea .request {
+        font-size: 0.7rem;
+        padding: 2px 4px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .sp-flex{
+        display: flex !important;
+        align-items: center;
+    }
+    .sp-flex div,.sp-flex button{
+        margin:0 0.5rem;
+    }
+    #calenderArea{
+        padding:0 ;
+    }
+    #calenderArea table{
+        width:100%;
+        table-layout:auto;
+        border-collapse: collapse;
+    }
+
+    #calenderArea table thead{
+        display: none;
+    }
+    #calenderArea table th,#calenderArea table td{
+        display: block;
+        width:auto;
+        background:#f9f9f9;
+    }
+    #calenderArea table td{
+        margin-bottom:1px;
+    }
+    #calenderArea span.weekday{
+        display: inline-block;
+    }
+    #calenderArea .navigation .pre,#calenderArea .navigation .next{
+        width:80px;
+        text-align: center;
+    }
+    #calenderArea table td.noframe{
+        display: none;
+    }
+}

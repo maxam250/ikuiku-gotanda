@@ -1,0 +1,65 @@
+.list{
+    padding:3rem 1rem;
+    width:100%;
+    box-sizing: border-box;
+}
+
+.list ul{
+    display: flex;
+    flex-wrap:wrap;
+    width:100%;
+}
+.list ul li{
+    width:200px;
+    padding:0.8rem;
+    background:#fff;
+    margin-right: 1% !important;
+}
+
+.list ul li .img{
+    padding:1rem;
+}
+.list ul li .img img{
+    width:120px;
+    height: 120px;
+    object-fit: cover;
+}
+.list ul li .name{}
+.list ul li .comment textarea{
+    width:100%;
+}
+
+
+.listTbl{}
+.listTbl .title{
+    margin-bottom:1rem;
+}
+.listTbl .title strong{
+    display: block;
+    margin-bottom:0.3rem;
+    font-size: 1.2rem;
+}
+.listTbl .title span{
+    margin-bottom: 0.3rem;
+}
+.listTbl .title p{
+}
+
+
+.listTbl .list li{
+    max-width: 100px;
+    padding:1rem;
+    margin-right:10px;
+    background:#f7f7f7;
+    text-align: center;
+}
+.listTbl .list li .img{
+    margin-bottom:0.2rem;
+}
+.listTbl .list li .name{
+    margin-bottom:0.2rem;
+    font-weight: bold;
+}
+.listTbl .list li .text{
+    font-size: 0.74rem;
+}

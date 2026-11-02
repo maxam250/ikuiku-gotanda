@@ -1,0 +1,679 @@
+@charset "utf-8";
+
+/*
+##########################################################################
+  キャストカード共通CSS
+  /item, /schedule, home など cast一覧で使用
+##########################################################################*/
+
+/* ==========================================================================
+   グリッド
+   ========================================================================== */
+
+.item-card-grid {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (min-width: 768px) {
+    .item-card-grid {
+        gap: 0.85rem;
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .item-card-grid {
+        gap: 1.5rem;
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+/* ==========================================================================
+   カード
+   ========================================================================== */
+
+.item-card {
+    display: block;
+    background: #fff;
+    border-radius:4px;
+    border: 1px solid #e8eaed;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s;
+    text-align: center;
+}
+
+.item-card:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 画像 */
+.item-card-img {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.item-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+    display: block;
+}
+
+.item-card:hover .item-card-img img {
+    transform: scale(1.04);
+}
+
+/* 本体 */
+.item-card-body {
+    padding: 0.3rem 0.4rem 0.5rem;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .item-card-body {
+        padding: 0.9rem 0.6rem 1rem;
+    }
+}
+@media (min-width: 1280px) {
+    .item-card-body {
+        padding: 0.9rem 1rem 1rem;
+    }
+}
+
+/* 名前行 */
+.item-card-name-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.3rem;
+    color: var(--ui-accent);
+}
+
+.item-card-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ui-accent);
+}
+
+.item-card-age {
+    font-size: 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+/* サイズ（身長・スリーサイズ） */
+.item-card-sizes {
+    margin: 0.15rem 0 0;
+    font-size: 0.68rem;
+    color: #888;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .item-card-name {
+    font-size: 1rem;
+    }
+
+    .item-card-age {
+        font-size: 0.82rem;
+    }
+
+    .item-card-sizes {
+        font-size: 0.78rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .item-card-sizes {
+        font-size: 0.82rem;
+    }
+}
+
+/* カテゴリ */
+.item-card-category {
+    margin-bottom: 0.5rem;
+}
+
+.item-card-category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 9999px;
+}
+
+/* プロフィールリンク */
+.item-card-link {
+    margin-top: 0.7rem;
+    padding: 0.1rem;
+    background:#f6f6f6;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: #7a797a;
+    text-align: center;
+    border-radius: 15px;
+}
+.item-card-link:hover {
+    background: #efb1ff;
+    color: #FFF;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   空状態
+   ========================================================================== */
+
+.item-card-empty {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: #94a3b8;
+}
+
+.item-card-empty i {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.item-card-empty-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 0.4rem;
+}
+
+.item-card-empty-sub {
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.item-card-empty-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #f472b6;
+    color: #fff;
+    padding: 0.65rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.item-card-empty-btn:hover {
+    background: #ec4899;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   検索結果カウント
+   ========================================================================== */
+
+.item-card-search-count {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.item-card-search-count strong {
+    color: #1a1a1a;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   バッジアイコン（FC・マイオプション・マイコスチューム）
+   ========================================================================== */
+
+.item-card-badges {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* scheduleページではleft揃え */
+.cast-info .item-card-badges {
+    justify-content: flex-start;
+}
+
+.item-card-badge {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    font-size: 0.62rem;
+    /* 画像への差し替えを想定した構造 */
+}
+
+.item-card-badge--fc {
+    background: #ffbe45;
+    color: #FFF;
+}
+
+.item-card-badge--opt {
+    background: #44c42a;
+    color: #FFF;
+}
+
+.item-card-badge--cos {
+    background: #6eaef8;
+    color: #FFF;
+}
+
+/* ==========================================================================
+   カテゴリフィルター（/items・/schedule 共通）
+   ========================================================================== */
+
+.cat-filter {
+    padding: 10px 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cat-filter-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.cat-filter-list::-webkit-scrollbar {
+    display: none;
+}
+
+.cat-filter-item {
+    flex: 0 0 auto;
+}
+
+.cat-filter-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    color: #333;
+}
+
+.cat-filter-link:hover {
+    background: #f9f0f5;
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: #333;
+}
+
+.cat-filter-link.is-active {
+    background: #fce7f3;
+}
+
+.cat-filter-link.is-active .cat-filter-name {
+    color: #e794c2;
+    font-weight: 700;
+}
+
+.cat-filter-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.cat-filter-icon--all {
+    background: #dbdbdb;
+}
+
+.cat-filter-link.is-active .cat-filter-icon--all {
+    background: #e794c2;
+}
+
+.cat-filter-name {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .cat-filter-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 0.875rem;
+    }
+
+    .cat-filter-name {
+        font-size: 0.62rem;
+    }
+}
+
+/* ==========================================================================
+   キャストカード（スケジュール・TOPページ共通）
+   ========================================================================== */
+
+.equipment-section,
+.cast-section {
+    margin-bottom: 3rem;
+}
+
+.equipment-grid,
+.cast-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.cast-card {
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1.5px solid var(--ui-line);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    text-align: center;
+    box-shadow: none;
+    color: var(--ui-text);
+}
+
+.cast-card:hover {
+    border-color: rgba(255,45,120,0.3);
+    box-shadow: none;
+    transform: none;
+}
+
+.equipment-card {
+    background: var(--ui-soft);
+    border: 1px solid var(--ui-line);
+    box-shadow: none;
+    color: var(--ui-text);
+}
+.equipment-card:hover {
+    box-shadow: none;
+    border-color: rgba(255,45,120,0.3);
+}
+
+/* 画像：角版、縦長（3:4.5） */
+.cast-image {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 2 / 3;
+    overflow: visible; /* 3D フリップのため visible に変更 */
+    background: var(--ui-bg-gray);
+    flex-shrink: 0;
+    perspective: 900px;
+}
+
+/* === 回転ドアフリップ === */
+.cast-image a.cast-flip {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cast-card:hover .cast-image a.cast-flip {
+    transform: rotateY(180deg);
+}
+
+.cast-flip-front,
+.cast-flip-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.cast-flip-back {
+    transform: rotateY(180deg);
+}
+
+.cast-flip-front img,
+.cast-flip-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    border: none;
+    display: block;
+    transition: none;
+}
+
+/* 後方互換（flip 未使用の a/img 向け） */
+.cast-image a:not(.cast-flip) {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.cast-image a:not(.cast-flip) img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    border: none;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.cast-card:hover .cast-image a:not(.cast-flip) img {
+    transform: scale(1.04);
+}
+
+/* カード本体（画像下） */
+.cast-body {
+    padding: 0.4rem 0.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+}
+
+.cast-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.cast-name a  { color: var(--ui-accent); text-decoration: none; }
+.cast-name a:hover { color: var(--ui-accent-hover); }
+.cast-age { color: var(--ui-accent); }
+
+.cast-category { margin-top: 0.15rem; }
+
+/* item-card-link：キャストカード内はダークテーマ上書き */
+.cast-card .item-card-link {
+    display: inline-block;
+    font-size: 0.7rem;
+    color: var(--ui-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background: none;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 0;
+    font-weight: normal;
+}
+.cast-card .item-card-link:hover { color: var(--ui-accent); background: none; }
+
+/* バッジ：キャストカード内はダークテーマ上書き */
+.cast-card .item-card-badge {
+    border-radius: 50%;
+}
+.cast-card .item-card-badge--fc  { background: rgba(255,45,120,0.2);  color: #f472b6; }
+.cast-card .item-card-badge--opt { background: rgba(234,179,8,0.2);  color: #fbbf24; }
+.cast-card .item-card-badge--cos { background: rgba(99,102,241,0.2); color: #818cf8; }
+
+.cast-status { margin-top: 0.1rem; }
+
+/* ステータスバッジ */
+.status-badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: white;
+}
+
+.status-badge.request  { background: #1f77d4; }
+.status-badge.tel      { background: #c74399; }
+.status-badge.closed   { background: #883b3f; }
+.status-badge.holiday  { background: #3b6d6a; }
+.status-badge.sold     { background: #883b3f; }
+.status-badge.available{ background: #08c4b7; }
+
+/* ==========================================================================
+   キャストカードフッター（時間＋ボタン）
+   ========================================================================== */
+.cast-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--ui-line);
+}
+
+.work-time-display {
+    font-size: 0.9rem;
+    background: transparent;
+}
+
+.work-time-display .work-time-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    background: #000;
+    border-radius: 50vmax;
+    padding: 4px 6px;
+    width:100%;
+}
+.work-time-icon  {
+    display: inline-block;
+    padding:3px 0 0;
+    line-height: 1;
+    color: #9d9db0;
+    font-size: 0.72rem; }
+.work-time-text  {
+    display: block;
+    padding:0;
+    line-height: 1;
+    color: #fff2aa;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* スケジュールカード — サイズ文字（180px固定幅で余裕あり） */
+.cast-body .item-card-sizes {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #9d9db0;
+}
+
+.cast-btns {
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* タイムラインボタン */
+.timeline-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.28rem 0.6rem;
+    background: var(--ui-soft);
+    border: 1px solid var(--ui-line-dark);
+    border-radius: 4px;
+    color: var(--ui-text);
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+    white-space: nowrap;
+    flex: 1;
+}
+.timeline-btn:hover {
+    background: #fff;
+    border-color: var(--ui-accent);
+    color: var(--ui-accent);
+}
+
+.reservation-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.28rem 0.6rem;
+    background: var(--ui-accent);
+    border: none;
+    border-radius: 4px;
+    color: #fff !important;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.18s;
+    white-space: nowrap;
+    flex: 1;
+}
+.reservation-btn:hover { background: var(--ui-accent-hover); color: #fff !important; }
+
+@media (max-width: 640px) {
+    .cast-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+    .cast-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .cast-image img {
+        width: 100%;
+        height: 100%;
+    }
+}

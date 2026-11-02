@@ -1,0 +1,903 @@
+/**
+ * 公開サイト（layouts.app 等）向け Vite エントリ
+ * 共通の Tailwind / ベースは common.css
+ */
+@import '../common.css';
+
+@layer base {
+    a {
+        @apply text-pink-400 no-underline;
+        color: #e794c2;
+    }
+
+    a:hover {
+        @apply text-pink-500;
+        color: #fd84c7;
+    }
+}
+/* カスタムコンポーネント */
+@layer components {
+    /* ヘッダーグラデーション */
+    .header-gradient {
+        @apply w-full h-16 lg:h-20;
+        background: linear-gradient(to right, #ffffff, #fff9fc, #fff4fa, #f4eeff);
+    }
+
+    /* モバイルメニューオーバーレイ（ヘッダー下から。ヘッダーは別 z-index で操作可能） */
+    .mobile-menu-overlay {
+        @apply fixed left-0 right-0 bottom-0 bg-black bg-opacity-50 z-[105];
+        top: var(--app-header-sticky-offset, 96px);
+        @apply opacity-0 invisible transition-all duration-300 ease-in-out;
+    }
+
+    .mobile-menu-overlay.active {
+        @apply opacity-100 visible;
+    }
+
+    /* モバイルメニュー（ヘッダー直下から。詳細は public/css/layout/app.css の ≤1024px も参照） */
+    .mobile-menu {
+        @apply fixed bottom-0 w-60 bg-white z-[10050];
+        top: var(--app-header-sticky-offset, 96px);
+        @apply -left-full transition-all duration-300 ease-in-out;
+        @apply shadow-2xl;
+        left: -100%;
+    }
+
+    .mobile-menu.active {
+        @apply left-0;
+    }
+    
+    /* ナビゲーションアイテム */
+    ul.navi{
+        @apply block;
+    }
+    ul.navi li{
+        @apply list-none;
+    }
+    .nav-item {
+        @apply flex items-center px-4 py-3 mx-2 rounded-lg;
+        @apply border-2 border-pink-300 bg-pink-50;
+        @apply transition-all duration-200 ease-in-out;
+        @apply no-underline;
+    }
+
+    .nav-item:hover {
+        @apply bg-pink-300 border-pink-500;
+    }
+
+    /* モバイルメニュー内のナビゲーションアイテム */
+    .mobile-menu .nav-item {
+        @apply flex items-center px-4 py-3 mx-2 rounded-lg;
+        @apply border-2 border-pink-300 bg-pink-50;
+        @apply transition-all duration-200 ease-in-out;
+        @apply no-underline;
+    }
+
+    .mobile-menu .nav-item img {
+        @apply w-6 h-6 flex-shrink-0 mr-3;
+    }
+
+    .mobile-menu .nav-item-text {
+        @apply flex flex-col flex-1;
+    }
+
+    .mobile-menu .nav-item-en {
+        @apply text-xs font-semibold text-pink-500 leading-tight mb-0.5;
+    }
+
+    .mobile-menu .nav-item-jp {
+        @apply text-sm font-medium text-gray-800 leading-snug;
+    }
+
+    /* カスタムスクロールバー - ピンク系おしゃれデザイン */
+    .custom-scrollbar::-webkit-scrollbar {
+        @apply w-2;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: linear-gradient(180deg, #ffe6f2 0%, #fff0f8 100%);
+        @apply rounded-lg;
+        box-shadow: inset 0 0 5px rgba(231, 148, 194, 0.2);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #ff9ed2 0%, #e794c2 50%, #d67bb0 100%);
+        @apply rounded-lg border border-white border-opacity-30;
+        box-shadow: 0 2px 4px rgba(231, 148, 194, 0.3);
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #ffb3d9 0%, #f0a0c8 50%, #e794c2 100%);
+        box-shadow: 0 3px 6px rgba(231, 148, 194, 0.4);
+        @apply scale-105;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:active {
+        background: linear-gradient(180deg, #e794c2 0%, #d67bb0 50%, #c5629e 100%);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-corner {
+        @apply bg-pink-50;
+    }
+
+    /* Firefox用スクロールバー */
+    .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #fdeaf5 #ffe6f2;
+    }
+
+    /* メニューアイコンの視認性を優先（filterで見えなくなるケースを回避） */
+    .menu-icon {
+        filter: none;
+        opacity: 1;
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    .menu-icon:hover {
+        opacity: 0.8;
+    }
+
+    #menuBtn:hover .menu-icon {
+        opacity: 0.8;
+    }
+
+    /* プロフィール画像スライダーのカスタマイズ */
+    .profile-swiper .swiper-button-next,
+    .profile-swiper .swiper-button-prev {
+        @apply text-pink-500;
+        background: rgba(255, 255, 255, 0.9) !important;
+        @apply w-11 h-11 rounded-full;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    .profile-swiper .swiper-button-next:hover,
+    .profile-swiper .swiper-button-prev:hover {
+        @apply text-pink-700;
+        background: rgba(255, 255, 255, 1) !important;
+        @apply scale-110;
+    }
+
+    .profile-swiper .swiper-button-next::after,
+    .profile-swiper .swiper-button-prev::after {
+        @apply text-lg font-semibold;
+    }
+
+    .profile-swiper .swiper-pagination-bullet {
+        @apply bg-gray-300 opacity-50 w-3 h-3 mx-1.5;
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    .profile-swiper .swiper-pagination-bullet-active {
+        @apply bg-pink-500 opacity-100 scale-110;
+    }
+
+    .profile-swiper .swiper-pagination {
+        @apply bottom-5 p-2.5 rounded-2xl;
+        background: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* カレンダー表示のスタイル */
+    .calendar-container {
+        @apply bg-white rounded-2xl p-5 shadow-lg;
+    }
+
+    .calendar-day {
+        @apply flex flex-col justify-start items-start relative;
+        @apply transition-all duration-200 bg-white border border-gray-200 rounded-lg;
+        min-height: 80px;
+    }
+
+    @screen sm {
+        .calendar-day {
+            min-height: 96px;
+        }
+    }
+
+    .calendar-day:hover {
+        @apply -translate-y-1 shadow-md;
+    }
+
+    .calendar-day.has-schedule {
+        @apply bg-green-50 border-green-300;
+        box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
+    }
+
+    .calendar-day.has-schedule:hover {
+        @apply bg-green-100;
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+    }
+
+    .calendar-day.today {
+        @apply bg-blue-50 border-blue-300 ring-2 ring-blue-200;
+    }
+
+    /* スケジュール時間のブロック */
+    .schedule-time-block {
+        @apply text-xs font-medium leading-tight max-w-full overflow-hidden truncate;
+    }
+
+    @screen sm {
+        .schedule-time-block {
+            @apply text-xs;
+        }
+    }
+
+    /* コスチューム・オプションアイテムのスタイル */
+    .costume-item, .option-item {
+        @apply transition-all duration-300 cursor-pointer;
+        will-change: transform;
+    }
+
+    .costume-item:hover, .option-item:hover {
+        @apply -translate-y-1;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .costume-item img, .option-item img {
+        @apply transition-transform duration-300;
+    }
+
+    .costume-item:hover img, .option-item:hover img {
+        @apply scale-105;
+    }
+
+    /* タブボタンのパステルアイコンスタイル */
+    .tab-button i {
+        @apply transition-all duration-200;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-button:hover i {
+        @apply -translate-y-0.5;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .tab-button.active i {
+        @apply scale-110;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* レイアウトコンポーネント */
+    .layout-body {
+        @apply min-h-screen w-full bg-gray-50;
+    }
+
+    .layout-container {
+        @apply min-h-screen w-full;
+    }
+
+    /* ヘッダー */
+    .header-main {
+        @apply sticky top-0 z-[100] shadow-sm;
+    }
+
+    .header-inner {
+        @apply w-full px-4 sm:px-6 lg:px-2;
+    }
+
+    .header-content {
+        @apply flex items-center justify-between h-14 lg:h-16;
+    }
+
+    .header-logo-area {
+        @apply flex items-center gap-4;
+    }
+
+    .header-logo {
+        @apply flex-shrink-0;
+    }
+
+    .header-logo-link {
+        @apply block;
+    }
+
+    .header-logo-img {
+        @apply w-auto h-9 sm:h-10 lg:h-12;
+    }
+
+    .header-catchphrase {
+        @apply hidden xl:block ml-8;
+    }
+
+    .header-catchphrase-text {
+        @apply text-base text-gray-600 font-medium;
+    }
+
+    .header-nav {
+        @apply flex items-center gap-3 lg:gap-4;
+    }
+
+    .header-sns {
+        @apply hidden lg:flex items-center gap-2;
+    }
+
+    .header-sns-link {
+        @apply hover:opacity-80 transition-opacity;
+    }
+
+    .header-sns-img {
+        @apply w-8 h-8;
+    }
+
+    .header-auth-area {
+        @apply hidden sm:flex sm:mr-3 items-center gap-2;
+    }
+
+    .header-auth-status {
+        @apply text-xs lg:text-sm text-gray-600;
+    }
+
+    .header-auth-link {
+        @apply bg-white text-gray-600 px-3 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-gray-100 transition-colors;
+    }
+
+    .header-login-link {
+        @apply bg-pink-300 text-white px-3 py-2 rounded-lg text-xs lg:text-sm font-medium hover:bg-pink-400 transition-colors;
+    }
+
+    .header-reservation-btn {
+        @apply bg-gradient-to-r from-pink-500 to-pink-600 text-white px-1 sm:px-2 lg:px-4 py-1 sm:py-2 rounded-lg text-xs lg:text-sm font-bold hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl flex flex-col items-center;
+    }
+
+    .header-reservation-icon {
+        @apply w-4 h-4 sm:w-4 sm:h-4 inline-block text-lg lg:text-base mb-1 sm:mb-1 lg:mb-1;
+    }
+
+    .header-reservation-text {
+        @apply hidden lg:block;
+    }
+
+    .header-reservation-text-mobile {
+        @apply lg:hidden text-2xs font-thin;
+    }
+
+    .header-recruit-btn {
+        @apply bg-purple-500 text-white px-1 sm:px-2 lg:px-4 py-1 sm:py-2 rounded-lg text-xs lg:text-sm font-bold hover:bg-purple-600 transition-colors shadow-lg hover:shadow-xl flex flex-col items-center;
+    }
+
+    .header-recruit-icon {
+        @apply w-4 h-4 sm:w-4 sm:h-4 inline-block text-lg lg:text-base mb-1 sm:mb-1 lg:mb-1;
+    }
+
+    .header-recruit-text {
+        @apply hidden lg:block;
+    }
+
+    .header-recruit-text-mobile {
+        @apply lg:hidden text-2xs font-thin;
+    }
+
+    .header-menu-btn {
+        @apply lg:hidden transition-all duration-200 hover:scale-110;
+    }
+
+    .header-menu-icon {
+        @apply w-6 h-6 menu-icon;
+        display: block;
+    }
+
+    /* モバイルメニュー */
+    .mobile-menu-header {
+        @apply py-2.5 px-3 border-b border-gray-200;
+    }
+
+    .mobile-menu-header-content {
+        @apply flex items-center justify-between;
+    }
+
+    .mobile-menu-title {
+        @apply text-lg font-bold text-gray-800;
+    }
+
+    .mobile-menu-close-btn {
+        @apply text-gray-500 hover:text-gray-700;
+    }
+
+    .mobile-menu-close-icon {
+        @apply text-xl;
+    }
+
+    .mobile-menu-sns {
+        @apply flex justify-center gap-4 mb-6;
+    }
+
+    .mobile-menu-auth {
+        @apply space-y-1.5;
+    }
+
+    .mobile-menu-auth-status {
+        @apply text-center text-sm text-gray-600 mb-3;
+    }
+
+    .mobile-menu-auth-link {
+        @apply block w-full border border-gray-300 bg-white text-gray-800 px-3 py-2 rounded text-center text-sm font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors;
+    }
+
+    .mobile-menu-login-link {
+        @apply block w-full border border-gray-300 bg-white text-gray-800 px-3 py-2 rounded text-center text-sm font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors;
+    }
+
+    .mobile-menu-register-link {
+        @apply block w-full bg-blue-600 text-white px-3 py-2 rounded text-center text-sm font-semibold hover:bg-blue-800 transition-colors border border-blue-600;
+    }
+
+    /* メインコンテンツ */
+    .main-layout {
+        @apply flex w-full;
+    }
+
+    .sidebar {
+        @apply hidden lg:block lg:w-36 lg:min-w-36 shadow-lg sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar;
+    }
+
+    .main-content {
+        @apply flex-1 w-full min-h-screen bg-gray-50 sm:ml-0;
+    }
+
+    .main-article {
+        @apply contents w-full;
+    }
+
+    /* フッター */
+    .footer-main {
+        @apply bg-gray-100 text-gray-700 mt-auto mb-16;
+    }
+
+    .footer-inner {
+        @apply w-full px-4 sm:px-6 lg:px-8 py-8 lg:py-12;
+    }
+
+    .footer-content {
+        @apply block sm:flex justify-between lg:flex-row gap-6 lg:gap-4;
+    }
+
+    .footer-nav-area {
+        @apply w-full sm:w-3/5 lg:w-3/5;
+    }
+
+    .footer-nav-list {
+        @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-3 text-sm;
+    }
+
+    .footer-nav-link {
+        @apply text-gray-600 hover:text-pink-600 transition-colors block py-1;
+    }
+
+    .footer-contact-area {
+        @apply w-full sm:w-2/5 lg:w-1/5;
+    }
+
+    .footer-contact-content {
+        @apply space-y-4;
+    }
+
+    .footer-contact-title {
+        @apply font-semibold mb-2 text-gray-700;
+    }
+
+    .footer-contact-tel {
+        @apply text-xl lg:text-2xl font-bold text-pink-600;
+    }
+
+    .footer-contact-tel-link {
+        @apply hover:underline;
+    }
+
+    .footer-contact-hours {
+        @apply text-gray-600;
+    }
+
+    .footer-sns-area {
+        @apply space-y-3;
+    }
+
+    .footer-sns-list {
+        @apply flex gap-3 flex-wrap;
+    }
+
+    .footer-sns-link {
+        @apply bg-gray-200 hover:bg-pink-500 text-gray-600 hover:text-white p-2 lg:p-3 rounded-lg transition-colors;
+    }
+
+    .footer-sns-link-youtube {
+        @apply bg-gray-200 hover:bg-red-500 text-gray-600 hover:text-white p-2 lg:p-3 rounded-lg transition-colors;
+    }
+
+    .footer-sns-link-tiktok {
+        @apply bg-gray-200 hover:bg-gray-700 text-gray-600 hover:text-white p-2 lg:p-3 rounded-lg transition-colors;
+    }
+
+    .footer-sns-link-facebook {
+        @apply bg-gray-200 hover:bg-blue-500 text-gray-600 hover:text-white p-2 lg:p-3 rounded-lg transition-colors;
+    }
+
+    .footer-sns-icon {
+        @apply text-lg lg:text-xl;
+    }
+
+    .footer-copyright {
+        @apply border-t border-gray-300 mt-6 lg:mt-8 pt-6 lg:pt-8 text-center;
+    }
+
+    .footer-copyright-nav {
+        @apply flex justify-end gap-12 text-sm mb-4 text-right;
+    }
+
+    .footer-copyright-link {
+        @apply text-gray-600 hover:text-pink-600 transition-colors block py-1;
+    }
+
+    .footer-copyright-text {
+        @apply text-gray-500 text-sm;
+    }
+
+    /* モバイル固定ナビゲーション */
+    .mobile-fixed-nav {
+        @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 lg:hidden z-50;
+    }
+
+    .mobile-fixed-nav-grid {
+        @apply grid grid-cols-4 h-16;
+    }
+
+    .mobile-fixed-nav-link {
+        @apply flex flex-col items-center justify-center text-xs text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-colors;
+    }
+
+    .mobile-fixed-nav-icon {
+        @apply text-lg mb-1;
+    }
+
+    /* スキップリンク */
+    .skip-link {
+        @apply sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-[9999] focus:bg-pink-500 focus:text-white focus:px-4 focus:py-2;
+    }
+}
+
+/* カスタムユーティリティ */
+@layer utilities {
+    /* グリッドレイアウト用のカスタム幅 */
+    .w-costume-mobile {
+        width: calc(33.333% - 12px);
+    }
+
+    .w-costume-desktop {
+        width: 240px;
+    }
+
+    .w-option-mobile {
+        width: calc(33.333% - 12px);
+    }
+
+    .w-option-desktop {
+        width: 240px;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 1023px) {
+        .contents {
+            @apply w-screen ml-0 pl-0 pr-0;
+        }
+
+        main {
+            @apply w-screen ml-0 pl-0 pr-0;
+        }
+    }
+
+    /* ================================================
+       1カラムレイアウト用スタイル
+       ================================================ */
+
+    /* アプリケーションボディ */
+    .app-body {
+        @apply min-h-screen flex flex-col;
+        @apply bg-gray-50;
+    }
+
+    /* アプリケーションコンテナ */
+    .app-container {
+        @apply flex flex-col min-h-screen;
+        @apply w-full;
+    }
+
+    /* メインコンテンツ（PCは common.css の .app-body-wrap 内で幅・余白を制御） */
+    .app-main {
+        @apply flex-1 w-full;
+        @apply bg-white;
+    }
+
+    /* Skip to main content リンク */
+    .skip-link {
+        @apply absolute -left-full top-0;
+        @apply bg-pink-500 text-white;
+        @apply px-4 py-2 rounded;
+        @apply z-[200];
+        @apply focus:left-4 focus:top-4;
+    }
+
+    /* ================================================
+       管理画面フォームレイアウト（2カラム式）
+       ================================================ */
+
+    /* フォームコンテナ */
+    .admin-form-container {
+        @apply w-full max-w-7xl mx-auto;
+        @apply bg-white;
+        @apply rounded-lg;
+        @apply shadow-sm;
+        @apply border border-gray-200;
+        @apply p-6 md:p-8;
+    }
+
+    /* フォームヘッダー */
+    .admin-form-header {
+        @apply flex justify-between items-center;
+        @apply mb-6 pb-4;
+        @apply border-b border-gray-200;
+    }
+
+    .admin-form-title {
+        @apply text-2xl font-semibold text-gray-800;
+    }
+
+    .admin-form-back-link {
+        @apply inline-flex items-center;
+        @apply px-4 py-2;
+        @apply text-sm font-medium text-gray-700;
+        @apply bg-white border border-gray-300 rounded-md;
+        @apply hover:bg-gray-50 hover:text-gray-900;
+        @apply transition-colors duration-200;
+    }
+
+    /* フォームボディ */
+    .admin-form-body {
+        @apply w-full;
+    }
+
+    /* フォーム行（2カラムレイアウト） */
+    .admin-form-row {
+        @apply flex flex-col md:flex-row;
+        @apply mb-6;
+        @apply gap-4 md:gap-6;
+    }
+
+    /* フォームラベルエリア（左側：2カラム分） */
+    .admin-form-label-area {
+        @apply flex-shrink-0;
+        @apply w-full md:w-2/12;
+        @apply pt-2;
+    }
+
+    .admin-form-label {
+        @apply block;
+        @apply text-sm font-medium text-gray-700;
+        @apply mb-1;
+    }
+
+    .admin-form-label-required {
+        @apply text-red-500;
+        @apply ml-1;
+    }
+
+    .admin-form-label-optional {
+        @apply text-gray-400;
+        @apply text-xs font-normal;
+        @apply ml-1;
+    }
+
+    .admin-form-label-description {
+        @apply text-xs text-gray-500;
+        @apply mt-1;
+        @apply font-normal;
+    }
+
+    /* フォーム入力エリア（右側：8カラム分） */
+    .admin-form-input-area {
+        @apply flex-1;
+        @apply w-full md:w-10/12;
+    }
+
+    /* フォーム入力フィールド */
+    .admin-form-input {
+        @apply w-full;
+        @apply px-3 py-2;
+        @apply text-sm;
+        @apply border border-gray-300 rounded-md;
+        @apply bg-white;
+        @apply text-gray-900;
+        @apply placeholder-gray-400;
+        @apply focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500;
+        @apply transition-colors duration-200;
+    }
+
+    .admin-form-input:disabled {
+        @apply bg-gray-100 text-gray-500 cursor-not-allowed;
+    }
+
+    .admin-form-input-error {
+        @apply border-red-500 focus:ring-red-500 focus:border-red-500;
+    }
+
+    /* テキストエリア */
+    .admin-form-textarea {
+        @apply admin-form-input;
+        @apply min-h-[100px];
+        @apply resize-y;
+    }
+
+    /* セレクトボックス */
+    .admin-form-select {
+        @apply admin-form-input;
+        @apply cursor-pointer;
+    }
+
+    /* チェックボックス・ラジオボタン */
+    .admin-form-checkbox,
+    .admin-form-radio {
+        @apply w-4 h-4;
+        @apply text-pink-600;
+        @apply border-gray-300 rounded;
+        @apply focus:ring-pink-500 focus:ring-2;
+        @apply cursor-pointer;
+    }
+
+    .admin-form-checkbox-label,
+    .admin-form-radio-label {
+        @apply ml-2 text-sm text-gray-700;
+        @apply cursor-pointer;
+    }
+
+    /* チェックボックス・ラジオボタングループ */
+    .admin-form-checkbox-group,
+    .admin-form-radio-group {
+        @apply flex flex-wrap;
+        @apply gap-4;
+    }
+
+    .admin-form-checkbox-item,
+    .admin-form-radio-item {
+        @apply flex items-center;
+    }
+
+    /* エラーメッセージ */
+    .admin-form-error {
+        @apply mt-1 text-sm text-red-600;
+    }
+
+    /* ヘルプテキスト */
+    .admin-form-help {
+        @apply mt-1 text-xs text-gray-500;
+    }
+
+    /* フォームセクション（グループ化） */
+    .admin-form-section {
+        @apply mb-8 pb-6;
+        @apply border-b border-gray-200;
+    }
+
+    .admin-form-section:last-child {
+        @apply border-b-0 mb-0 pb-0;
+    }
+
+    .admin-form-section-title {
+        @apply text-lg font-semibold text-gray-800;
+        @apply mb-4;
+    }
+
+    /* フォームフッター（ボタンエリア） */
+    .admin-form-footer {
+        @apply flex justify-end items-center;
+        @apply gap-3;
+        @apply mt-8 pt-6;
+        @apply border-t border-gray-200;
+    }
+
+    .admin-form-button {
+        @apply inline-flex items-center justify-center;
+        @apply px-6 py-2.5;
+        @apply text-sm font-medium;
+        @apply rounded-md;
+        @apply transition-colors duration-200;
+        @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+
+    .admin-form-button-primary {
+        @apply admin-form-button;
+        @apply bg-pink-600 text-white;
+        @apply hover:bg-pink-700;
+        @apply focus:ring-pink-500;
+    }
+
+    .admin-form-button-secondary {
+        @apply admin-form-button;
+        @apply bg-white text-gray-700;
+        @apply border border-gray-300;
+        @apply hover:bg-gray-50;
+        @apply focus:ring-gray-500;
+    }
+
+    .admin-form-button-danger {
+        @apply admin-form-button;
+        @apply bg-red-600 text-white;
+        @apply hover:bg-red-700;
+        @apply focus:ring-red-500;
+    }
+
+    /* インラインフォーム（横並び） */
+    .admin-form-inline {
+        @apply flex flex-wrap;
+        @apply gap-4;
+    }
+
+    .admin-form-inline-item {
+        @apply flex-1;
+        @apply min-w-[200px];
+    }
+
+    /* フル幅フォーム行 */
+    .admin-form-row-full {
+        @apply admin-form-row;
+    }
+
+    .admin-form-row-full .admin-form-label-area {
+        @apply w-full md:w-2/12;
+    }
+
+    .admin-form-row-full .admin-form-input-area {
+        @apply w-full md:w-10/12;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+        .admin-form-container {
+            @apply p-4;
+        }
+
+        .admin-form-header {
+            @apply flex-col items-start gap-4;
+        }
+
+        .admin-form-row {
+            @apply flex-col;
+        }
+
+        .admin-form-label-area {
+            @apply w-full;
+        }
+
+        .admin-form-input-area {
+            @apply w-full;
+        }
+
+        .admin-form-footer {
+            @apply flex-col;
+        }
+
+        .admin-form-button {
+            @apply w-full;
+        }
+    }
+
+    /* ファイルアップロード */
+    .admin-form-file {
+        @apply block w-full;
+        @apply text-sm text-gray-500;
+        @apply file:mr-4 file:py-2 file:px-4;
+        @apply file:rounded-md file:border-0;
+        @apply file:text-sm file:font-semibold;
+        @apply file:bg-pink-50 file:text-pink-700;
+        @apply hover:file:bg-pink-100;
+        @apply cursor-pointer;
+    }
+
+    /* プレビュー画像 */
+    .admin-form-image-preview {
+        @apply mt-2;
+        @apply w-32 h-32;
+        @apply object-cover rounded-md;
+        @apply border border-gray-300;
+    }
+}

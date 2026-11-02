@@ -1,0 +1,447 @@
+/* ===== Age Verification Page ===== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --av-primary:     #ff2d78;
+    --av-accent:      #ff6fa3;
+    --av-dark:        #fff8fb;
+    --av-card-bg:     rgba(255, 255, 255, 0.85);
+    --av-card-border: rgba(255, 45, 120, 0.12);
+    --av-text:        #3d1a2e;
+    --av-text-muted:  #7a3b5a;
+    --av-transition:  0.25s ease;
+}
+
+html, body {
+    width: 100%;
+    height: auto;
+}
+
+body.age-verify-page {
+    min-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--av-dark);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255, 45, 120, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 80% 110%, rgba(255, 111, 163, 0.10) 0%, transparent 60%);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    color: var(--av-text);
+}
+
+/* ── カード（縦並び） ─── */
+.av-card {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--av-card-bg);
+    border: none;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: none;
+    animation: av-card-in 0.45s cubic-bezier(.22,.61,.36,1) both;
+    padding: 2.5rem 1.5rem 2rem;
+    gap: 1.5rem;
+    border-radius: 4px;
+    width: calc(100% - 2rem);
+    max-width: 720px;
+    margin: 2rem auto 0;
+}
+
+.av-brand {
+    text-align: center;
+}
+
+.av-brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--av-primary);
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.av-brand-copy {
+    margin: 0.4rem 0 0;
+    font-size: 0.8rem;
+    color: var(--av-text-muted);
+    letter-spacing: 0.04em;
+}
+
+@keyframes av-card-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Enter / Exit（E+ age-verify 準拠のピル型） ─── */
+.av-card-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 360px;
+}
+
+.av-action-item {
+    flex: none;
+    display: flex;
+    width: 100%;
+}
+
+.av-action-item form {
+    display: flex;
+    width: 100%;
+    margin: 0;
+}
+
+.av-round-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    height: auto;
+    padding: 0.85rem 2rem;
+    border: none !important;
+    border-radius: 9999px !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+}
+
+.av-round-btn--enter {
+    background: linear-gradient(135deg, #ff2d78, #ff6fa3);
+    box-shadow:
+        0 4px 20px rgba(255, 45, 120, 0.35),
+        0 0 0 3px rgba(255, 45, 120, 0.12);
+}
+
+.av-round-btn--enter:hover {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 8px 30px rgba(255, 45, 120, 0.45),
+        0 0 0 3px rgba(255, 45, 120, 0.2);
+}
+
+.av-round-btn--enter i {
+    font-size: 0.82rem;
+    color: #fff;
+}
+
+.av-round-btn--exit {
+    background: transparent;
+    color: #b07090 !important;
+    border: 1.5px solid rgba(180, 100, 140, 0.22) !important;
+    box-shadow: none;
+}
+
+.av-round-btn--exit:hover {
+    opacity: 1;
+    background: #faf7f8;
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
+.av-round-btn-en {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+}
+
+.av-round-btn--enter .av-round-btn-en {
+    color: #fff;
+}
+
+.av-round-btn--exit .av-round-btn-en {
+    color: #b07090;
+}
+
+/* ── 下段：説明テキスト ─── */
+.av-card-body {
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+}
+
+/* ── 年齢バッジ ─── */
+.av-age-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--av-primary);
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--av-primary);
+    margin-bottom: 12px;
+    letter-spacing: 0;
+}
+
+/* ── テキスト ─── */
+.av-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--av-text);
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+}
+
+.av-description {
+    font-size: 13px;
+    color: var(--av-text-muted);
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.av-note {
+    font-size: 11px;
+    color: var(--av-text-muted);
+    line-height: 1.7;
+    padding: 10px 14px;
+    background: #fff0f6;
+    border-radius: 12px;
+    border-left: 3px solid var(--av-primary);
+}
+
+/* ── 退出リンク ─── */
+.av-exit {
+    text-align: center;
+}
+
+.av-exit-link {
+    font-size: 12px;
+    color: var(--av-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--av-transition);
+}
+
+.av-exit-link:hover {
+    color: var(--av-text);
+}
+
+/* ── フッター ─── */
+.av-footer {
+    padding: 1rem;
+    text-align: center;
+}
+
+.av-footer-copy {
+    font-size: 11px;
+    color: var(--av-text-muted);
+    opacity: 0.6;
+}
+
+/* ── 系列店 ─────────────── */
+.av-shop-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    width:900px;
+    margin:auto;
+    max-width:100%;
+}
+
+.av-shop-group-item {
+    display: block;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    width:30%;
+}
+
+.av-shop-group-item:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.av-shop-group-item img {
+    display: block;
+    width:auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.av-shop-group-name {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: #ffffff;
+    border: 1.5px solid var(--av-card-border);
+    border-radius: 9999px;
+    color: var(--av-text);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+    .av-shop-group-item img {
+        max-width: 140px;
+    }
+}
+
+/* ── リンクグループ ─────────────── */
+.links-grouped-list {
+    padding: 1.5rem 1rem 2rem;
+}
+
+.links-grouped-title {
+    font-size: 0.85rem;
+    color: var(--av-text-muted);
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.link-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+.link-group a{
+    color: var(--av-text);
+}
+
+/* フリー枠（最上段・最下段）*/
+.link-group--free-top .link-item,
+.link-group--free-bottom .link-item {
+    max-width: 100%;
+}
+
+.link-group--free-top .link-item img,
+.link-group--free-bottom .link-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 468px */
+.link-group--468 .link-item {
+    width: 468px;
+    max-width: 100%;
+}
+
+.link-group--468 .link-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 200px */
+.link-group--200 .link-item {
+    width: 200px;
+    max-width: 100%;
+}
+
+.link-group--200 .link-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 88px */
+.link-group--88 .link-item {
+    width: 88px;
+    max-width: 100%;
+}
+
+.link-group--88 .link-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* テキスト */
+.link-group--text {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.link-group--text .link-item a {
+    color: var(--av-text-muted);
+    font-size: 0.85rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.link-group--text .link-item a:hover {
+    color: var(--av-text);
+}
+
+/* ── スマホ ─────────────── */
+@media (max-width: 640px) {
+    .av-card {
+        padding: 1.25rem 1rem;
+        gap: 1rem;
+        margin: 1rem auto 0;
+        width: calc(100% - 1.5rem);
+    }
+
+    .av-card-actions {
+        flex-direction: column;
+        gap: 0.65rem;
+        align-items: stretch;
+        max-width: 100%;
+    }
+
+    .av-action-item {
+        flex: none;
+        width: 100%;
+    }
+
+    .av-round-btn {
+        width: 100%;
+        height: auto;
+        padding: 0.78rem 1.5rem;
+    }
+
+    .av-round-btn-en {
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+    }
+
+    .av-card-body {
+        max-width: 100%;
+    }
+
+    /* スマホ：全カテゴリ 1列 */
+    .link-group--468,
+    .link-group--200,
+    .link-group--88 {
+        gap: 0.8rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    .link-group--468 .link-item,
+    .link-group--200 .link-item,
+    .link-group--88 .link-item {
+        width: auto;
+        max-width: 100%;
+    }
+}

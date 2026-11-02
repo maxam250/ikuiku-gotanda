@@ -1,0 +1,601 @@
+/*
+ * public/css/frontend/options.css
+ * 無料・有料オプション一覧 — Premium Dark Luxury
+ */
+
+/* ── CSS Variables ───────────────────────────── */
+:root {
+    --opt-free:      #00d4a0;
+    --opt-free-dim:  rgba(0, 212, 160, 0.10);
+    --opt-free-glow: rgba(0, 212, 160, 0.22);
+    --opt-pay:       var(--ui-accent);
+    --opt-pay-dim:   rgba(255, 45, 120, 0.10);
+    --opt-pay-glow:  rgba(255, 45, 120, 0.28);
+    --opt-radius:    12px;
+    --opt-ease:      cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ── ページ ──────────────────────────────────── */
+.opt-page {
+    padding: 0 0.6rem 5rem;
+}
+
+.opt-section {
+    margin-bottom: 5rem;
+}
+
+
+/* ═══════════════════════════════════════════════
+   セクションヘッダー
+   ═══════════════════════════════════════════════ */
+.opt-section-header {
+    position: relative;
+    padding: 3rem 0 2rem;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+}
+
+/* 大きな装飾文字（背景） */
+.opt-section-deco {
+    position: absolute;
+    top: 50%;
+    left: -0.05em;
+    transform: translateY(-50%);
+    font-size: clamp(6rem, 14vw, 11rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--opt-free);
+    opacity: 0.04;
+    pointer-events: none;
+    user-select: none;
+}
+
+.opt-section-deco--pay {
+    color: var(--opt-pay);
+}
+
+/* メタ情報（チップ + タイトル） */
+.opt-section-meta {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* タイプチップ */
+.opt-type-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.opt-type-chip--free {
+    background: var(--opt-free-dim);
+    color: var(--opt-free);
+    border: 1px solid rgba(0, 212, 160, 0.3);
+}
+
+.opt-type-chip--pay {
+    background: var(--opt-pay-dim);
+    color: var(--opt-pay);
+    border: 1px solid rgba(255, 45, 120, 0.3);
+}
+
+/* セクションタイトル */
+.opt-section-title {
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: var(--ui-text);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+/* 下線 */
+.opt-section-line {
+    position: relative;
+    height: 1px;
+    margin-top: 1.75rem;
+    background: linear-gradient(90deg, var(--opt-free) 0%, transparent 60%);
+}
+
+.opt-section-line--pay {
+    background: linear-gradient(90deg, var(--opt-pay) 0%, transparent 60%);
+}
+
+
+/* ═══════════════════════════════════════════════
+   カテゴリ区切り
+   ═══════════════════════════════════════════════ */
+.opt-cate-group {
+    margin-bottom: 2.5rem;
+}
+
+.opt-cate-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.opt-cate-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--ui-line);
+}
+
+.opt-cate-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.85rem 0.3rem 0.65rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.opt-cate-name--free {
+    color: var(--opt-free);
+    background: var(--opt-free-dim);
+    border: 1px solid rgba(0, 212, 160, 0.2);
+}
+
+.opt-cate-name--pay {
+    color: var(--opt-pay);
+    background: var(--opt-pay-dim);
+    border: 1px solid rgba(255, 45, 120, 0.2);
+}
+
+.opt-cate-name .fa-chevron-right {
+    font-size: 0.55rem;
+}
+
+
+/* ═══════════════════════════════════════════════
+   グリッド
+   ═══════════════════════════════════════════════ */
+.opt-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+@media (max-width: 1200px) {
+    .opt-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+    .opt-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.65rem; }
+}
+@media (max-width: 480px) {
+    .opt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+}
+
+
+/* ═══════════════════════════════════════════════
+   カード
+   ═══════════════════════════════════════════════ */
+.opt-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--ui-surface);
+    border: 1px solid var(--ui-line);
+    border-radius: var(--opt-radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.28s var(--opt-ease),
+                box-shadow 0.28s var(--opt-ease),
+                border-color 0.28s ease;
+    outline: none;
+}
+
+/* ホバー — FREE */
+.opt-card--free:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 212, 160, 0.35);
+    box-shadow:
+        0 0  0 1px rgba(0, 212, 160, 0.12),
+        0 12px 36px rgba(0, 0, 0, 0.45),
+        0  0  24px var(--opt-free-glow);
+}
+
+/* ホバー — PAID */
+.opt-card--pay:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 45, 120, 0.35);
+    box-shadow:
+        0 0  0 1px rgba(255, 45, 120, 0.12),
+        0 12px 36px rgba(0, 0, 0, 0.45),
+        0  0  24px var(--opt-pay-glow);
+}
+
+/* フォーカスリング */
+.opt-card:focus-visible {
+    border-color: var(--ui-accent);
+    box-shadow: 0 0 0 3px rgba(255, 45, 120, 0.3);
+}
+
+/* ── メディア（画像エリア） ─── */
+.opt-card-media,
+.opt-modal-media { display: none; }
+
+.opt-card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #0d0d12;
+}
+
+.opt-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--opt-ease);
+    display: block;
+}
+
+.opt-card:hover .opt-card-img {
+    transform: scale(1.07);
+}
+
+/* 画像なしプレースホルダー */
+.opt-card-no-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.opt-card-no-img--free {
+    background: radial-gradient(ellipse at 60% 40%, rgba(0, 212, 160, 0.08) 0%, transparent 70%);
+    color: rgba(0, 212, 160, 0.3);
+}
+
+.opt-card-no-img--pay {
+    background: radial-gradient(ellipse at 60% 40%, rgba(255, 45, 120, 0.08) 0%, transparent 70%);
+    color: rgba(255, 45, 120, 0.3);
+}
+
+/* 画像オーバーレイグラデーション */
+.opt-card-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
+    pointer-events: none;
+}
+
+/* チップバッジ（画像右下） */
+.opt-card-chip {
+    position: absolute;
+    bottom: 0.55rem;
+    right: 0.55rem;
+    z-index: 1;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 0.22rem 0.55rem;
+    border-radius: 6px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    line-height: 1.4;
+}
+
+.opt-card-chip--free {
+    background: rgba(0, 212, 160, 0.85);
+    color: #002d22;
+}
+
+.opt-card-chip--pay {
+    background: rgba(255, 45, 120, 0.9);
+    color: #fff;
+}
+
+.opt-card-chip--pay small {
+    font-size: 0.7em;
+    font-weight: 700;
+    margin-left: 0.1em;
+}
+
+/* ── テキストエリア ─── */
+.opt-card-info {
+    padding: 0.65rem 0.7rem 0.6rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.opt-card-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--ui-text);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.opt-card-excerpt {
+    font-size: 0.65rem;
+    color: var(--ui-text-muted);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* CTAリンク */
+.opt-card-cta {
+    margin-top: auto;
+    padding-top: 0.45rem;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: gap 0.2s ease;
+}
+
+.opt-card:hover .opt-card-cta { gap: 0.55rem; }
+
+.opt-card-cta--free { color: var(--opt-free); }
+.opt-card-cta--pay  { color: var(--opt-pay); }
+
+.opt-card-cta .fa-arrow-right {
+    font-size: 0.55rem;
+    transition: transform 0.2s ease;
+}
+
+.opt-card:hover .opt-card-cta .fa-arrow-right { transform: translateX(3px); }
+
+/* データなし */
+.opt-empty {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    color: var(--ui-text-muted);
+    font-size: 0.85rem;
+    background: var(--ui-soft);
+    border: 1px solid var(--ui-line);
+    border-radius: var(--opt-radius);
+}
+
+
+/* ═══════════════════════════════════════════════
+   モーダル
+   ═══════════════════════════════════════════════ */
+.opt-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.opt-overlay.is-open {
+    display: flex;
+    animation: opt-overlay-in 0.2s ease;
+}
+
+@keyframes opt-overlay-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* モーダル本体 */
+.opt-modal {
+    position: relative;
+    background: #18181f;
+    border: 1px solid #2a2a36;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 520px;
+    max-height: 92vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.7),
+        0  0  0 1px rgba(255,255,255,0.04) inset;
+    animation: opt-modal-in 0.28s var(--opt-ease);
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a36 transparent;
+}
+
+@keyframes opt-modal-in {
+    from { opacity: 0; transform: scale(0.93) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* アクセントバー（最上部カラーライン） */
+.opt-modal-accent-bar {
+    height: 3px;
+    width: 100%;
+    border-radius: 18px 18px 0 0;
+    flex-shrink: 0;
+}
+
+.opt-modal-accent-bar--free {
+    background: linear-gradient(90deg, var(--opt-free), rgba(0,212,160,0.3));
+}
+
+.opt-modal-accent-bar--pay {
+    background: linear-gradient(90deg, var(--opt-pay), rgba(255,45,120,0.3));
+}
+
+/* 閉じるボタン */
+.opt-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--ui-text-muted);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.opt-modal-close:hover {
+    background: rgba(255,255,255,0.12);
+    color: var(--ui-text);
+    transform: scale(1.1);
+}
+
+/* モーダル画像エリア */
+.opt-modal-media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0d0d12;
+    flex-shrink: 0;
+}
+
+.opt-modal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.opt-modal-no-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: rgba(255,255,255,0.07);
+}
+
+/* モーダル本文エリア */
+.opt-modal-body {
+    padding: 1.75rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* タイプチップ */
+.opt-modal-chip {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    padding: 0.22rem 0.7rem;
+    border-radius: 20px;
+}
+
+.opt-modal-chip--free {
+    background: var(--opt-free-dim);
+    color: var(--opt-free);
+    border: 1px solid rgba(0,212,160,0.3);
+}
+
+.opt-modal-chip--pay {
+    background: var(--opt-pay-dim);
+    color: var(--opt-pay);
+    border: 1px solid rgba(255,45,120,0.3);
+}
+
+/* タイトル */
+.opt-modal-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ui-text);
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+}
+
+/* 価格 */
+.opt-modal-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.65rem 1rem;
+    background: var(--opt-pay-dim);
+    border: 1px solid rgba(255, 45, 120, 0.2);
+    border-radius: 8px;
+    color: var(--opt-pay);
+    width: fit-content;
+}
+
+.opt-modal-price .fa-yen-sign {
+    font-size: 0.85rem;
+}
+
+.opt-modal-price #optModalPriceNum {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.opt-modal-price-unit {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(255, 45, 120, 0.7);
+}
+
+/* 本文テキスト */
+.opt-modal-text {
+    font-size: 0.88rem;
+    color: var(--ui-text-muted);
+    line-height: 1.8;
+    white-space: pre-line;
+    padding-top: 0.25rem;
+    border-top: 1px solid var(--ui-line);
+}
+
+
+/* ═══════════════════════════════════════════════
+   スマホ調整
+   ═══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+    .opt-section-header { padding: 2rem 0 1.5rem; }
+
+    .opt-modal-body { padding: 1.25rem 1.25rem 1.5rem; }
+
+    .opt-modal-title { font-size: 1.05rem; }
+
+    .opt-card-info { padding: 0.5rem 0.55rem; }
+
+    .opt-card-title { font-size: 0.7rem; }
+
+    .opt-card-excerpt { display: none; }
+}

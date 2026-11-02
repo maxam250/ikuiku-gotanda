@@ -1,0 +1,134 @@
+
+#loginArea{
+    position: relative;
+    width:650px;
+    max-width:92%;
+    margin:auto;
+    padding:1.5rem;
+    border-radius:4px;
+    background:#FFF;
+    /* border:1px solid #666; */
+}
+
+
+
+
+/* title */
+#loginArea .title{
+    display: flex;
+    margin-bottom:2rem;
+}
+#loginArea .title svg#logo{
+    width:90px;
+    margin-right: 1rem;
+}
+#loginArea .title .text{
+    font-size: 3rem;
+    font-weight: bold;
+    color: #a1d0eb;
+}
+#loginArea .title .text strong{
+    display: block;
+    font-size: 1.1rem;
+    color: #555;
+}
+#loginArea .title .text span{
+    display: block;
+    line-height: 1;
+}
+/* form */
+#loginArea input[type='text'],#loginArea input[type='password'] {
+    display: block;
+    width:100%;
+    margin:0.5rem 0;
+    padding:0.8rem;
+    box-sizing: border-box;
+    border: 1px solid #0080e9;
+    font-size: 1.2rem;
+}
+#loginArea input::placeholder{
+    color: #CCC;
+}
+
+#loginArea button[type='submit']{
+    width:100%;
+    margin:0.5rem 0;
+    padding:0.4rem;
+    margin:1rem auto;
+    background:#363a40;
+    color: #FFF;
+    font-size: 1.0rem;
+    line-height: 1.8;
+    cursor: pointer;
+}
+
+/* パスワードリセットリンク */
+.forgot-password {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.forgot-link {
+    color: #0080e9;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.back-to-login {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.back-link {
+    color: #0080e9;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* エラー・成功メッセージ */
+.error {
+    background: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.success {
+    background: #efe;
+    border: 1px solid #cfc;
+    color: #3c3;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+@media (max-width: 768px) {
+
+    #loginArea{
+        width:92%;
+        max-width:92%;
+    }
+
+    #loginArea .title .text{
+        font-size: 2.3rem;
+    }
+}

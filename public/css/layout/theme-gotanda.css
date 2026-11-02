@@ -1,0 +1,1245 @@
+/*
+ * public/css/layout/theme-gotanda.css
+ * 旧サイト（びくびくサークル五反田店 _gotanda）のデザインに寄せるテーマ。
+ * 構成: 紺のヘッダー(ロゴ・open/close・tel) → 白い枠(左:縦ナビ＋バナー / 右:コンテンツ) → 紺のフッター
+ * 配色は旧 common.css（2026/10 改訂版）準拠: 紺 #022d7b / 文字 #002985 / アクセント水色 #6ac2f4
+ * layouts.app で他のCSSより後に読み込み、既存スタイルを上書きする。
+ */
+
+/* =============================================================================
+   ベースカラー
+   ============================================================================= */
+:root {
+    --gtd-navy: #022d7b;          /* ヘッダー・ナビ・見出し・フッター */
+    --gtd-navy-dark: #011f57;
+    --gtd-text: #002985;          /* 本文 */
+    --gtd-sky: #6ac2f4;           /* アクセント（ナビの枠・ホバー） */
+    --gtd-cyan: #66f1ff;          /* ナビ英字 */
+    --gtd-yellow: #fcff00;        /* ナビホバー時の文字 */
+    --gtd-pink: #f454b2;          /* 新人の入店日帯 */
+    --gtd-cream: #f2e8c7;         /* トップの各セクション枠 */
+    --gtd-line: #dce5ed;          /* カード枠 */
+    --gtd-frame-width: 1200px;    /* 旧 #container */
+    --gtd-side-width: 280px;      /* 旧 #side */
+
+    --ui-accent: var(--gtd-navy);
+    --ui-accent-hover: #244b70;
+    --ui-link: var(--gtd-navy);
+    --ui-link-hover: #244b70;
+    --ui-text: var(--gtd-text);
+    --brand-pink: var(--gtd-navy);
+    --brand-pink-lt: var(--gtd-sky);
+    --color-primary: var(--gtd-navy);
+    --panel-bg: #fff;
+
+    /* 見出しは丸ゴシック（旧サイトの平成丸ゴシック相当） */
+    --gtd-title-font: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "ヒラギノ丸ゴ ProN", "BIZ UDPGothic", "Meiryo", sans-serif;
+    --title-mincho: var(--gtd-title-font);
+}
+
+/* 背景：大理石調（旧 images/body_bg2.gif） */
+body.app-body {
+    background-color: #f1f1f1;
+    color: var(--gtd-text);
+}
+body.app-body::before {
+    background-color: #f1f1f1;
+    background-image: url('../../images/body_bg2.gif');
+    background-repeat: repeat;
+    background-size: auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* =============================================================================
+   ヘッダー（旧 #header: 紺の帯にロゴ・open/close・tel・届出表示）
+   ============================================================================= */
+body.app-body .header-main {
+    background: var(--gtd-navy) !important;
+    color: #fff;
+    box-shadow: 2px 0 3px 3px rgba(0, 0, 0, 0.05);
+}
+body.app-body .header-inner {
+    max-width: none;
+    padding: 0 16px 0 0;
+}
+body.app-body .header-content {
+    display: flex;
+    align-items: center;
+    min-height: 0;
+}
+body.app-body .header-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+body.app-body .header-logo-img {
+    width: 240px !important;
+    height: auto !important;
+    max-width: none !important;
+}
+
+/* open/close・tel・届出表示を1行に（旧 .telArea） */
+body.app-body .header-aside {
+    flex: 1 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4rem 1.2rem;
+    margin-left: 1.2rem;
+    padding-top: 1.2rem;
+    font-family: 'Lato', sans-serif;
+}
+body.app-body .header-nav {
+    flex-wrap: nowrap;
+    gap: 1.2rem;
+}
+body.app-body .header-nav-sep {
+    display: none;
+}
+body.app-body .header-nav-info {
+    flex-direction: row;
+    align-items: center;
+    min-height: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+body.app-body .header-nav-info-body {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.2rem;
+    white-space: nowrap;
+}
+body.app-body .header-nav-label,
+body.app-body .header-nav-label--open,
+body.app-body .header-nav-label--phone {
+    display: inline-block;
+    margin: 0;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+}
+body.app-body .header-nav-value,
+body.app-body .header-nav .header-nav-value--tel {
+    color: #fff !important;
+    font-size: 1.6rem !important;
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: none;
+}
+body.app-body .header-nav-value--tel:hover {
+    color: var(--gtd-sky) !important;
+}
+
+.header-other {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    line-height: 1;
+}
+.header-other-text {
+    color: #fff;
+    font-size: 0.7rem;
+}
+.header-other-contact {
+    display: inline-block;
+    padding: 0.25rem 0.8rem;
+    border-radius: 10px;
+    background: #1ab352;
+    color: #fff !important;
+    font-size: 0.7rem;
+    text-decoration: none !important;
+}
+.header-other-contact:hover {
+    background: #13963f;
+}
+
+/* ヘッダー内のピルボタン（サブナビ）・横型ナビは旧サイトに無い（左の縦ナビを使う） */
+body.app-body .header-subnav,
+body.app-body .app-topnav,
+body.app-body .app-topnav-flyout,
+body.app-body .header-nav-toggle-wrap {
+    display: none !important;
+}
+
+/* スマホ用の在籍人数・出勤人数（PC では出さない） */
+.header-count {
+    display: none;
+}
+
+/* 狭いPC幅 */
+@media (max-width: 1280px) {
+    body.app-body .header-logo-img { width: 200px !important; }
+    body.app-body .header-nav-value,
+    body.app-body .header-nav .header-nav-value--tel { font-size: 1.35rem !important; }
+}
+
+/* タブレット・スマホ：ロゴ ＋ OPEN/電話/届出（右）＋ MENU、下に在籍・出勤人数 */
+@media (max-width: 1024px) {
+    body.app-body .header-inner {
+        padding: 0.3rem 8px 0.5rem;
+    }
+    body.app-body .header-logo-img {
+        width: 120px !important;
+    }
+    body.app-body .header-aside {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        gap: 0.15rem;
+        margin-left: 0.6rem;
+        padding-top: 0;
+    }
+    body.app-body .header-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.1rem;
+    }
+    body.app-body .header-nav-label--open {
+        font-size: 0.75rem;
+    }
+    body.app-body .header-nav-info--open .header-nav-value {
+        font-size: 0.95rem !important;
+    }
+    body.app-body .header-nav-info--phone .header-nav-label {
+        display: none;
+    }
+    body.app-body .header-nav .header-nav-value--tel {
+        font-size: 1.3rem !important;
+    }
+    .header-other-contact {
+        display: none;
+    }
+    .header-other-text {
+        font-size: 0.65rem;
+        font-weight: 700;
+    }
+    /* メニューボタンは右端へ */
+    body.app-body .header-menu-btn {
+        order: 2;
+    }
+    body.app-body .header-logo-area {
+        display: contents;
+    }
+    body.app-body .header-logo {
+        order: 0;
+    }
+    body.app-body .header-aside {
+        order: 1;
+        flex: 1 1 auto;
+    }
+    body.app-body .header-menu-btn {
+        order: 3;
+        margin-left: auto;
+    }
+
+    .header-count {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.15rem 0.8rem;
+        margin: 0.4rem 0.2rem 0;
+        padding: 0.3rem 0.6rem;
+        background: #222;
+        color: #fff;
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+    .header-count-date {
+        flex: 0 0 100%;
+        text-align: center;
+        font-weight: 700;
+    }
+    .header-count p {
+        margin: 0;
+    }
+    .header-count strong {
+        display: inline-block;
+        margin-right: 0.8rem;
+        padding: 0 0.4rem;
+        background: #000;
+        font-weight: 700;
+    }
+    .header-count .num {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    .header-count-sch {
+        padding-left: 0.8rem;
+        border-left: 1px solid #888;
+    }
+}
+@media (max-width: 380px) {
+    body.app-body .header-logo-img { width: 96px !important; }
+    body.app-body .header-nav .header-nav-value--tel { font-size: 1.1rem !important; }
+    .header-count { font-size: 0.72rem; }
+}
+
+/* =============================================================================
+   コンテンツ枠（旧 #container: 白・角丸。左 280px のサイド＋右コンテンツ）
+   ============================================================================= */
+body.app-body .app-body-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    width: calc(100% - 32px);
+    max-width: var(--gtd-frame-width);
+    min-height: 0;
+    margin: 1.2rem auto 1.5rem;
+    padding: 0.8rem;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 8px;
+    overflow: clip; /* はみ出た部分はトリミング */
+}
+body.app-body .app-body-wrap .app-main {
+    flex: 1 1 auto;
+    order: 1;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 1rem;
+}
+body.app-body .content-panel {
+    padding: 0;
+    margin-bottom: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+body.app-body .top-section,
+body.app-body .top-event-section,
+body.app-body .shop-widget,
+body.app-body .cast-search-wrap,
+body.app-body .modern-timeline {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+body.app-body .breadcrumb {
+    margin: 0 0 1rem;
+}
+body.app-body .member-right-column {
+    order: 2;
+}
+
+/* =============================================================================
+   左カラム（旧 #side: 縦ナビ → シティヘブンのウィジェット → バナー → グループ店）
+   ============================================================================= */
+.site-side {
+    flex: 0 0 var(--gtd-side-width);
+    order: 0; /* DOM はメインの後。PC では左に表示 */
+    width: var(--gtd-side-width);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: clip;
+}
+.site-side ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.site-side-widgets li,
+.site-side-banners li,
+.site-side-group li {
+    margin: 0 0 0.5rem;
+}
+.site-side iframe {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+    border: none;
+    background: #fff;
+}
+.site-side-banners img,
+.site-side-group img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.site-side-heading {
+    margin: 1rem 0 0.5rem;
+    padding: 0.35rem;
+    background: var(--gtd-navy);
+    color: #fff;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-align: center;
+}
+.site-side-group-name {
+    display: block;
+    padding: 0.8rem 0.5rem;
+    border: 1px solid var(--gtd-navy);
+    background: #fff;
+    color: var(--gtd-navy);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 縦ナビ（旧 #navi li a: 紺地＋水色の枠、日本語の下に水色の英字） */
+.site-side-navi ul.navi {
+    display: block;
+    margin: 0 0 1rem;
+    padding: 0;
+}
+.site-side-navi ul.navi li {
+    display: block;
+    margin: 0;
+}
+.site-side-navi ul.navi li a {
+    /* base.css の ul.navi（ピンクの円）を打ち消す */
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    text-align: left;
+    word-break: normal;
+    margin: 0 0 0.3rem;
+    padding: 0.5rem 0.8rem;
+    background: var(--gtd-navy);
+    border: 1px solid var(--gtd-sky);
+    color: #fff !important;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background 0.15s;
+}
+.site-side-navi .navi-link-icon {
+    display: none !important;
+}
+.site-side-navi .navi-link-meta {
+    display: block;
+}
+.site-side-navi ul.navi li a .navi-link-jp {
+    display: block;
+    margin: 0 0 0.2rem;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: normal;
+}
+.site-side-navi ul.navi li a .navi-link-en {
+    display: block;
+    color: var(--gtd-cyan);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    white-space: normal;
+}
+.site-side-navi ul.navi li a:hover,
+.site-side-navi ul.navi li a.is-current {
+    background: var(--gtd-sky);
+}
+.site-side-navi ul.navi li a:hover .navi-link-jp,
+.site-side-navi ul.navi li a.is-current .navi-link-jp {
+    color: var(--gtd-yellow);
+}
+.site-side-navi ul.navi li a:hover .navi-link-en,
+.site-side-navi ul.navi li a.is-current .navi-link-en {
+    color: var(--gtd-navy);
+}
+
+/* 狭いPC幅：サイドを少し細く */
+@media (max-width: 1180px) {
+    :root { --gtd-side-width: 230px; }
+    .site-side-navi .navi-link-jp { font-size: 0.92rem; }
+}
+
+/* タブレット・スマホ：1カラム。ナビはドロワーに任せ、ウィジェット・バナー・グループ店をメインの下に */
+@media (max-width: 1024px) {
+    body.app-body .app-body-wrap {
+        display: block;
+        width: calc(100% - 12px);
+        margin: 0.6rem auto 1rem;
+        padding: 0.6rem;
+    }
+    .site-side {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .site-side-navi {
+        display: none;
+    }
+    .site-side-banners,
+    .site-side-group ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        column-gap: 0.6rem;
+        align-items: start;
+    }
+}
+@media (max-width: 600px) {
+    .site-side-banners {
+        grid-template-columns: 1fr;
+    }
+    .site-side-group ul {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 0.4rem;
+    }
+}
+
+/* =============================================================================
+   モバイルドロワー：紺地・2列（旧 sp slide_navi）
+   ============================================================================= */
+body.app-body .mobile-menu {
+    background: var(--gtd-navy);
+}
+body.app-body .mobile-menu-header {
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--gtd-sky);
+}
+body.app-body .mobile-menu-title,
+body.app-body .mobile-menu-close-btn,
+body.app-body .mobile-menu-close-icon {
+    color: #fff !important;
+}
+body.app-body .mobile-menu-nav ul.navi {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+body.app-body .mobile-menu-nav ul.navi li {
+    margin: 0;
+    list-style: none;
+}
+body.app-body .mobile-menu-nav ul.navi li a {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    padding: 0.7rem 0.5rem;
+    border-bottom: 1px solid rgba(106, 194, 244, 0.35);
+    border-right: 1px solid rgba(106, 194, 244, 0.35);
+    background: transparent;
+    color: #fff !important;
+    text-decoration: none;
+}
+body.app-body .mobile-menu-nav ul.navi li a:hover,
+body.app-body .mobile-menu-nav ul.navi li a.is-current {
+    background: var(--gtd-sky);
+}
+body.app-body .mobile-menu-nav .navi-link-icon {
+    color: var(--gtd-cyan);
+    width: 1.2em;
+    text-align: center;
+}
+body.app-body .mobile-menu-nav .navi-link-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25;
+}
+body.app-body .mobile-menu-nav .navi-link-jp {
+    color: #fff;
+    font-size: 0.86rem;
+}
+body.app-body .mobile-menu-nav .navi-link-en {
+    color: var(--gtd-cyan);
+    font-size: 0.6rem;
+    letter-spacing: 0.03em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =============================================================================
+   見出し（旧 h2: 紺の帯、左に » アイコン、大きな日本語の下に英字）
+   ============================================================================= */
+body.app-body .section-title,
+body.app-body .titleArea,
+body.app-body .schedule-title-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.2rem;
+    margin: 0 0 1.5rem;
+    padding: 0.5rem 1rem 0.5rem 3.4rem;
+    border: 0;
+    background: var(--gtd-navy);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.08);
+    color: #fff;
+    text-align: left;
+}
+body.app-body .section-title::after,
+body.app-body .titleArea::after,
+body.app-body .schedule-title-wrap::after {
+    display: none !important;
+}
+body.app-body .section-title::before,
+body.app-body .titleArea::before,
+body.app-body .schedule-title-wrap::before {
+    content: "\f101" !important;
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    width: auto;
+    height: auto;
+    margin: 0;
+    background: none;
+    transform: translateY(-50%);
+    color: #fff;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 1.6rem;
+    line-height: 1;
+}
+body.app-body .section-title .section-title-ja,
+body.app-body .titleArea .title,
+body.app-body .schedule-title-wrap .schedule-title-text {
+    order: 0;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    text-shadow: none;
+}
+body.app-body .section-title .section-title-en,
+body.app-body .titleArea h2,
+body.app-body .schedule-title-wrap .schedule-title-en {
+    order: 1;
+    position: static;
+    display: block;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--gtd-cyan);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-align: left;
+}
+body.app-body .titleArea h2::before,
+body.app-body .titleArea h2::after,
+body.app-body .schedule-title-wrap .schedule-title-en::before,
+body.app-body .section-title .section-title-en::before {
+    display: none !important;
+}
+body.app-body .schedule-title-wrap .schedule-title-link {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    margin: 0;
+    border-color: #fff;
+    background: transparent;
+    color: #fff;
+}
+@media (max-width: 600px) {
+    body.app-body .section-title,
+    body.app-body .titleArea,
+    body.app-body .schedule-title-wrap {
+        margin-bottom: 1rem;
+        padding: 0.45rem 0.8rem 0.45rem 2.8rem;
+    }
+    body.app-body .section-title::before,
+    body.app-body .titleArea::before,
+    body.app-body .schedule-title-wrap::before {
+        left: 0.8rem;
+        font-size: 1.3rem;
+    }
+    body.app-body .section-title .section-title-en,
+    body.app-body .titleArea h2,
+    body.app-body .schedule-title-wrap .schedule-title-en {
+        font-size: 0.78rem;
+    }
+}
+
+body.app-body h1,
+body.app-body h2,
+body.app-body h3,
+body.app-body h4,
+body.app-body .titleArea .title,
+body.app-body .section-title,
+body.app-body .section-title-ja,
+body.app-body .schedule-title-text,
+body.app-body .site-side-heading,
+body.app-body .navi-link-jp {
+    font-family: var(--gtd-title-font);
+}
+
+/* =============================================================================
+   トップ：各セクション（旧 #top #inner > section: クリーム色の枠）
+   ============================================================================= */
+.top-layout-wrap {
+    display: block;
+}
+.mv-scroll-content {
+    position: relative;
+    overflow: hidden;
+}
+.gtd-section,
+body.app-body.is-top .top-ranking-section,
+body.app-body.is-top #today_sch > section {
+    width: 100%;
+    margin: 0 auto 2rem;
+    padding: 0.5rem 1rem 1rem;
+    box-sizing: border-box;
+    border: 3px solid var(--gtd-cream);
+}
+.gtd-section > .section-title,
+body.app-body.is-top .top-ranking-section .section-title {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: -0.5rem;
+}
+body.app-body.is-top .top-section-inner {
+    padding: 0;
+    max-width: none;
+}
+
+/* イベントスライダー：枠なしで一番上 */
+body.app-body.is-top .top-event-section {
+    margin: 0 0 2rem;
+    padding: 0;
+}
+
+/* 新着ニュース：「もっと見る」で開閉 */
+.gtd-info-item {
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 1rem;
+    border-bottom: 1px dotted var(--gtd-line);
+}
+.gtd-info-body {
+    max-height: 320px;
+    overflow: hidden;
+    line-height: 1.6;
+    color: #111;
+    overflow-wrap: anywhere;
+}
+.gtd-info-item.is-open .gtd-info-body {
+    max-height: none;
+}
+.gtd-info-body img {
+    max-width: 100%;
+    height: auto !important;
+}
+.gtd-info-img {
+    margin: 0 0 0.6rem;
+    text-align: center;
+}
+.gtd-info-more {
+    display: block;
+    width: 50%;
+    margin: 0.6rem auto 0;
+    padding: 5px 20px;
+    border: 0;
+    border-radius: 20px;
+    background: #29b6f6;
+    color: #fff;
+    cursor: pointer;
+}
+.gtd-info-item.is-open .gtd-info-more {
+    background: #aaa;
+}
+
+/* =============================================================================
+   キャストカード（旧 .box: 白・薄い枠・影、名前とサイズは紺）
+   ============================================================================= */
+.gtd-card {
+    padding: 4px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid var(--gtd-line);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+    color: var(--gtd-text);
+    text-align: center;
+}
+.gtd-card-entry {
+    margin: 0 0 2px;
+    padding: 3px 2px;
+    border-radius: 2px;
+    background: var(--gtd-pink);
+    color: #fff;
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1;
+}
+.gtd-card-img {
+    position: relative;
+    margin: 0 0 6px;
+    line-height: 0;
+}
+.gtd-card-img img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+.gtd-card-new {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 34%;
+}
+.gtd-card-new img,
+.gtd-cast-icon img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+}
+.gtd-cast-icon {
+    position: absolute;
+    width: 40%;
+    pointer-events: none;
+}
+.gtd-cast-icon--l {
+    top: 0;
+    left: 0;
+}
+.gtd-cast-icon--r {
+    right: 0;
+    bottom: 0;
+}
+.gtd-card-name {
+    margin: 0.4rem 0 0.2rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+.gtd-card-name a {
+    color: var(--gtd-navy) !important;
+}
+.gtd-card-size {
+    margin: 0 0 0.4rem;
+    font-size: 0.74rem;
+    line-height: 1.4;
+}
+
+/* 新人情報スライダー */
+.gtd-newface-slider {
+    position: relative;
+    padding: 0 0 0.5rem;
+}
+.gtd-newface-swiper {
+    padding-bottom: 1.8rem !important;
+}
+.gtd-newface-slider .swiper-button-prev,
+.gtd-newface-slider .swiper-button-next {
+    width: 34px;
+    height: 50px;
+    margin-top: -40px;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+}
+.gtd-newface-slider .swiper-button-prev { left: 0; }
+.gtd-newface-slider .swiper-button-next { right: 0; }
+.gtd-newface-slider .swiper-button-prev::after,
+.gtd-newface-slider .swiper-button-next::after {
+    font-size: 1.2rem;
+}
+.gtd-newface-swiper .swiper-pagination-bullet-active {
+    background: var(--gtd-navy);
+}
+
+/* ピックアップ：PC 5列 / スマホ 3列 */
+.gtd-card-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.6rem;
+}
+@media (max-width: 900px) {
+    .gtd-card-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+    .gtd-section,
+    body.app-body.is-top .top-ranking-section,
+    body.app-body.is-top #today_sch > section {
+        padding: 0.4rem 0.5rem 0.8rem;
+        margin-bottom: 1.2rem;
+    }
+    .gtd-section > .section-title,
+    body.app-body.is-top .top-ranking-section .section-title {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        margin-top: -0.4rem;
+    }
+    .gtd-card-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.3rem;
+    }
+    .gtd-card-name { font-size: 0.8rem; }
+    .gtd-card-size { font-size: 0.66rem; }
+    .gtd-info-more { width: 80%; }
+}
+
+/* ランキング・出勤・一覧のキャストカード名を紺に */
+body.app-body .item-card-name,
+body.app-body .item-card-name a {
+    color: var(--gtd-navy);
+}
+body.app-body .top-rank-no {
+    background: var(--gtd-navy);
+}
+
+/* =============================================================================
+   特設イベント
+   ============================================================================= */
+.top-special-events {
+    margin: 0 0 2rem;
+    padding: 1rem;
+    border: 3px solid var(--gtd-cream);
+}
+.tse-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.tse-heading-en { font-size: 1.4rem; font-weight: 700; color: var(--gtd-navy); }
+.tse-heading-ja { font-size: 0.9rem; color: var(--gtd-text); }
+.tse-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.tse-list--single { grid-template-columns: minmax(0, 560px); justify-content: center; }
+.tse-card { border: 1px solid var(--gtd-line); background: #fff; overflow: hidden; }
+.tse-card-img-link { display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+.tse-card-img { width: 100%; height: 100%; object-fit: cover; }
+.tse-card-body { padding: 0.8rem; }
+.tse-card-title { margin: 0 0 0.4rem; font-size: 1rem; }
+.tse-card-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 0.7rem; font-size: 0.8rem; }
+.tse-card-btn { display: inline-block; margin-top: 0.5rem; padding: 0.4rem 1rem; background: var(--gtd-navy); color: #fff !important; }
+@media (max-width: 768px) {
+    .tse-list { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+    .tse-list { grid-template-columns: 1fr; }
+}
+
+/* =============================================================================
+   フッター（旧 #footer: 紺地に白文字）
+   ============================================================================= */
+body.app-body .site-footer {
+    background: var(--gtd-navy);
+    color: #fff;
+}
+body.app-body .sf-accent-line {
+    background: var(--gtd-sky);
+}
+body.app-body .sf-brand-copy,
+body.app-body .sf-hours,
+body.app-body .sf-block-label,
+body.app-body .sf-nav-heading,
+body.app-body .sf-nav-link,
+body.app-body .sf-nav-link em,
+body.app-body .sf-nav-link span {
+    color: #fff !important;
+}
+body.app-body .sf-tel {
+    color: #fff !important;
+}
+body.app-body .sf-tel:hover {
+    color: var(--gtd-sky) !important;
+}
+body.app-body .sf-tel-block {
+    border-left-color: var(--gtd-sky);
+}
+body.app-body .sf-nav-heading {
+    border-bottom-color: rgba(106, 194, 244, 0.5);
+}
+body.app-body .sf-nav-link {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+body.app-body .sf-nav-link:hover {
+    background: rgba(106, 194, 244, 0.3);
+}
+body.app-body .sf-sns-btn {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff !important;
+}
+body.app-body .sf-bottom {
+    background: #fff;
+    border-top: 0;
+}
+body.app-body .sf-copyright {
+    color: #605035;
+}
+/* フッターロゴは白抜きにせず元のカラーのまま */
+body.app-body .sf-logo-img {
+    filter: none;
+    opacity: 1;
+}
+
+/* スマホ下部固定ナビ：紺系に統一 */
+body.app-body .mobile-fixed-nav-link-home .mobile-fixed-nav-icon {
+    color: var(--gtd-navy);
+    border-color: var(--gtd-navy);
+}
+body.app-body .mobile-fixed-nav-link-cast .mobile-fixed-nav-icon {
+    background: var(--gtd-navy);
+}
+body.app-body .mobile-fixed-nav-link-schedule .mobile-fixed-nav-icon {
+    background: var(--gtd-sky);
+}
+
+/* =============================================================================
+   トップ：イベントスライダー（旧 slider-pro: メイン 730×337 ＋ 右に幅180のサムネイル）
+   ============================================================================= */
+@media (min-width: 769px) {
+    body.app-body .tes-wrap {
+        align-items: stretch;
+    }
+    body.app-body .tes-main-img {
+        height: auto;
+        aspect-ratio: 730 / 337;
+        object-fit: cover;
+    }
+    body.app-body .tes-thumbs-wrap {
+        flex: 0 0 170px;
+        max-width: 170px;
+        height: auto;
+    }
+}
+body.app-body .tes-thumb-btn {
+    color: var(--gtd-navy);
+}
+body.app-body .tes-thumb-item.is-active {
+    border-color: #fd397e;
+}
+
+/* トップ：ランキング（wrapper の padding はスライド位置がずれるので外枠へ） */
+body.app-body .top-ranks-swiper {
+    padding: 0;
+}
+body.app-body .top-ranks-swiper .swiper-slide {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+body.app-body .top-ranks-swiper .swiper-wrapper {
+    padding: 0;
+}
+body.app-body .top-ranks-title {
+    color: var(--gtd-navy);
+    border-bottom-color: var(--gtd-sky);
+}
+body.app-body .top-ranks-prev,
+body.app-body .top-ranks-next {
+    color: var(--gtd-navy);
+}
+
+/* トップ：当日スケジュールの見出しも枠いっぱいに */
+body.app-body.is-top #today_sch .schedule-section-header {
+    margin: -0.5rem -1rem 0;
+}
+@media (max-width: 600px) {
+    body.app-body.is-top #today_sch .schedule-section-header {
+        margin: -0.4rem -0.5rem 0;
+    }
+}
+body.app-body .schedule-tab-btn.active {
+    border-bottom-color: var(--gtd-navy);
+    color: var(--gtd-navy);
+}
+
+/* =============================================================================
+   出勤カード（旧 .box: 5列、サイズは全表示、出勤時間は紺の帯）
+   ============================================================================= */
+body.app-body .top-schedule-section .cast-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+body.app-body .cast-card {
+    border: 1px solid var(--gtd-line);
+    border-radius: 0;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+body.app-body .cast-name,
+body.app-body .cast-name a {
+    color: var(--gtd-navy);
+}
+body.app-body .cast-body .item-card-sizes {
+    color: var(--gtd-text);
+    font-size: 0.74rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+body.app-body .work-time-display .work-time-frame {
+    width: 100%;
+    padding: 0.3rem 0.2rem;
+    border-radius: 2px;
+    background: var(--gtd-navy);
+    box-sizing: border-box;
+}
+body.app-body .work-time-text {
+    color: #fff;
+}
+body.app-body .work-time-icon {
+    color: var(--gtd-sky);
+}
+@media (max-width: 1024px) {
+    body.app-body .top-schedule-section .cast-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    body.app-body .top-schedule-section .cast-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.3rem;
+    }
+    body.app-body .cast-body .item-card-sizes {
+        font-size: 0.64rem;
+    }
+}
+
+/* スマホ：ヘッダー右上の MENU ボタン（旧 sp header #header_menu） */
+@media (max-width: 1024px) {
+    body.app-body .header-menu-btn {
+        display: block !important;
+        flex: 0 0 auto;
+        width: 56px;
+        height: 56px;
+        padding: 0;
+        background: none;
+        line-height: 0;
+    }
+    body.app-body .header-menu-icon {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* ランキング：1〜3位を枠内に収める */
+body.app-body .top-ranks-row {
+    gap: 0.5rem;
+}
+body.app-body .top-ranks-col {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 200px;
+}
+@media (max-width: 600px) {
+    body.app-body .top-ranks-swiper .swiper-slide {
+        padding: 0 26px;
+    }
+}
+
+/* 出勤カードの列数（base の #ListArea 指定より強く） */
+body.app-body .top-layout-wrap #ListArea .cast-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+@media (max-width: 1024px) {
+    body.app-body .top-layout-wrap #ListArea .cast-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    body.app-body .top-layout-wrap #ListArea .cast-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.3rem;
+    }
+}
+
+/* =============================================================================
+   下層ページのキャスト一覧（女の子一覧など）：PC 4列 / タブレット 3列 / スマホ 2列
+   画像は 2:3 の枠に収め、縦に長い画像は枠でトリミングする
+   ============================================================================= */
+body.app-body .content-panel .cast-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+body.app-body .content-panel .cast-card {
+    width: 100%;
+    min-width: 0;
+}
+body.app-body .content-panel .cast-image {
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+}
+body.app-body .content-panel .cast-image a:not(.cast-flip) img,
+body.app-body .content-panel .cast-image video,
+body.app-body .content-panel .cast-flip-front img,
+body.app-body .content-panel .cast-flip-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+@media (max-width: 900px) {
+    body.app-body .content-panel .cast-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    body.app-body .content-panel .cast-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+}
+
+/* =============================================================================
+   プロフィール：Q&A コメント（元は暗い背景用の薄い灰色 #d1d5db）を濃い色に
+   ============================================================================= */
+body.app-body .prof-comment-faq,
+body.app-body .prof-comment-faq p,
+body.app-body .prof-comment-faq strong,
+body.app-body .prof-comment-faq span {
+    color: #222 !important;
+}
+body.app-body .prof-faq-comment {
+    background: #fff;
+    border-color: var(--gtd-sky);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* =============================================================================
+   モバイルドロワー：文字はすべて白（base の .mobile-menu 指定より強く）
+   ============================================================================= */
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a,
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-jp,
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-en,
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-icon,
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a:hover .navi-link-jp,
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a:hover .navi-link-en,
+body.app-body .mobile-menu .mobile-menu-title,
+body.app-body .mobile-menu .mobile-menu-close-icon {
+    color: #fff !important;
+}
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-en {
+    opacity: 1;
+}
+@media (max-width: 1024px) {
+    body.app-body .mobile-menu {
+        width: min(360px, 92vw) !important;
+    }
+}
+body.app-body .mobile-menu .mobile-menu-nav ul.navi li a .navi-link-jp {
+    white-space: normal;
+}
+body.app-body .mobile-menu .mobile-menu-close-btn {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+}

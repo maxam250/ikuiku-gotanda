@@ -1,0 +1,66 @@
+
+/*
+##########################################################################
+コスチューム
+##########################################################################*/
+#costume{
+}
+
+
+
+
+/*tabarea*/
+
+#tabArea{
+	background:#f6f6f6;
+	padding:1rem;
+}
+
+ul#tabhead{
+	display: flex;
+	justify-content: flex-start;
+}
+ul#tabhead li{
+	display: block;
+}
+ul#tabhead li a{
+	display: block;
+	padding:1rem 3rem;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+dl#tabbody{}
+dl#tabbody dt{}
+
+
+#body-tab0{}
+#body-tab1{}
+#body-tab2{}
+
+
+#cos_inner .tabContent{
+	margin:0 0 30px;
+}
+.tabContent h3{
+	margin-bottom: 2.5rem;
+}
+.tabContent .list{
+}
+.tabContent .list .box{
+}
+.tabContent .list .box h4{
+}
+.tabContent .list .box span{
+}
+
+
+
+#body-tab0 h3{
+	color:blue;
+}
+#body-tab1 h3{
+	color: chocolate;
+}
+#body-tab2 h3{
+	color: blueviolet;
+}

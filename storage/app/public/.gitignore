@@ -1,0 +1,9 @@
+# すべてのファイルを除外
+*
+
+# .gitignoreと.gitkeepは除外しない
+!.gitignore
+!.gitkeep
+
+# ディレクトリ構造を維持
+!*/

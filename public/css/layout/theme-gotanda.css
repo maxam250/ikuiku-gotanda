@@ -1327,3 +1327,344 @@ body.app-body .sys-fixed-fee-value small {
 body.app-body .sys-fixed-fee-value {
     color: var(--gtd-navy);
 }
+
+/* =============================================================================
+   料金システム：旧サイトからの静的な料金表・注意事項（旧 _gotanda/css/system.css 準拠）
+   ============================================================================= */
+body.app-body .sys-static-table {
+    width: 100%;
+    margin: 0 0 1.5rem;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+body.app-body .sys-static-table th,
+body.app-body .sys-static-table td {
+    padding: 3% 1.8%;
+    border: 1px solid #454545;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.3;
+}
+body.app-body .sys-static-table th {
+    background: #dcdcdc;
+    color: #222;
+    font-size: 1.4rem;
+}
+body.app-body .sys-static-table td {
+    background: #151515;
+    color: #dcdcdc;
+    font-size: 1.6rem;
+}
+body.app-body .sys-static-tax {
+    display: block;
+    padding-top: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: normal;
+}
+@media (max-width: 600px) {
+    body.app-body .sys-static-table th { font-size: 0.95rem; }
+    body.app-body .sys-static-table td { font-size: 1.05rem; }
+    body.app-body .sys-static-tax { font-size: 0.6rem; }
+}
+
+/* 注意事項（旧 _gotanda/www_tpl/inc_notes.tpl 内の style） */
+body.app-body .sys-static-notes--gotanda {
+    width: 800px;
+    max-width: 100%;
+    margin: auto;
+    color: #575555;
+    font-size: 14px;
+    line-height: 1.8;
+}
+body.app-body .sys-static-notes--gotanda > div {
+    margin: 0 0 20px;
+    padding: 16px 20px;
+    border: 1px solid #333;
+    border-top: 3px solid #c31212;
+    background: #f3f3f3;
+}
+body.app-body .sys-static-notes--gotanda h4 {
+    margin: 0 0 12px;
+    padding: 0 0 8px;
+    border-bottom: 1px solid #d8caca;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ee3f5c;
+    text-align: center;
+}
+body.app-body .sys-static-notes--gotanda h5 {
+    margin: 14px 0 8px;
+    padding: 4px 10px;
+    background: #ddd;
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+}
+body.app-body .sys-static-notes--gotanda p {
+    margin: 0 0 10px;
+}
+body.app-body .sys-static-notes--gotanda p:last-child {
+    margin-bottom: 0;
+}
+body.app-body .sys-static-notes--gotanda ul {
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+}
+body.app-body .sys-static-notes--gotanda ul li {
+    margin: 0 0 4px;
+    padding-left: 1.2em;
+    text-indent: -1.2em;
+}
+body.app-body .sys-static-notes--gotanda ul li::before {
+    content: "・";
+    color: #c31212;
+}
+@media (max-width: 600px) {
+    body.app-body .sys-static-notes--gotanda > div { padding: 12px 12px; }
+}
+body.app-body .sys-static-notes--gotanda li {
+    color: #575555 !important;
+}
+
+/* 料金表：サイトの配色に合わせる（項目＝紺、金額＝白地に濃紺文字、ボーダーなし） */
+body.app-body .sys-static-table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    background: #e9f0f9;
+    border-radius: 6px;
+}
+body.app-body .sys-static-table th,
+body.app-body .sys-static-table td {
+    border: none;
+}
+body.app-body .sys-static-table th {
+    background: var(--gtd-navy);
+    color: #fff;
+}
+body.app-body .sys-static-table td {
+    background: #fff;
+    color: var(--gtd-navy);
+}
+body.app-body .sys-static-table td:empty,
+body.app-body .sys-static-table th:empty {
+    background: transparent;
+}
+body.app-body .sys-static-tax {
+    color: #5a6f8f;
+}
+
+/* =============================================================================
+   ランキング（旧 css/ranking.css 準拠：金色のカテゴリボタン・黒帯の見出し・No.1 大カード＋2列）
+   ============================================================================= */
+body.app-body .rk-page {
+    padding: 0 0 1rem;
+}
+body.app-body .rk-cate {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+body.app-body .rk-cate li a {
+    display: block;
+    padding: 0.7rem 1rem;
+    border-top: 1px solid #f6e7ab;
+    border-left: 1px solid #f6e7ab;
+    border-radius: 4px;
+    background: linear-gradient(45deg, #daaf08 0%, #daaf08 45%, #fee9a0 70%, #daaf08 85%, #daaf08 100%);
+    color: #442f1f !important;
+    font-size: 0.9rem;
+    font-weight: bold;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: filter 0.2s ease;
+}
+body.app-body .rk-cate li a:hover {
+    filter: brightness(1.08);
+}
+body.app-body .rk-cate li a.is-active {
+    background: linear-gradient(45deg, #8a6a00 0%, #b48c06 60%, #8a6a00 100%);
+    color: #fff !important;
+}
+body.app-body .rk-cate li a img {
+    display: inline-block;
+    width: 1.2em;
+    margin-right: 0.4em;
+    vertical-align: -0.15em;
+}
+
+/* カテゴリ見出し（.rank_titleArea） */
+body.app-body .rk-cate-title {
+    margin: 0 0 2rem;
+    padding: 1.2rem;
+    border-radius: 3px;
+    background: linear-gradient(45deg, #ddd 0%, #9e9e9e 45%, #e8e8e8 70%, #9e9e9e 85%, #ddd 100%);
+    text-align: center;
+}
+body.app-body .rk-cate-title .title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #222;
+}
+body.app-body .rk-cate-title .text {
+    margin-top: 0.4em;
+    padding: 0.5em;
+    background: rgba(50, 50, 50, 0.1);
+    color: #545454;
+    font-weight: bold;
+}
+
+/* ランキング名（h3.rankingname） */
+body.app-body .rk-section {
+    margin: 0 0 2.5rem;
+}
+body.app-body .rk-name {
+    position: relative;
+    margin: 1rem 0 1.8rem;
+    padding: 0.5rem 0.5rem 0.5rem 110px;
+    background: #151515;
+    border: 1px solid #b69d51;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 1.8;
+    text-align: center;
+}
+body.app-body .rk-name-icon {
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    width: 90px;
+}
+body.app-body .rk-name-icon img {
+    display: block;
+    width: 100%;
+}
+body.app-body .rk-body {
+    margin: -0.8rem 0 1.5rem;
+    text-align: center;
+}
+
+/* カード */
+body.app-body .rk-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+body.app-body .rk-box {
+    display: flex;
+    gap: 4%;
+    align-items: flex-start;
+    padding: 4%;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    background: url(../../images/ranking/box_bg.png) no-repeat #fff;
+    background-size: 100% auto;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.06);
+}
+body.app-body .rk-box--1 {
+    grid-column: 1 / -1;
+    padding: 2.5%;
+}
+body.app-body .rk-img {
+    flex: 0 0 42%;
+}
+body.app-body .rk-box--1 .rk-img {
+    flex-basis: 40%;
+}
+body.app-body .rk-img img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+body.app-body .rk-cont {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+body.app-body .rk-icon {
+    margin: 0 0 1.2rem;
+}
+body.app-body .rk-icon img {
+    display: block;
+    width: 100%;
+}
+body.app-body .rk-icon-text {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #555;
+    text-align: center;
+}
+body.app-body .rk-name-area {
+    margin: 0 0 1rem;
+    padding: 8px;
+    background: url(../../images/ranking/title_bg.jpg);
+    color: #fff;
+}
+body.app-body .rk-name-area .inner {
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+body.app-body .rk-cast-name {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    line-height: 1.3;
+}
+body.app-body .rk-box--1 .rk-cast-name {
+    font-size: 1.5rem;
+}
+body.app-body .rk-cast-name a {
+    color: #f1ff19 !important;
+    text-decoration: underline;
+}
+body.app-body .rk-cast-size {
+    font-size: 0.85rem;
+    color: #fff;
+}
+body.app-body .rk-comment {
+    padding: 0.8rem;
+    border: 1px dotted #999;
+    background: rgba(0, 0, 0, 0.04);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #333;
+}
+body.app-body .rk-empty {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    body.app-body .rk-cate {
+        gap: 0.5rem;
+    }
+    body.app-body .rk-cate li a {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.78rem;
+    }
+    body.app-body .rk-name {
+        padding-left: 70px;
+        font-size: 1.1rem;
+    }
+    body.app-body .rk-name-icon {
+        width: 58px;
+        top: -6px;
+    }
+    body.app-body .rk-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    body.app-body .rk-box--1 .rk-cast-name {
+        font-size: 1.2rem;
+    }
+}
+/* 五反田は旧 ranking.css の上書きと同じく水色の枠・薄いグレー地（box_bg なし） */
+body.app-body .rk-box {
+    border-color: #6ac2f4;
+    background: #f5f7f9;
+}

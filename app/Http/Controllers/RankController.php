@@ -2,44 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Rank;
 use App\Models\RankCate;
-use App\Models\Item;
-use App\Models\ItemRank;
-use App\Models\Fanclub;
-use App\Models\FanclubMembership;
-use App\Models\FanclubContent;
 
 class RankController extends Controller
 {
-    public function index()
+    /**
+     * 旧 ranking.php と同じ動き
+     *   /rank           … 最新のランキング 1 件（sort 昇順・登録日の新しい順の先頭）
+     *   /rank/{cate_id} … そのカテゴリのランキングを新しい順にすべて表示
+     */
+    public function index($cate_id = null)
     {
-        $ranks     = Rank::with(['itemRanks.items'])->where('active', '1')->orderBy('sort', 'asc')->get();
-        $rankCates = RankCate::orderBy('sort', 'asc')->get();
+        $activeRanks = Rank::where('active', '1');
 
-        // ファンクラブ登録数ランキング（active会員数 上位10）
-        // $fcMemberRanking = FanclubMembership::selectRaw('fanclub_id, COUNT(*) as member_count')
-        //     ->where('status', 'active')
-        //     ->groupBy('fanclub_id')
-        //     ->orderByDesc('member_count')
-        //     ->limit(10)
-        //     ->with('fanclub.cast.thumbnail')
-        //     ->get()
-        //     ->filter(fn($m) => $m->fanclub && $m->fanclub->cast);
+        // カテゴリボタン：公開中のランキングがあるカテゴリだけ（旧サイトと同じく id 順）
+        $rankCates = RankCate::whereIn('id', (clone $activeRanks)->select('cate_id'))
+            ->orderBy('id', 'asc')
+            ->get();
 
-        // // ファンクラブ配信ランキング（公開済みコンテンツ数 上位10）
-        // $fcContentRanking = FanclubContent::selectRaw('cast_id, COUNT(*) as post_count')
-        //     ->whereNotNull('published_at')
-        //     ->where('published_at', '<=', now())
-        //     ->groupBy('cast_id')
-        //     ->orderByDesc('post_count')
-        //     ->limit(10)
-        //     ->with('cast.thumbnail')
-        //     ->get()
-        //     ->filter(fn($c) => $c->cast);
+        $currentCate = null;
+        if ($cate_id !== null && ctype_digit((string) $cate_id)) {
+            $currentCate = RankCate::find($cate_id);
+        }
 
-        // return view('rank', compact('ranks', 'rankCates', 'fcMemberRanking', 'fcContentRanking'));
-        return view('rank', compact('ranks', 'rankCates'));
+        if ($currentCate) {
+            $ranks = (clone $activeRanks)->where('cate_id', $currentCate->id)
+                ->orderBy('id', 'desc')
+                ->with(['itemRanks.items.thumbnail'])
+                ->get();
+        } else {
+            $ranks = (clone $activeRanks)
+                ->orderBy('sort', 'asc')
+                ->orderBy('created_at', 'desc')
+                ->with(['itemRanks.items.thumbnail'])
+                ->limit(1)
+                ->get();
+        }
+
+        return view('rank', compact('ranks', 'rankCates', 'currentCate'));
     }
 }

@@ -40,7 +40,10 @@ source "${CONFIG_PATH}"
 # 変数初期化
 # ============================================================
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-TMP_DIR="/tmp/backup_${TIMESTAMP}"
+# 一時作業ディレクトリの親（/tmp は容量制限が厳しいサーバーがあるためホーム配下をデフォルトにする）
+TMP_BASE="${TMP_BASE:-${HOME}/tmp}"
+# 同時刻に複数サイトが実行されても衝突しないよう SITE_NAME と PID を含める
+TMP_DIR="${TMP_BASE}/backup_${SITE_NAME}_${TIMESTAMP}_$$"
 FILE_BACKUP_NAME="files_backup_${TIMESTAMP}.tar.gz"
 DB_BACKUP_NAME="database_backup_${TIMESTAMP}.sql"
 S3_FILE_PREFIX="s3://${BUCKET_NAME}/${SITE_NAME}/files"
@@ -63,7 +66,7 @@ mkdir -p "${LOG_DIR}"
 LOG_FILE="${LOG_DIR}/backup.log"
 
 log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "${LOG_FILE}"
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [${SITE_NAME}] $*" | tee -a "${LOG_FILE}"
 }
 
 error_exit() {

@@ -90,7 +90,7 @@ class ItemImageController extends Controller
                 $item_width = config('images.item_width');
                 $item_height = config('images.item_height');
 
-                $img = $img->cover($item_width, $item_height);
+                $img = $img->scaleDown($item_width, $item_height); // 切り抜かずに縮小のみ（トリミングは CSS 側）
                 $img->toJpeg(80)->save($fullPath);
 
             } catch (\Exception $e) {
@@ -175,7 +175,7 @@ class ItemImageController extends Controller
              $img = $manager->read($fullPath);
              $item_width = config('images.item_width');
              $item_height = config('images.item_height');
-             $img = $img->cover($item_width, $item_height);
+             $img = $img->scaleDown($item_width, $item_height); // 切り抜かずに縮小のみ（トリミングは CSS 側）
              $img->toJpeg(80)->save($fullPath);
 
              // データベースを更新

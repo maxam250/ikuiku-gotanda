@@ -65,7 +65,7 @@ class ItemImageController extends Controller
                 $img = $manager->read($fullPath);
                 $item_width = config('images.item_width');
                 $item_height = config('images.item_height');
-                $img->cover($item_width, $item_height);
+                $img->scaleDown($item_width, $item_height); // 切り抜かずに縮小のみ（トリミングは CSS 側）
                 $img->toJpeg()->save($fullPath);
             } catch (\Exception $e) {
                 \Log::error('Image processing error: ' . $e->getMessage());
@@ -136,7 +136,7 @@ class ItemImageController extends Controller
                  $img = $manager->read($fullPath);
                  $item_width = config('images.item_width');
                  $item_height = config('images.item_height');
-                 $img->cover($item_width, $item_height);
+                 $img->scaleDown($item_width, $item_height); // 切り抜かずに縮小のみ（トリミングは CSS 側）
                  $img->toJpeg()->save($fullPath);
              } catch (\Exception $e) {
                  \Log::error('Image processing error: ' . $e->getMessage());

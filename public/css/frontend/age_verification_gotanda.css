@@ -1,28 +1,29 @@
 /*
  * public/css/frontend/age_verification_gotanda.css
  * 入口ページ（年齢確認）。旧 _gotanda/css/index.css・sp-css/index.css 準拠。
- * 紺地(#022d7b) → ロゴ → YES / NO の丸ボタン → 18禁の注意書き → 求人バナー → グループ店 → 各種媒体 → フッター
+ * ロゴ部分のみ紺の帯(#022d7b)、ボタンから下は白背景 → YES / NO の丸ボタン → 18禁の注意書き → 求人バナー → グループ店 → 各種媒体 → フッター
  */
 
 body.age-verify-page.av-gtd {
     display: block;
     min-height: 100vh;
     margin: 0;
-    background: #022d7b;
+    background: #fff;
     background-image: none;
-    color: #fff;
+    color: #002985;
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     overflow-x: hidden; /* はみ出た部分はトリミング */
 }
 .av-gtd a {
-    color: #fff;
+    color: #022d7b;
 }
 
 /* ロゴ（旧 #mainArea） */
 .av-gtd-main {
-    width: min(1000px, 100%);
-    margin: 0 auto 1.5rem;
-    padding: 2rem 1rem 0;
+    width: 100%;
+    margin: 0 0 2.5rem;
+    padding: 2rem 1rem;
+    background: #022d7b;
     box-sizing: border-box;
 }
 .av-gtd-main h1 {
@@ -82,7 +83,7 @@ body.age-verify-page.av-gtd {
 }
 .av-gtd-question {
     margin: 0 0.5rem;
-    color: #fff;
+    color: #022d7b;
     font-size: 0.95rem;
     font-weight: 700;
     line-height: 1.6;
@@ -153,7 +154,7 @@ body.age-verify-page.av-gtd {
 .av-gtd-group-name {
     display: block;
     padding: 0.8rem;
-    border: 1px solid #6ac2f4;
+    border: 1px solid #022d7b;
     font-size: 0.85rem;
     line-height: 1.4;
     text-align: center;
@@ -167,8 +168,8 @@ body.age-verify-page.av-gtd {
 .av-gtd-links > h2 {
     margin: 0 0 1rem;
     padding: 0.5rem;
-    border: 2px solid #fff;
-    color: #fff;
+    border: 2px solid #022d7b;
+    color: #022d7b;
     font-size: 0.85rem;
     font-weight: 400;
     text-align: center;
@@ -185,7 +186,7 @@ body.age-verify-page.av-gtd {
 /* フッター（旧 #footer #contactArea） */
 .av-gtd-footer {
     padding: 20px 1rem;
-    border-top: 1px solid rgba(106, 194, 244, 0.5);
+    background: #022d7b;
     color: #fff;
     text-align: center;
 }
@@ -210,7 +211,7 @@ body.age-verify-page.av-gtd {
 }
 .av-gtd-copyright {
     padding: 0.5rem 1rem;
-    background: #fff;
+    background: #f1f1f1;
     color: #605035;
     font-size: 0.75rem;
     text-align: center;
@@ -221,8 +222,8 @@ body.age-verify-page.av-gtd {
    ============================================================================= */
 @media (max-width: 600px) {
     .av-gtd-main {
-        padding: 1.2rem 0.6rem 0;
-        margin-bottom: 1rem;
+        padding: 1.2rem 0.6rem;
+        margin-bottom: 1.5rem;
     }
     .av-gtd-btns {
         margin-bottom: 1.8rem;
@@ -252,7 +253,7 @@ body.age-verify-page.av-gtd {
     }
     .av-gtd-contact h2 {
         margin: 0 0 0.6rem;
-        color: #dfdfdf;
+        color: #022d7b;
         font-size: 0.95rem;
     }
     .av-gtd-contact ul {
@@ -290,4 +291,9 @@ body.age-verify-page.av-gtd {
     .av-gtd-footer-tel a {
         font-size: 1.8rem;
     }
+}
+
+/* フッターは紺地なのでリンクは白 */
+.av-gtd .av-gtd-footer a {
+    color: #fff;
 }

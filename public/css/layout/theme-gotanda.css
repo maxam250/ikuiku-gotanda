@@ -1243,3 +1243,87 @@ body.app-body .mobile-menu .mobile-menu-close-btn {
     background: transparent !important;
     border: 1px solid rgba(255, 255, 255, 0.6) !important;
 }
+
+/* =============================================================================
+   料金システム（system.css のピンク系を薄い紺系に置き換え）
+   ============================================================================= */
+body.app-body .sys-section:nth-of-type(odd)  { background: #f5f8fc; }
+body.app-body .sys-section:nth-of-type(even) { background: #e9f0f9; }
+body.app-body #sys-price       { background: #ffffff; }
+body.app-body #sys-service     { background: #eef3fa; }
+body.app-body #sys-option-free { background: #e4ecf7; }
+body.app-body #sys-payment     { background: #f2f6fb; }
+body.app-body #sys-notes       { background: #e9f0f9; }
+
+body.app-body .sys-page h3,
+body.app-body .sys-page h4,
+body.app-body .sys-page p,
+body.app-body .sys-payment-body p {
+    color: var(--gtd-text);
+}
+body.app-body .sys-heading-en {
+    color: var(--gtd-navy);
+}
+body.app-body .sys-heading-ja,
+body.app-body .sys-heading-link a,
+body.app-body .sys-fee-price,
+body.app-body .sys-option-list .sys-option-price,
+body.app-body .sys-payment-note i {
+    color: var(--gtd-navy) !important;
+}
+body.app-body .sys-heading-ja::after {
+    background: var(--gtd-sky);
+}
+
+/* 料金カード・表・サービス・オプションの枠と見出し行 */
+body.app-body .sys-course-block,
+body.app-body .sys-service-item,
+body.app-body .sys-option-list .sys-option-item,
+body.app-body .sys-payment-body {
+    border-color: #d5e2f2;
+}
+body.app-body .sys-course-block::before {
+    background: linear-gradient(90deg, var(--gtd-navy) 0%, var(--gtd-sky) 50%, var(--gtd-navy) 100%);
+    background-size: 200% 100%;
+}
+body.app-body .sys-course-block:hover,
+body.app-body .sys-service-item:hover,
+body.app-body .sys-option-list .sys-option-item:hover {
+    border-color: var(--gtd-sky);
+}
+body.app-body .sys-course-title,
+body.app-body .sys-fee-table thead tr,
+body.app-body .sys-fee-table tbody tr:hover,
+body.app-body .sys-payment-note {
+    background: #eef3fa;
+}
+body.app-body .sys-course-title,
+body.app-body .sys-fee-table th,
+body.app-body .sys-fee-table td,
+body.app-body .sys-fee-table tbody th,
+body.app-body .sys-fee-table tbody tr {
+    border-color: #d5e2f2;
+}
+body.app-body .sys-fee-table tbody td:nth-child(2) {
+    border-right-color: #d5e2f2;
+}
+body.app-body .sys-payment-note {
+    border-left-color: var(--gtd-navy);
+}
+body.app-body section.sys-section h4.sys-option-group-title {
+    color: var(--gtd-navy);
+}
+body.app-body .sys-notes-list li::before {
+    background: rgba(2, 45, 123, 0.12);
+}
+body.app-body .sys-fixed-fee {
+    background: #f5f8fc;
+    border-color: #d5e2f2;
+}
+body.app-body .sys-fixed-fee-label,
+body.app-body .sys-fixed-fee-value small {
+    color: #4a6694;
+}
+body.app-body .sys-fixed-fee-value {
+    color: var(--gtd-navy);
+}

@@ -16,8 +16,8 @@ class RankController extends Controller
     {
         $activeRanks = Rank::where('active', '1');
 
-        // カテゴリボタン：公開中のランキングがあるカテゴリだけ（旧サイトと同じく id 順）
-        $rankCates = RankCate::whereIn('id', (clone $activeRanks)->select('cate_id'))
+        // カテゴリボタン：旧サイトと同じく全カテゴリを id 順に表示
+        $rankCates = RankCate::where('active', 1)
             ->orderBy('id', 'asc')
             ->get();
 

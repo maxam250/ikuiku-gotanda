@@ -83,7 +83,7 @@
         </div>
     </section>
     @empty
-    <p class="rk-empty">現在、表示できるランキングはありません。</p>
+    <p class="rk-empty">{{ $currentCate ? "現在、このカテゴリのランキングはありません。" : "現在、表示できるランキングはありません。" }}</p>
     @endforelse
 
 </div>

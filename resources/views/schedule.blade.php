@@ -2,7 +2,10 @@
 
 @section('breadcrumb_label', '出勤予定')
 @push('head')
-<style>.cast-image video.cast-thumb-video{width:100%;height:100%;object-fit:cover;display:block;}</style>
+<style>.cast-image video.cast-thumb-video{width:100%;height:100%;object-fit:cover;display:block;}
+.dstrip-day.is-disabled{opacity:.35;cursor:not-allowed;pointer-events:none;}
+.dstrip-nav:disabled{opacity:.3;cursor:not-allowed;pointer-events:none;}
+</style>
 @endpush
 
 @section('content')
@@ -15,10 +18,19 @@
 
 
 <!-- 日付選択（7日間ずつスライド） -->
+@php
+    $todayAdj  = \Carbon\Carbon::parse(adjustTimeWithShift())->startOfDay();
+    $maxAdj    = $todayAdj->copy()->addMonth();
+    $stripDate = $adjustedDate->copy()->startOfDay();
+    if ($stripDate->lt($todayAdj)) $stripDate = $todayAdj->copy();
+    if ($stripDate->gt($maxAdj))   $stripDate = $maxAdj->copy();
+@endphp
 <div class="calendar-section">
     <div class="dstrip" id="scheduleDstrip"
-         data-base="{{ $adjustedDate->format('Y-m-d') }}"
-         data-selected="{{ $adjustedDate->format('Y-m-d') }}"
+         data-base="{{ $stripDate->format('Y-m-d') }}"
+         data-selected="{{ $stripDate->format('Y-m-d') }}"
+         data-min="{{ $todayAdj->format('Y-m-d') }}"
+         data-max="{{ $maxAdj->format('Y-m-d') }}"
          data-url="{{ url('/schedule') }}">
         <button class="dstrip-nav dstrip-prev" type="button" onclick="dstripSchedule.slide(-1)" aria-label="前の7日間">
             <i class="fas fa-chevron-left"></i>
@@ -132,13 +144,15 @@ const dstripSchedule = (function () {
     const track = document.getElementById('scheduleDstripTrack');
     if (!root || !track) return { slide: function () {} };
 
-    const base = root.dataset.base;          // 表示起点
-    const selected = root.dataset.selected;  // 選択中の日付
-    const baseUrl = root.dataset.url;         // /schedule
-    const params = new URLSearchParams(window.location.search);
+    const base     = root.dataset.base;
+    const selected = root.dataset.selected;
+    const baseUrl  = root.dataset.url;
+    const minDate  = new Date(root.dataset.min + 'T00:00:00');
+    const maxDate  = new Date(root.dataset.max + 'T00:00:00');
+    const params   = new URLSearchParams(window.location.search);
     const categoryId = params.get('category_id');
-    const query = categoryId ? `?category_id=${categoryId}` : '';
-    const dows = ['日', '月', '火', '水', '木', '金', '土'];
+    const query    = categoryId ? `?category_id=${categoryId}` : '';
+    const dows     = ['日', '月', '火', '水', '木', '金', '土'];
     let offset = 0;
 
     function ymd(d) {
@@ -163,19 +177,52 @@ const dstripSchedule = (function () {
             if (ds === todayStr) cls += ' is-today';
             if (dow === 0) cls += ' sun';
             if (dow === 6) cls += ' sat';
-            html += `<a class="${cls}" href="${baseUrl}/${ds}${query}">`
-                +  `<span class="dstrip-dow">${dows[dow]}</span>`
-                +  `<span class="dstrip-date">${d.getMonth() + 1}/${d.getDate()}</span>`
-                +  `</a>`;
+            if (d < minDate || d > maxDate) {
+                cls += ' is-disabled';
+                html += `<span class="${cls}">`
+                    + `<span class="dstrip-dow">${dows[dow]}</span>`
+                    + `<span class="dstrip-date">${d.getMonth() + 1}/${d.getDate()}</span>`
+                    + `</span>`;
+            } else {
+                html += `<a class="${cls}" href="${baseUrl}/${ds}${query}">`
+                    + `<span class="dstrip-dow">${dows[dow]}</span>`
+                    + `<span class="dstrip-date">${d.getMonth() + 1}/${d.getDate()}</span>`
+                    + `</a>`;
+            }
         }
         track.innerHTML = html;
         track.classList.remove('dstrip-anim');
         void track.offsetWidth;
         track.classList.add('dstrip-anim');
+
+        // ナビゲーションボタンの有効/無効
+        const prevBtn = root.querySelector('.dstrip-prev');
+        const nextBtn = root.querySelector('.dstrip-next');
+        if (prevBtn) {
+            const prevEnd = new Date(base + 'T00:00:00');
+            prevEnd.setDate(prevEnd.getDate() + offset - 1);
+            prevBtn.disabled = prevEnd < minDate;
+        }
+        if (nextBtn) {
+            const nextStart = new Date(base + 'T00:00:00');
+            nextStart.setDate(nextStart.getDate() + offset + 7);
+            nextBtn.disabled = nextStart > maxDate;
+        }
     }
 
     render();
-    return { slide: function (dir) { offset += dir * 7; render(); } };
+    return {
+        slide: function (dir) {
+            const newOffset = offset + dir * 7;
+            const wStart = new Date(base + 'T00:00:00');
+            wStart.setDate(wStart.getDate() + newOffset);
+            const wEnd = new Date(wStart);
+            wEnd.setDate(wStart.getDate() + 6);
+            if (wEnd < minDate || wStart > maxDate) return;
+            offset = newOffset;
+            render();
+        }
+    };
 })();
 </script>
 

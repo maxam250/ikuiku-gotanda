@@ -788,10 +788,12 @@ h2.section-title .section-title-sub {
 .top-ranks-swiper {
     position: relative;
     overflow: hidden;
-    padding: 0 0px;          /* 矢印ボタン分の余白 */
 }
-.top-ranks-swiper .swiper-wrapper{
-    padding:0 40px;
+/* wrapperへのpaddingはSwiperの位置計算と競合するため削除。
+   代わりにスライドのコンテンツ側にpaddingを持たせる */
+.top-ranks-swiper .swiper-slide {
+    padding: 0 40px;
+    box-sizing: border-box;
 }
 
 
@@ -886,9 +888,18 @@ h2.section-title .section-title-sub {
 .top-ranks-next { right: 4px !important; }
 
 @media (max-width: 480px) {
-    .top-ranks-swiper { padding: 0 36px; }
+    .top-ranks-swiper { padding: 0; }
+    .top-ranks-swiper .swiper-slide { padding: 0 36px; }
     .top-rank-cast-img { width: 64px; height: 64px; }
     .top-ranks-col { max-width: 100px; }
+}
+
+/* ランキングセクション：Swiperのオーバーフローを確実に封じ込める */
+.top-ranking-section {
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
 }
 
 /* ==========================================================================

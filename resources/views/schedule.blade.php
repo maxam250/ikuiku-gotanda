@@ -20,7 +20,7 @@
 <!-- 日付選択（7日間ずつスライド） -->
 @php
     $todayAdj  = \Carbon\Carbon::parse(adjustTimeWithShift())->startOfDay();
-    $maxAdj    = $todayAdj->copy()->addMonth();
+    $maxAdj    = $todayAdj->copy()->addMonths(2);
     $stripDate = $adjustedDate->copy()->startOfDay();
     if ($stripDate->lt($todayAdj)) $stripDate = $todayAdj->copy();
     if ($stripDate->gt($maxAdj))   $stripDate = $maxAdj->copy();

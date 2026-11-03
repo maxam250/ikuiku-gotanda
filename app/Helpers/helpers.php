@@ -201,13 +201,15 @@ if (!function_exists('getWeekDates')) {
      * @param int $weekCount 何週間分取得するか（デフォルト1週間）
      * @return array
      */
-    function getWeekDates($weekCount = 1) {
+    function getWeekDates($weekCount = 1, $months = 0) {
         // 日本語ロケールを設定
         Carbon::setLocale('ja');
 
         // schedule_switch_hourで調整した当日を起点にする
         $startOfWeek = Carbon::parse(adjustTimeWithShift())->startOfDay();
-        $endOfWeek = $startOfWeek->copy()->addWeeks($weekCount);
+        $endOfWeek = $months > 0
+            ? $startOfWeek->copy()->addMonths($months)
+            : $startOfWeek->copy()->addWeeks($weekCount);
         $dates = [];
 
         // 日付を取得し、リンク用と表示用のフォーマットを別々に追加

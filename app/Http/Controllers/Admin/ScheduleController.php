@@ -30,7 +30,7 @@ class ScheduleController extends Controller
         //調整日付をstringからdateとして扱えるようにする
         $adjustedDate = Carbon::parse($adjustedDate);
 
-        $dates = getWeekDates();
+        $dates = getWeekDates(0, 2);
 
         //出勤者
         $schedules_pre = Schedule::with(['item', 'itemImage'])

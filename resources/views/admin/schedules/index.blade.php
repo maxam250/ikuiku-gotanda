@@ -181,7 +181,7 @@
                         <!-- 開始時間 -->
                         <div class="time">
                             <select name="items[{{ $non_schedule->id }}][time_start]" class="time-select text-sm pt-2 pb-2 pl-2 pr-8" required>
-                                @foreach (generateTimeOptions('09:00', '44:00') as $time => $label)
+                                @foreach (generateTimeOptions('06:00', '44:00') as $time => $label)
                                     <option value="{{ $time }}" {{ $non_schedule->default_sch_start && $non_schedule->default_sch_start == $time ? 'selected' : '' }}>
                                         @if ($time > '24:00:00')
                                         翌

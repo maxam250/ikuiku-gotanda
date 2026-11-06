@@ -112,7 +112,9 @@ class RecruitController extends Controller
 
         try {
             // 管理者への通知メール送信
-            $to = Shop::value('shop_mail2') ?? config('mail.shop_mail2', 'recruit@pps-mart.com');
+            $shop  = Shop::first();
+            $to    = $shop?->shop_mail2 ?: config('mail.from.address');
+            $fromName = ($shop?->shop_name ?: config('mail.from.name', '求人担当')) . ' 求人担当';
 
             // デバッグ用ログ
             \Log::info('Recruit form submission', [
@@ -123,7 +125,7 @@ class RecruitController extends Controller
             Mail::to($to)->send(new RecruitNotification($mailData));
 
             // 送信者への自動返信メール送信
-            Mail::to($request->mail)->send(new RecruitAutoReply($mailData));
+            Mail::to($request->mail)->send(new RecruitAutoReply($mailData, $to, $fromName));
 
             return redirect()->route('recruits.index')->with('success', 'ご応募ありがとうございます。内容を確認の上、ご連絡いたします。')->withFragment('toForm');
         } catch (\Exception $e) {

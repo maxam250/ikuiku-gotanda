@@ -14,13 +14,17 @@ class RecruitAutoReply extends Mailable
     use Queueable, SerializesModels;
 
     public $mailData;
+    public string $fromEmail;
+    public string $fromName;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData)
+    public function __construct($mailData, string $fromEmail = '', string $fromName = '求人担当')
     {
-        $this->mailData = $mailData;
+        $this->mailData  = $mailData;
+        $this->fromEmail = $fromEmail ?: config('mail.from.address');
+        $this->fromName  = $fromName;
     }
 
     /**
@@ -30,7 +34,7 @@ class RecruitAutoReply extends Mailable
     {
         return new Envelope(
             subject: '【自動返信】求人応募ありがとうございます',
-            from: new \Illuminate\Mail\Mailables\Address('recruit@pps-mart.com', 'KIRARI 求人担当'),
+            from: new \Illuminate\Mail\Mailables\Address($this->fromEmail, $this->fromName),
         );
     }
 

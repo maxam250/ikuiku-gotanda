@@ -102,7 +102,7 @@ class Schedule extends Model
 
     public function itemImage()
     {
-        return $this->hasOne(ItemImage::class, 'item_id', 'item_id');
+        return $this->hasOne(ItemImage::class, 'item_id', 'item_id')->orderBy('sort')->orderBy('id');
     }
 
     public function itemImages()

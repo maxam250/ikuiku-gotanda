@@ -19,10 +19,10 @@ class ItemImage extends Model
     }
 
     /**
-     * サムネイルの優先順：サムネイルにチェック（flag=1）した画像 → 無ければ先頭（管理画面で一番左＝sort 昇順）の画像
+     * サムネイルの優先順：先頭（管理画面で一番左＝sort 昇順）の画像
      */
     public function scopeThumbnailOrder($query)
     {
-        return $query->orderByDesc('flag')->orderBy('sort')->orderBy('id');
+        return $query->orderBy('sort')->orderBy('id');
     }
 }

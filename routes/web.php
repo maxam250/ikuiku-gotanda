@@ -1,5 +1,15 @@
 <?php
 
+// test. サブドメインのクローラー対策：動的 robots.txt
+Route::get('/robots.txt', function () {
+    if (str_starts_with(request()->getHost(), 'test.')) {
+        return response("User-agent: *\nDisallow: /\n", 200)
+            ->header('Content-Type', 'text/plain');
+    }
+    return response()->file(public_path('robots.txt'));
+});
+
+
 
 use Illuminate\Support\Facades\Route;
 

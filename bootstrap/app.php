@@ -61,6 +61,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // セキュリティヘッダーを設定するミドルウェアを追加
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
 
+        // test. サブドメインをクローラーから保護（X-Robots-Tag: noindex, nofollow）
+        $middleware->append(\App\Http\Middleware\NoIndexTestDomain::class);
+
         // 簡易アクセスログ（フロントページのUU/PV記録・cron無しで自動削除）
         // 一時停止中：サーバーDB負荷軽減のため。後日 LockerStudio 導入予定
         // $middleware->appendToGroup('web', \App\Http\Middleware\LogPageView::class);

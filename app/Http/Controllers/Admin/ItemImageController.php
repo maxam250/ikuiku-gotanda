@@ -83,16 +83,7 @@ class ItemImageController extends Controller
             }
 
             try {
-                // Intervention Image v3系の推奨APIを使用
-                $manager = new ImageManager(new Driver());
-                $img = $manager->read($fullPath);
-
-                $item_width = config('images.item_width');
-                $item_height = config('images.item_height');
-
-                $img = $img->scaleDown($item_width, $item_height); // 切り抜かずに縮小のみ（トリミングは CSS 側）
-                $img->toJpeg(80)->save($fullPath);
-
+                $this->processImage($fullPath);
             } catch (\Exception $e) {
                 \Log::error('Image processing error: ' . $e->getMessage());
                 // 画像処理に失敗しても、アップロード自体は成功とみなす
@@ -169,14 +160,9 @@ class ItemImageController extends Controller
              $newImageName = 'item_' . $image->item_id . '_' . time() . '.' . $newImage->getClientOriginalExtension();
              $path = $newImage->storeAs('item', $newImageName, 'public');
 
-             // 画像のリサイズ処理
+             // 画像のリサイズ・圧縮処理
              $fullPath = storage_path('app/public/' . $path);
-             $manager = new ImageManager(new Driver());
-             $img = $manager->read($fullPath);
-             $item_width = config('images.item_width');
-             $item_height = config('images.item_height');
-             $img = $img->scaleDown($item_width, $item_height); // 切り抜かずに縮小のみ（トリミングは CSS 側）
-             $img->toJpeg(80)->save($fullPath);
+             $this->processImage($fullPath);
 
              // データベースを更新
              $image->filename = $path;
@@ -471,6 +457,37 @@ class ItemImageController extends Controller
             ], 500, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
     }
+
+    /**
+     * 画像を長辺 900px 以下・目標 KB 以下に圧縮して上書き保存
+     * 品質を 85% から 5% 刻みで下げ、目標サイズに収まったら停止
+     */
+    private function processImage(string $fullPath): void
+    {
+        $manager    = new ImageManager(new Driver());
+        $img        = $manager->read($fullPath);
+
+        $maxWidth   = config('images.item_width',       900);
+        $maxHeight  = config('images.item_height',      900);
+        $targetKb   = config('images.item_target_kb',   300);
+        $minQuality = config('images.item_min_quality',  60);
+
+        // 長辺を maxWidth/maxHeight の小さい方に合わせてリサイズ（拡大なし）
+        $img->scaleDown($maxWidth, $maxHeight);
+
+        $targetBytes = $targetKb * 1024;
+        $quality     = 85;
+
+        do {
+            $img->toJpeg($quality)->save($fullPath);
+            clearstatcache(true, $fullPath);
+            if (filesize($fullPath) <= $targetBytes || $quality <= $minQuality) {
+                break;
+            }
+            $quality -= 5;
+        } while (true);
+    }
+
 
     //sort
     public function sortImage(Request $request, $item_id)

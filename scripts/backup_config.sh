@@ -15,7 +15,7 @@
 # ============================================================
 # サーバー上の Laravel ルートディレクトリ（artisan がある場所・絶対パス）
 # 例: さくらマネージド → /home/ユーザー名/www/ディレクトリ名
-APP_DIR="/home/cariver18/www/ikuiku-gotanda"
+APP_DIR="/home/cariver18/ikuiku-gotanda"
 
 # ============================================================
 # DB接続情報の読み込み設定
@@ -85,4 +85,4 @@ TMP_BASE="${HOME}/tmp"
 # cron 設定例（サーバーの crontab -e で登録）
 # ============================================================
 # 毎日 02:00 に実行:
-#   0 2 * * * /bin/bash /home/cariver18/www/ikuiku-gotanda/scripts/backup.sh
+#   0 2 * * * /bin/bash /home/cariver18/ikuiku-gotanda/scripts/backup.sh

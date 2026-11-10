@@ -260,9 +260,10 @@ Route::middleware('auth:admin')->group(function () {
 
         ////////////////////////////////////////////////////
         // スケジュール管理
-        Route::get('/schedules/{date?}', [ScheduleController::class, 'index'])->name('schedules.index');
+        Route::get('/schedules/{date?}', [ScheduleController::class, 'index'])->name('schedules.index')->where('date', '\d{4}-\d{2}-\d{2}');
         Route::put('/schedules/{id}/status', [ScheduleController::class, 'updateStatus'])->name('schedules.updateStatus');
         Route::put('/schedules/{id}/update-time', [ScheduleController::class, 'updateTime'])->name('schedules.updateTime');
+        Route::get('/schedules/bulk-update/{date?}', fn() => redirect()->route('admin.schedules.index'));
         Route::post('/schedules/bulk-update/{date?}', [ScheduleController::class, 'bulkUpdate'])->name('schedules.bulkUpdate');
         Route::post('/schedules/sort', [scheduleController::class, 'sort'])->name('schedules.sort');
         Route::delete('/schedules/{id}', [scheduleController::class, 'destroy'])->name('schedules.destroy');

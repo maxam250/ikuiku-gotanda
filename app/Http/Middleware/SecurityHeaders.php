@@ -17,6 +17,12 @@ class SecurityHeaders
     {
         $response = $next($request);
 
+        // 管理画面ページはキャッシュ禁止（CSRFトークンが古いページをキャッシュさせない）
+        if (str_starts_with($request->path(), 'kanrigamen')) {
+            $response->headers->set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+            $response->headers->set('Pragma', 'no-cache');
+        }
+
         // X-Content-Type-Options: MIMEタイプのスニッフィングを防ぐ
         $response->headers->set('X-Content-Type-Options', 'nosniff');
 

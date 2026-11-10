@@ -22,8 +22,8 @@ class ScheduleController extends Controller
         // 現在時点の調整日付を取得
         $adjustedDate = adjustTimeWithShift(); //custom helper関数
 
-        // URLに日付が指定されていれば、その日付を使用
-        if ($date) {
+        // URLに日付が指定されていれば、その日付を使用（有効な日付フォーマットのみ）
+        if ($date && preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
             $adjustedDate = $date;
         }
 
@@ -202,7 +202,7 @@ class ScheduleController extends Controller
 
         // $itemsがnullまたは空の場合の処理
         if (empty($items) || !is_array($items)) {
-            return redirect()->back()->with('error', '出勤に設定するキャストが選択されていません。');
+            return redirect()->route('admin.schedules.index')->with('error', '出勤に設定するキャストが選択されていません。');
         }
 
         // パラメータの日付が指定されていない場合、$adjustedDateを使用
@@ -250,7 +250,7 @@ class ScheduleController extends Controller
 
         $this->deleteOldSchedules();
 
-        return redirect()->back()->with('success', '出勤情報を一斉登録しました');
+        return redirect()->route('admin.schedules.index')->with('success', '出勤情報を一斉登録しました');
     }
 
 

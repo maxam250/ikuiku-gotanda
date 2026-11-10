@@ -121,10 +121,16 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], 419, ['Content-Type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
             }
 
-            // すでにログイン済みなら元URLをリロード
+            // すでにログイン済みなら
             if (Auth::guard('admin')->check() ||
                 Auth::guard('member')->check() ||
                 Auth::guard('item')->check()) {
+                // POST/PUT/PATCH/DELETE はフォームのあるページ（リファラー）へ戻す
+                // ※ $request->fullUrl() に戻すと POST → GET 変換ループが発生するため
+                if (in_array(strtoupper($request->method()), ['POST', 'PUT', 'PATCH', 'DELETE'])) {
+                    return redirect()->back()->with('error', 'セッションが切れました。もう一度お試しください。');
+                }
+                // GET は同一URLをリロード（CSRF トークンを再取得）
                 return redirect()->to($request->fullUrl());
             }
 

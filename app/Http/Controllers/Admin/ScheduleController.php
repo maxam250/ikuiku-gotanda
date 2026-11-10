@@ -198,32 +198,30 @@ class ScheduleController extends Controller
     public function bulkUpdate(Request $request)
     {
         $items = $request->input('items');
-        $date = $request->input('schedule_date');
+        $date  = $request->input('schedule_date');
 
-        // $itemsがnullまたは空の場合の処理
-        if (empty($items) || !is_array($items)) {
-            return redirect()->route('admin.schedules.index')->with('error', '出勤に設定するキャストが選択されていません。');
-        }
-
-        // パラメータの日付が指定されていない場合、$adjustedDateを使用
+        // 日付を先に決定（エラー時のリダイレクト先にも使うため）
         if ($date === null) {
             $currentDate = adjustTimeWithShift();
         } else {
-            // 指定された日付が正しいフォーマットかチェックして取得
             try {
                 $currentDate = Carbon::parse($date)->format('Y-m-d');
             } catch (\Exception $e) {
-                // 日付のパースに失敗した場合は404ページにリダイレクト
                 abort(404);
             }
         }
-// dd($items);
+
+        // $itemsがnullまたは空の場合の処理
+        if (empty($items) || !is_array($items)) {
+            return redirect()->route('admin.schedules.index', ['date' => $currentDate])
+                ->with('error', '出勤に設定するキャストが選択されていません。');
+        }
+
         // スケジュールを更新または作成
         foreach ($items as $itemId => $itemData) {
 
             // チェックが入っているキャストのみ処理
             if (isset($itemData['selected']) && $itemData['selected'] == 1) {
-
 
                 $time_start = $itemData['time_start'];
                 $time_end   = $itemData['time_end'];
@@ -250,7 +248,8 @@ class ScheduleController extends Controller
 
         $this->deleteOldSchedules();
 
-        return redirect()->route('admin.schedules.index')->with('success', '出勤情報を一斉登録しました');
+        return redirect()->route('admin.schedules.index', ['date' => $currentDate])
+            ->with('success', '出勤情報を一斉登録しました');
     }
 
 

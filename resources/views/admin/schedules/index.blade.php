@@ -153,6 +153,8 @@
 
         <form action="{{ route('admin.schedules.bulkUpdate') }}" method="POST">
             @csrf
+            {{-- schedule_date を先頭に置く（max_input_vars 超過時に末尾から切り捨てられるため） --}}
+            <input type="hidden" name="schedule_date" value="{{ $adjustedDate->format('Y-m-d') }}">
             <div class="btnArea" style="text-align: center; margin-bottom: 2rem;">
                 <button type="submit" class="af-btn af-btn-primary">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -207,8 +209,6 @@
                 </li>
                 @endforeach
             </ul>
-            <!-- selectするとtime_start、time_endが入らなくなる -->
-            <input type="hidden" name="schedule_date" value="{{$adjustedDate}}">
             <div style="margin: 1.5rem 0;">
                 {{ $non_schedules->links('vendor.pagination.admin-items') }}
             </div>

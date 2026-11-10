@@ -151,7 +151,7 @@
             <div>{{ $non_schedules->links('vendor.pagination.admin-items') }}</div>
         </div>
 
-        <form action="{{ route('admin.schedules.bulkUpdate') }}" method="POST">
+        <form id="bulkUpdateForm" action="{{ route('admin.schedules.bulkUpdate') }}" method="POST">
             @csrf
             {{-- schedule_date を先頭に置く（max_input_vars 超過時に末尾から切り捨てられるため） --}}
             <input type="hidden" name="schedule_date" value="{{ $adjustedDate->format('Y-m-d') }}">
@@ -437,6 +437,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 const checkbox = document.querySelector(`input[name="items[${castId}][selected]"]`);
                 if (checkbox) {
                     checkbox.checked = true;
+                }
+            }
+        });
+    });
+});
+
+// 一括登録フォーム送信前に未チェックキャストのselectをdisableにする
+// （チェックなし500人×2フィールド=1000変数がmax_input_vars超過を引き起こすため）
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('bulkUpdateForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function () {
+        form.querySelectorAll('input[name^="items"][name$="[selected]"]').forEach(function (checkbox) {
+            if (!checkbox.checked) {
+                const match = checkbox.name.match(/items\[(\d+)\]\[selected\]/);
+                if (match) {
+                    const id = match[1];
+                    const timeStart = form.querySelector('select[name="items[' + id + '][time_start]"]');
+                    const timeEnd   = form.querySelector('select[name="items[' + id + '][time_end]"]');
+                    if (timeStart) timeStart.disabled = true;
+                    if (timeEnd)   timeEnd.disabled   = true;
                 }
             }
         });
